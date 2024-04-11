@@ -8,4 +8,19 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::post('/login', [\App\Http\Controllers\AuthController::class, 'login'])->name('login');
+Route::delete('/logout', [\App\Http\Controllers\AuthController::class, 'logout'])
+    ->middleware('auth:sanctum')
+    ->name('logout');
 
+Route::middleware(['auth:sanctum', 'ability:root,admin'])->group(function (){
+   Route::prefix('admin')->group(function (){
+      Route::prefix('/client')->group(function (){
+          Route::post('/', [\App\Http\Controllers\Admin\ClientAdminController::class, 'store'])
+              ->name('admin.create.client');
+          Route::get('/', [\App\Http\Controllers\Admin\ClientAdminController::class, 'index'])
+              ->name('admin.index.client');
+          Route::post('/user/{client_id}', [\App\Http\Controllers\Admin\UserAdminController::class, 'store'])
+              ->name('admin.user.create');
+      });
+   });
+});

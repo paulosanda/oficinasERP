@@ -16,21 +16,30 @@ class RoleSeeder extends Seeder
         $basicRoles = [
             0 => [
                 'role' =>'root',
+                'type' => 'admin',
                 'description' => 'super usuário'
             ],
             1 => [
                 'role' => 'admin',
+                'type' => 'admin',
                 'description' => 'administrador'
             ],
             2 => [
-                'role' => 'client',
-                'description' => 'cliente'
-            ]
+                'role' => 'master',
+                'type' => 'client',
+                'description' => 'master do cliente'
+            ],
+            3 => [
+                'role' => 'operator',
+                'type' => 'client',
+                'description' => 'oerador do cliente'
+            ],
         ];
 
         foreach ($basicRoles as $role) {
             Role::create([
                 'role' => $role['role'],
+                'type' => $role['type'],
                 'role_description' => $role['description']
             ]);
         }
