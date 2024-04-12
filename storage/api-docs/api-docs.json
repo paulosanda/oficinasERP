@@ -416,6 +416,75 @@
                     }
                 ]
             }
+        },
+        "/api/client/customer": {
+            "post": {
+                "tags": [
+                    "Client"
+                ],
+                "summary": "cria customer (consumidor)",
+                "operationId": "createCustomer",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "Bearer {token}"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "dados do customer",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Customer"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "success"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthorizes"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
         }
     },
     "components": {
@@ -423,6 +492,18 @@
             "Client": {
                 "title": "Client",
                 "description": "dados do cliente",
+                "required": [
+                    "razao_social",
+                    "cnpj",
+                    "endereco",
+                    "numero",
+                    "bairro",
+                    "cep",
+                    "cidade",
+                    "estado",
+                    "celular",
+                    "email"
+                ],
                 "properties": {
                     "id": {
                         "description": "id do cliente",
@@ -478,6 +559,75 @@
                     "email": {
                         "description": "email",
                         "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "Customer": {
+                "title": "Customer",
+                "description": "dados do customer(cliente das empresas)",
+                "required": [
+                    "name"
+                ],
+                "properties": {
+                    "name": {
+                        "description": "nome do customer",
+                        "type": "string"
+                    },
+                    "email": {
+                        "description": "email do customer",
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "celular": {
+                        "description": "celular do customer",
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "telefone": {
+                        "description": "telefone do customer",
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "cpf": {
+                        "description": "cpf do customer",
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "nascimento": {
+                        "description": "data de nascimento do customer",
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "profissao": {
+                        "description": "ocupação do customer",
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "endereco": {
+                        "description": "endereco do customer",
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "numero": {
+                        "description": "numero do endereço do customer",
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "bairro": {
+                        "description": "bairro do customer",
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "cidade": {
+                        "description": "cidade do customer",
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "estado": {
+                        "description": "estado do customer",
+                        "type": "string",
+                        "nullable": true
                     }
                 },
                 "type": "object"

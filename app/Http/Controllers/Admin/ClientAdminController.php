@@ -61,10 +61,7 @@ class ClientAdminController extends Controller
      *           name="Authorization",
      *           in="header",
      *           required=true,
-     *           @OA\Schema(
-     *               type="string",
-     *               format="Bearer {token}"
-     *           ),
+     *           @OA\Schema(type="string",format="Bearer {token}"),
      *           description="Token de acesso do usuário"
      *       ),
      *     @OA\RequestBody(
