@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Client;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,13 +17,16 @@ class CustomerFactory extends Factory
      */
     public function definition(): array
     {
+        $client = Client::factory()->create();
         return [
+            "client_id" => $client->id,
             'name' => fake()->name,
             'email' => fake()->email,
             'celular' => fake()->phoneNumber,
             'telefone' => fake()->phoneNumber,
             'cpf' => fake()->numerify('###.###.###-##'),
             'nascimento' => fake()->date(),
+            'profissao' => 'ocupação',
             'endereco' => fake()->streetAddress,
             'numero' => fake()->numberBetween(1,100),
             'cep' => fake()->postcode,

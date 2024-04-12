@@ -7,6 +7,7 @@ namespace App\OpenApiSchemas;
  *     schema="Client",
  *     title="Client",
  *     description="dados do cliente",
+ *     required={"razao_social", "cnpj","endereco","numero","bairro","cep","cidade","estado","celular","email"},
  *     @OA\Property(property="id", type="integer", format="int64", description="id do cliente"),
  *     @OA\Property(property="razao_social", type="string", description="razão social"),
  *     @OA\Property(property="cnpj", type="string", description="cnpj do cliente"),
