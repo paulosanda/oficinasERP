@@ -7,8 +7,9 @@ use App\Models\Role;
 use App\Models\User;
 use App\Models\UserRole;
 use Database\Seeders\RoleSeeder;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Artisan;
 use Tests\TestCase;
 
@@ -17,7 +18,7 @@ class ClientAdminControllerTest extends TestCase
     use RefreshDatabase;
 
     private User $user;
-    private Client|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model $client;
+    private Client|Collection|Model $client;
     public function setUp(): void
     {
         parent::setUp();

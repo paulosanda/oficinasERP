@@ -15,8 +15,4 @@ class Role extends Model
         'role_description'
     ];
 
-    public function users()
-    {
-        return $this->newBelongsToMany();
-    }
 }

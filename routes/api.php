@@ -24,3 +24,15 @@ Route::middleware(['auth:sanctum', 'ability:root,admin'])->group(function (){
       });
    });
 });
+
+Route::middleware(['auth:sanctum', 'ability:master,operador'])->group(function(){
+    Route::prefix('client')->group(function (){
+        Route::prefix('customer')->group(function (){
+            Route::post('/', [\App\Http\Controllers\CustomerController::class, 'store'])
+                ->name('customer.create');
+            Route::put('/',[\App\Http\Controllers\CustomerController::class, 'update'])
+                ->name('customer.update');
+        });
+    });
+
+});
