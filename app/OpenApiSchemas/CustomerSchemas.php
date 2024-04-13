@@ -7,7 +7,7 @@ namespace App\OpenApiSchemas;
  *     schema="Customer",
  *     title="Customer",
  *     required={"name"},
- *     description="dados do customer(cliente das empresas)",
+ *     description="dados do customer",
  *     @OA\Property(property="name", type="string", description="nome do customer"),
  *     @OA\Property(property="email", type="string", nullable=true,description="email do customer"),
  *     @OA\Property(property="celular", type="string",nullable=true, description="celular do customer"),

@@ -15,7 +15,7 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
 
 
-    protected $with = ['client','roles'];
+    protected $with = ['company','roles'];
     /**
      * The attributes that are mass assignable.
      *
@@ -50,9 +50,9 @@ class User extends Authenticatable
         ];
     }
 
-    public function client(): HasOneThrough
+    public function company(): HasOneThrough
     {
-        return $this->hasOneThrough(Client::class, ClientUser::class, 'user_id', 'id', 'id', 'client_id');
+        return $this->hasOneThrough(Company::class, CompanyUser::class, 'user_id', 'id', 'id', 'company_id');
     }
 
     public function roles(): HasManyThrough

@@ -2,8 +2,8 @@
 
 namespace Tests\Feature;
 
-use App\Models\Client;
-use App\Models\ClientUser;
+use App\Models\Company;
+use App\Models\CompanyUser;
 use App\Models\Customer;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
@@ -16,7 +16,7 @@ class VehicleControllerTest extends TestCase
     use RefreshDatabase;
 
     private User|Collection|Model $user;
-    private Client|Collection|Model $client;
+    private Company|Collection|Model $company;
 
     private Customer|Collection|Model $customer;
     public function setUp(): void
@@ -24,15 +24,15 @@ class VehicleControllerTest extends TestCase
         parent::setUp();
 
         $this->user = User::factory()->create();
-        $this->client = Client::factory()->create();
+        $this->company = Company::factory()->create();
 
-        ClientUser::factory()->create([
-            'client_id' => $this->client->id,
+        CompanyUser::factory()->create([
+            'company_id' => $this->company->id,
             'user_id' => $this->user->id
         ]);
 
         $this->customer = Customer::factory()->create([
-            'client_id' => $this->client->id
+            'company_id' => $this->company->id
         ]);
     }
 
