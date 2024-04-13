@@ -4,17 +4,19 @@ namespace App\Actions;
 
 
 use App\Models\Customer;
-use App\Trait\CustomerBelongToClient;
+use App\Trait\EmptyEntity;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 
-class CustomerUpdateAction extends BaseAction
+class CustomerUpdateAction
 {
-    use CustomerBelongToClient;
+    use  EmptyEntity;
+
+    protected string $object = 'Customer model';
     protected function rules(): array
     {
         return [
+            'client_id' => 'integer|required',
             'id' => 'integer|required',
             'name' => 'string|required',
             'email' => 'email',
@@ -34,26 +36,22 @@ class CustomerUpdateAction extends BaseAction
 
     public function execute(Request $request): JsonResponse
     {
-        $data = Validator::make($request->all(), $this->rules());
+        $data = $request->validate($this->rules());
 
-        if($data->fails()) {
-            return response()->json(['error' => $data->errors()], 422);
-        } else {
-            try {
-                $customerUpdate = $data->getData();
+        try{
+            $customer = Customer::where('id', $data['id'])->where('client_id', $data['client_id'])->first();
+            $this->isEmpty($customer, $this->object);
 
-                $customer = Customer::find($customerUpdate['id']);
+            unset($data['id']);
+            unset($data['client_id']);
 
-                if ($this->checkCustomerClient($customer->client_id)) {
-                    $customer->update($customerUpdate);
+            $customer->update($data);
 
-                    return response()->json(['message' => 'success'], 200);
-                } else {
-                    return response()->json(['error' => 'invalid customer'], 422);
-                }
-            } catch (\Exception $e) {
-                return response()->json(['error' => $e->getMessage()], 500);
-            }
+            return response()->json(['message' => 'success', 'customer created']);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()]);
+        } catch (\Throwable $e) {
+            return response()->json(['error' => $e->getMessage()]);
         }
     }
 }

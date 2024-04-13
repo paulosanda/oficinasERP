@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\InjectClientId;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,7 +26,7 @@ Route::middleware(['auth:sanctum', 'ability:root,admin'])->group(function (){
    });
 });
 
-Route::middleware(['auth:sanctum', 'ability:master,operador'])->group(function(){
+Route::middleware(['auth:sanctum', 'ability:master,operador', InjectClientId::class])->group(function(){
     Route::prefix('client')->group(function (){
         Route::prefix('customer')->group(function (){
             Route::post('/', [\App\Http\Controllers\CustomerController::class, 'store'])

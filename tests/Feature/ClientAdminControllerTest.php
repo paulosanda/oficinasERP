@@ -130,9 +130,10 @@ class ClientAdminControllerTest extends TestCase
         $response->assertStatus(422);
 
         $response->assertJson([
-            "error" => [
-                "razao_social" => ["validation.required"]
-            ]
+            'message' => 'validation.required',
+            'errors' => [
+                'razao_social' => ['validation.required'],
+            ],
         ]);
 
         $this->assertDatabaseCount('clients', 10);
