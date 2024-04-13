@@ -5,9 +5,9 @@ namespace App\Actions;
 
 use App\Models\Client;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\JsonResponse;
 
-class ClientCreateAction extends BaseAction
+class ClientCreateAction
 {
     protected function rules(): array
     {
@@ -27,25 +27,16 @@ class ClientCreateAction extends BaseAction
         ];
     }
 
-    public function execute(Request $request): \Illuminate\Http\JsonResponse
+    public function execute(Request $request): JsonResponse
     {
-        $data = Validator::make($request->all(), $this->rules());
-
-        if ($data->fails()) {
-            return response()->json(['error' => $data->errors()], 422);
-        }
+        $data = $request->validate($this->rules());
 
         try {
-            $newClient = Client::create($data->getData());
+            $newClient = Client::create($data);
 
-            $data = $newClient->toArray();
-
-            return response()->json($data, 200);
-
+            return response()->json($newClient, 200);
         } catch (\Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 500);
+            return response()->json(['error' => $e->getMessage()]);
         }
-
     }
-
 }
