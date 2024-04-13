@@ -5,53 +5,54 @@ namespace App\Actions;
 use App\Models\ClientUser;
 use App\Models\User;
 use App\Models\UserRole;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 
-class UserCreateAction extends BaseAction
+class UserCreateAction
 {
     protected function rules(): array
     {
         return [
-                'user.name' => 'string|required',
-                'user.email' => 'string|required',
-                'user.password' => 'string|required',
-                'roles' => 'required|array',
-                'roles.*' => 'integer'
+            'user.name' => 'string|required',
+            'user.email' => 'string|required',
+            'user.password' => 'string|required',
+            'roles' => 'required|array',
+            'roles.*' => 'integer'
         ];
     }
 
-    public function execute($clientId, Request $request): \Illuminate\Http\JsonResponse
+    public function execute($clientId, Request $request): JsonResponse
     {
-        $data = Validator::make($request->all(), $this->rules());
+        $data = $request->validate($this->rules());
 
-        if ($data->fails()) {
-            return response()->json(['error' => $data->errors()], 422);
-        }
         try {
+            $user = User::create($data['user']);
 
-            $userData = $data->getData()['user'];
+            $this->createUserRoles($data['roles'], $user->id);
 
-            $user = User::create($userData);
+            $this->appendUserToClient($clientId, $user->id);
 
-            $roleData = $data->getData()['roles'];
-
-            foreach ($roleData as $role) {
-                UserRole::create([
-                    'user_id' => $user->id,
-                    'role_id' => $role
-                ]);
-            }
-
-            ClientUser::create([
-                'client_id' => $clientId,
-                'user_id' => $user->id
-            ]);
-
-            return response()->json(['message' => 'usuário criado com sucesso']);
-
+            return response()->json(['message' => 'success']);
         } catch (\Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 500);
+            return response()->json(['error' => $e->getMessage()]);
         }
+    }
+
+    public function createUserRoles($data, $userId): void
+    {
+        foreach ($data as $role) {
+            UserRole::create([
+                'user_id' => $userId,
+                'role_id' => $role
+            ]);
+        }
+    }
+
+    private function appendUserToClient($clientId, $userId): void
+    {
+        ClientUser::create([
+            'client_id' => $clientId,
+            'user_id' => $userId
+        ]);
     }
 }

@@ -3,15 +3,16 @@
 namespace App\Actions;
 
 use App\Models\Customer;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
 
-class CustomerCreateAction extends BaseAction
+
+class CustomerCreateAction
 {
     protected function rules(): array
     {
         return [
+            'client_id' => 'required|integer',
             'name' => 'string|required',
             'email' => 'email',
             'celular' => 'string',
@@ -28,30 +29,16 @@ class CustomerCreateAction extends BaseAction
         ];
     }
 
-    public function execute(Request $request)
+    public function execute(Request $request): JsonResponse
     {
+        $data = $request->validate($this->rules());
 
-        $data = Validator::make($request->all(), $this->rules());
+        try {
+            $newCustomer = Customer::create($data);
 
-        $user = Auth::user()->toArray();
-
-        if ($data->fails()) {
-
-            return response()->json(['error' => $data->errors()], 422);
-        } else {
-            $customer = $data->getData();
-
-            $customer['client_id'] = $user['client']['id'];
-
-            $customer = Customer::create($customer);
-
-            if($customer) {
-                return response()->json(['message' => 'success']);
-            } else {
-                return response()->json(['error' => 'fail'], 500);
-            }
-
+            return response()->json(['message' => 'success']);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()]);
         }
-
     }
 }
