@@ -2,13 +2,13 @@
 
 namespace Tests\Feature;
 
+use App\Models\Company;
 use Tests\TestCase;
 use App\Models\Role;
 use App\Models\User;
-use App\Models\Client;
 use App\Models\Customer;
 use App\Models\UserRole;
-use App\Models\ClientUser;
+use App\Models\CompanyUser;
 use Database\Seeders\RoleSeeder;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -17,18 +17,18 @@ class CustomerControllerTest extends TestCase
 {
     use RefreshDatabase;
     private User $user;
-    private Client $client;
+    private Company $company;
     private Role $role;
     public function setUp(): void
     {
         parent::setUp();
 
         $this->user = User::factory()->create();
-        $this->client = Client::factory()->create();
+        $this->company = Company::factory()->create();
         Artisan::call('db:seed', [RoleSeeder::class]);
         $role = Role::where('role', 'master')->first();
-        ClientUser::factory()->create([
-            'client_id' => $this->client->id,
+        CompanyUser::factory()->create([
+            'company_id' => $this->company->id,
             'user_id' => $this->user->id
         ]);
         UserRole::create([
@@ -67,14 +67,14 @@ class CustomerControllerTest extends TestCase
     public function testUpdateCustomer(): void
     {
         $customer = $this->customerData();
-        $customer['client_id'] = $this->client->id;
+        $customer['company_id'] = $this->company->id;
 
         $customerModel = Customer::create($customer);
 
         $customerUpdate =  $this->customerData();
 
         $customerUpdate['id'] = $customerModel->id;
-        $customerUpdate['client_id'] = $this->client->id;
+        $customerUpdate['company_id'] = $this->company->id;
         $customerUpdate['name'] = 'updated';
 
         $token = $this->user->createToken('teste', ['master', 'operator'])->plainTextToken;
@@ -91,22 +91,22 @@ class CustomerControllerTest extends TestCase
         ]);
     }
 
-    public function testUpdateCustomerErrorClient(): void
+    public function testUpdateCustomerErrorCompany(): void
     {
-        $anotherClient = Client::factory()->create();
+        $anotherCompany = Company::factory()->create();
 
         $customer = $this->customerData();
-        $customer['client_id'] = $anotherClient->id;
+        $customer['company_id'] = $anotherCompany->id;
 
         $customerModel = Customer::create($customer);
 
         $customerUpdate =  $this->customerData();
 
         $customerUpdate['id'] = $customerModel->id;
-        $customerUpdate['client_id'] = $this->client->id;
+        $customerUpdate['company_id'] = $this->company->id;
         $customerUpdate['name'] = 'updated';
 
-        $anotherClient = Client::factory()->create();
+        $anotherCompany = Company::factory()->create();
 
 
         $token = $this->user->createToken('teste', ['master', 'operator'])->plainTextToken;

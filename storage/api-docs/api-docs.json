@@ -6,13 +6,13 @@
         "version": "1.0.0"
     },
     "paths": {
-        "/api/admin/client": {
+        "/api/admin/company": {
             "get": {
                 "tags": [
                     "Admin"
                 ],
-                "summary": "lista todos os clientes",
-                "operationId": "IndexClient",
+                "summary": "lista todos os company",
+                "operationId": "IndexCompany",
                 "parameters": [
                     {
                         "name": "Authorization",
@@ -32,7 +32,7 @@
                                 "schema": {
                                     "type": "array",
                                     "items": {
-                                        "$ref": "#/components/schemas/Client"
+                                        "$ref": "#/components/schemas/Company"
                                     }
                                 }
                             }
@@ -65,8 +65,8 @@
                 "tags": [
                     "Admin"
                 ],
-                "summary": "cria novo cadastro de cliente",
-                "operationId": "createClient",
+                "summary": "cria novo cadastro de company",
+                "operationId": "createCompany",
                 "parameters": [
                     {
                         "name": "Authorization",
@@ -80,11 +80,11 @@
                     }
                 ],
                 "requestBody": {
-                    "description": "Request body to create cliente",
+                    "description": "Request body to create company",
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Client"
+                                "$ref": "#/components/schemas/Company"
                             }
                         }
                     }
@@ -97,7 +97,7 @@
                                 "schema": {
                                     "type": "array",
                                     "items": {
-                                        "$ref": "#/components/schemas/Client"
+                                        "$ref": "#/components/schemas/Company"
                                     }
                                 }
                             }
@@ -127,13 +127,13 @@
                 ]
             }
         },
-        "/api/admin/user/{client_id}": {
+        "/api/admin/user/{company_id}": {
             "post": {
                 "tags": [
                     "Admin"
                 ],
-                "summary": "cria novo usuário para cliente",
-                "description": "cria novo usuário para um cliente, e registra a(s) role(s)",
+                "summary": "cria novo usuário para company",
+                "description": "cria novo usuário para um company, e registra a(s) role(s)",
                 "operationId": "storeUser",
                 "parameters": [
                     {
@@ -147,9 +147,9 @@
                         }
                     },
                     {
-                        "name": "client_id",
+                        "name": "company_id",
                         "in": "path",
-                        "description": "Id do cliente",
+                        "description": "Id do company",
                         "required": true,
                         "schema": {
                             "type": "integer"
@@ -417,10 +417,10 @@
                 ]
             }
         },
-        "/api/client/customer": {
+        "/api/company/customer": {
             "post": {
                 "tags": [
-                    "Client"
+                    "Company"
                 ],
                 "summary": "cria customer (consumidor)",
                 "operationId": "createCustomer",
@@ -489,9 +489,9 @@
     },
     "components": {
         "schemas": {
-            "Client": {
-                "title": "Client",
-                "description": "dados do cliente",
+            "Company": {
+                "title": "Company",
+                "description": "dados do company",
                 "required": [
                     "razao_social",
                     "cnpj",
@@ -506,7 +506,7 @@
                 ],
                 "properties": {
                     "id": {
-                        "description": "id do cliente",
+                        "description": "id do company",
                         "type": "integer",
                         "format": "int64"
                     },
@@ -515,16 +515,16 @@
                         "type": "string"
                     },
                     "cnpj": {
-                        "description": "cnpj do cliente",
+                        "description": "cnpj do company",
                         "type": "string"
                     },
                     "inscricao_estadual": {
-                        "description": "inscrição estadual do cliente",
+                        "description": "inscrição estadual do company",
                         "type": "string",
                         "nullable": true
                     },
                     "inscricao_municipal": {
-                        "description": "inscrição municipal do cliente",
+                        "description": "inscrição municipal do company",
                         "type": "string",
                         "nullable": true
                     },
@@ -565,7 +565,7 @@
             },
             "Customer": {
                 "title": "Customer",
-                "description": "dados do customer(cliente das empresas)",
+                "description": "dados do customer",
                 "required": [
                     "name"
                 ],
@@ -626,6 +626,65 @@
                     },
                     "estado": {
                         "description": "estado do customer",
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            },
+            "vehicle": {
+                "title": "Vehicle",
+                "description": "dados do veículo",
+                "required": [
+                    "customer_id",
+                    "placa"
+                ],
+                "properties": {
+                    "customer_id": {
+                        "description": "id do customer",
+                        "type": "integer"
+                    },
+                    "marca": {
+                        "description": "marca do veículo",
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "modelo": {
+                        "description": "modelo do veículo",
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "cor": {
+                        "description": "cor do veículo",
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "ano": {
+                        "description": "ano do veículo",
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "placa": {
+                        "description": "placa do veículo",
+                        "type": "string"
+                    },
+                    "numero_chassi": {
+                        "description": "numero do chassi do veículo",
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "renavam": {
+                        "description": "renavam do veículo",
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "media_mensal_km_rodado": {
+                        "description": "média de km rodados por mês pelo veículo",
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "observacoes": {
+                        "description": "observações para o cadastro do veículo",
                         "type": "string",
                         "nullable": true
                     }

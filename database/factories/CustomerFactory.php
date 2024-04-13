@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\Client;
+use App\Models\Company;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,9 +17,9 @@ class CustomerFactory extends Factory
      */
     public function definition(): array
     {
-        $client = Client::factory()->create();
+        $company = Company::factory()->create();
         return [
-            "client_id" => $client->id,
+            "company_id" => $company->id,
             'name' => fake()->name,
             'email' => fake()->email,
             'celular' => fake()->phoneNumber,
