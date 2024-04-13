@@ -16,7 +16,7 @@ class CustomerUpdateAction
     protected function rules(): array
     {
         return [
-            'client_id' => 'integer|required',
+            'company_id' => 'integer|required',
             'id' => 'integer|required',
             'name' => 'string|required',
             'email' => 'email',
@@ -39,11 +39,11 @@ class CustomerUpdateAction
         $data = $request->validate($this->rules());
 
         try{
-            $customer = Customer::where('id', $data['id'])->where('client_id', $data['client_id'])->first();
+            $customer = Customer::where('id', $data['id'])->where('company_id', $data['company_id'])->first();
             $this->isEmpty($customer, $this->object);
 
             unset($data['id']);
-            unset($data['client_id']);
+            unset($data['company_id']);
 
             $customer->update($data);
 

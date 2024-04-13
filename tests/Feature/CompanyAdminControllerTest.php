@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Models\Client;
+use App\Models\Company;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\UserRole;
@@ -13,17 +13,17 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
 use Tests\TestCase;
 
-class ClientAdminControllerTest extends TestCase
+class CompanyAdminControllerTest extends TestCase
 {
     use RefreshDatabase;
 
     private User $user;
-    private Client|Collection|Model $client;
+    private Company|Collection|Model $company;
     public function setUp(): void
     {
         parent::setUp();
 
-        $this->client = Client::factory()->count(10)->create();
+        $this->company = Company::factory()->count(10)->create();
 
         Artisan::call('db:seed' ,[RoleSeeder::class]);
 
@@ -38,13 +38,13 @@ class ClientAdminControllerTest extends TestCase
 
     }
 
-    public function testCreateClient(): void
+    public function testCreateCompany(): void
     {
         $token = $this->user->createToken('teste', ['root'])->plainTextToken;
 
         $response = $this->withHeaders([
             'Authorization' => 'Bearer '. $token,
-        ])->postJson(route('admin.create.client'),[
+        ])->postJson(route('admin.create.company'),[
             'razao_social' => fake()->company,
             'cnpj' => fake()->numerify('###.###.###/0001-##'),
             'inscricao_estadual' => fake()->numerify('###.###.###-##'),
@@ -76,16 +76,16 @@ class ClientAdminControllerTest extends TestCase
             'email'
         ]);
 
-        $this->assertDatabaseCount('clients', 11);
+        $this->assertDatabaseCount('companies', 11);
     }
 
-    public function testCreateClientError422()
+    public function testCreateCompanyError422()
     {
-        $token = $this->user->createToken('test', ['client'])->plainTextToken;
+        $token = $this->user->createToken('test', ['company'])->plainTextToken;
 
         $response = $this->withHeaders([
             'Authorization' => 'Bearer '. $token,
-                ])->postJson(route('admin.create.client'),[
+                ])->postJson(route('admin.create.company'),[
                     'razao_social' => fake()->company,
                     'cnpj' => fake()->numerify('###.###.###/0001-##'),
                     'inscricao_estadual' => fake()->numerify('###.###.###-##'),
@@ -107,13 +107,13 @@ class ClientAdminControllerTest extends TestCase
         ]);
     }
 
-    public function testCreateClientErrorMissRazaoSocial(): void
+    public function testCreateCompanyErrorMissRazaoSocial(): void
     {
         $token = $this->user->createToken('teste', ['root'])->plainTextToken;
 
         $response = $this->withHeaders([
             'Authorization' => 'Bearer '. $token,
-                ])->postJson(route('admin.create.client'),[
+                ])->postJson(route('admin.create.company'),[
                     'cnpj' => fake()->numerify('###.###.###/0001-##'),
                     'inscricao_estadual' => fake()->numerify('###.###.###-##'),
                     'inscricao_municipal' => fake()->numerify('###.###.###'),
@@ -136,16 +136,16 @@ class ClientAdminControllerTest extends TestCase
             ],
         ]);
 
-        $this->assertDatabaseCount('clients', 10);
+        $this->assertDatabaseCount('companies', 10);
     }
 
-    public function testCreateClientWithoutInscricaoEstadual(): void
+    public function testCreateCompanyWithoutInscricaoEstadual(): void
     {
         $token = $this->user->createToken('teste', ['root'])->plainTextToken;
 
         $response = $this->withHeaders([
             'Authorization' => 'Bearer '. $token,
-        ])->postJson(route('admin.create.client'),[
+        ])->postJson(route('admin.create.company'),[
             'razao_social' => fake()->company,
             'cnpj' => fake()->numerify('###.###.###/0001-##'),
             'inscricao_municipal' => fake()->numerify('###.###.###'),
@@ -175,7 +175,7 @@ class ClientAdminControllerTest extends TestCase
             'email'
         ]);
 
-        $this->assertDatabaseCount('clients', 11);
+        $this->assertDatabaseCount('companies', 11);
     }
 
     public function testIndex(): void
@@ -184,7 +184,7 @@ class ClientAdminControllerTest extends TestCase
 
         $response = $this->withHeaders([
             'Authorization' => 'Bearer ' . $token,
-        ])->getJson(route('admin.index.client'));
+        ])->getJson(route('admin.index.company'));
 
         $response->assertStatus(200);
 

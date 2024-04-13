@@ -5,15 +5,14 @@ namespace App\Http\Controllers;
 use App\Actions\CustomerCreateAction;
 use App\Actions\CustomerUpdateAction;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class CustomerController extends Controller
 {
     /**
      * @OA\Post(
-     *     path="/api/client/customer",
+     *     path="/api/company/customer",
      *     operationId="createCustomer",
-     *     tags={"Client"},
+     *     tags={"Company"},
      *     summary="cria customer (consumidor)",
      *     security={{ "bearerAuth": {} }},
      *     @OA\Parameter(

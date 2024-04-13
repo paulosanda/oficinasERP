@@ -10,11 +10,11 @@ class UserAdminController extends Controller
 {
     /**
      *@OA\Post(
-     *     path="/api/admin/user/{client_id}",
+     *     path="/api/admin/user/{company_id}",
      *     operationId="storeUser",
      *     tags={"Admin"},
-     *     summary="cria novo usuário para cliente",
-     *     description="cria novo usuário para um cliente, e registra a(s) role(s)",
+     *     summary="cria novo usuário para company",
+     *     description="cria novo usuário para um company, e registra a(s) role(s)",
      *     security={{ "bearerAuth": {} }},
      *     @OA\Parameter(
      *           name="Authorization",
@@ -27,8 +27,8 @@ class UserAdminController extends Controller
      *           ),
      *       ),
      *     @OA\Parameter(
-     *          name="client_id",
-     *          description="Id do cliente",
+     *          name="company_id",
+     *          description="Id do company",
      *          required=true,
      *          in="path",
      *          @OA\Schema(
@@ -73,8 +73,8 @@ class UserAdminController extends Controller
      *       ),
      *)
      */
-    public function store($clientId, Request $request)
+    public function store($companyId, Request $request)
     {
-        return app(UserCreateAction::class)->execute($clientId, $request);
+        return app(UserCreateAction::class)->execute($companyId, $request);
     }
 }

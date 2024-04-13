@@ -2,12 +2,11 @@
 
 namespace App\Actions;
 
-
-use App\Models\Client;
+use App\Models\Company;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 
-class ClientCreateAction
+class CompanyCreateAction
 {
     protected function rules(): array
     {
@@ -32,9 +31,9 @@ class ClientCreateAction
         $data = $request->validate($this->rules());
 
         try {
-            $newClient = Client::create($data);
+            $newCompany = Company::create($data);
 
-            return response()->json($newClient, 200);
+            return response()->json($newCompany, 200);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()]);
         }

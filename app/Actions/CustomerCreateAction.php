@@ -12,7 +12,7 @@ class CustomerCreateAction
     protected function rules(): array
     {
         return [
-            'client_id' => 'required|integer',
+            'company_id' => 'required|integer',
             'name' => 'string|required',
             'email' => 'email',
             'celular' => 'string',

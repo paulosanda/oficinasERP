@@ -4,8 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
-class Client extends Model
+class Company extends Model
 {
     use HasFactory;
 
@@ -24,8 +25,8 @@ class Client extends Model
         'email'
     ];
 
-    public function users(): \Illuminate\Database\Eloquent\Relations\HasManyThrough
+    public function users(): HasManyThrough
     {
-        return $this->hasManyThrough(User::class, ClientUser::class, 'client_id', 'id', 'id', 'user_id');
+        return $this->hasManyThrough(User::class, CompanyUser::class, 'company_id', 'id', 'id', 'user_id');
     }
 }

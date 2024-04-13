@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Actions\ClientCreateAction;
+use App\Actions\CompanyCreateAction;
 use App\Http\Controllers\Controller;
-use App\Models\Client;
+use App\Models\Company;
 use Illuminate\Http\Request;
 
-class ClientAdminController extends Controller
+class CompanyAdminController extends Controller
 {
     /**
      * @OA\Get(
-     *     path="/api/admin/client",
-     *     operationId="IndexClient",
+     *     path="/api/admin/company",
+     *     operationId="IndexCompany",
      *     tags={"Admin"},
-     *     summary="lista todos os clientes",
+     *     summary="lista todos os company",
      *     security={{ "bearerAuth": {} }},
      *     @OA\Parameter(
      *         name="Authorization",
@@ -30,7 +30,7 @@ class ClientAdminController extends Controller
      *         description="succes",
      *         @OA\JsonContent(
      *             type="array",
-     *             @OA\Items(ref="#/components/schemas/Client")
+     *             @OA\Items(ref="#/components/schemas/Company")
      *         )
      *     ),
      *     @OA\Response(
@@ -45,17 +45,17 @@ class ClientAdminController extends Controller
      */
     public function index(): \Illuminate\Http\JsonResponse
     {
-        $response = Client::all()->toArray();
+        $response = Company::all()->toArray();
 
         return response()->json($response, 200);
     }
 
     /**
      * @OA\Post(
-     *     path="/api/admin/client",
-     *     operationId="createClient",
+     *     path="/api/admin/company",
+     *     operationId="createCompany",
      *     tags={"Admin"},
-     *     summary="cria novo cadastro de cliente",
+     *     summary="cria novo cadastro de company",
      *     security={{ "bearerAuth": {} }},
      *     @OA\Parameter(
      *           name="Authorization",
@@ -65,10 +65,10 @@ class ClientAdminController extends Controller
      *           description="Token de acesso do usuário"
      *       ),
      *     @OA\RequestBody(
-     *         request="CreateClient",
-     *         description="Request body to create cliente",
+     *         request="CreateCompany",
+     *         description="Request body to create company",
      *         @OA\JsonContent(
-     *             ref="#/components/schemas/Client"
+     *             ref="#/components/schemas/Company"
      *         )
      *     ),
      *     @OA\Response(
@@ -76,7 +76,7 @@ class ClientAdminController extends Controller
      *         description="success",
      *         @OA\JsonContent(
      *            type="array",
-     *            @OA\Items(ref="#/components/schemas/Client")
+     *            @OA\Items(ref="#/components/schemas/Company")
      *         )
      *     ),
      *     @OA\Response(
@@ -90,6 +90,6 @@ class ClientAdminController extends Controller
      */
     public function store(Request $request)
     {
-        return app(ClientCreateAction::class)->execute($request);
+        return app(CompanyCreateAction::class)->execute($request);
     }
 }

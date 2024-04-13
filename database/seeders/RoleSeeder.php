@@ -26,13 +26,13 @@ class RoleSeeder extends Seeder
             ],
             2 => [
                 'role' => 'master',
-                'type' => 'client',
+                'type' => 'company',
                 'description' => 'master do cliente'
             ],
             3 => [
                 'role' => 'operator',
-                'type' => 'client',
-                'description' => 'oerador do cliente'
+                'type' => 'company',
+                'description' => 'operador do company'
             ],
         ];
 

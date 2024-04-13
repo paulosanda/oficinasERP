@@ -7,20 +7,20 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class InjectClientId
+class InjectCompanyId
 {
     /**
      * Handle an incoming request.
      *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     * @param Closure(Request): (Response) $next
      */
     public function handle(Request $request, Closure $next): Response
     {
         $user = Auth::user();
 
         if($user) {
-            $clientId = $user->client->id;
-            $request->merge(['client_id' => $clientId]);
+            $companyId = $user->company->id;
+            $request->merge(['company_id' => $companyId]);
         }
 
         return $next($request);

@@ -3,6 +3,7 @@
 namespace App\Actions;
 
 use App\Models\Vehicle;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class VehicleCreateAction
@@ -23,7 +24,7 @@ class VehicleCreateAction
         ];
     }
 
-    public function execute(Request $request)
+    public function execute(Request $request): JsonResponse
     {
         $data = $request->validate($this->rules());
 

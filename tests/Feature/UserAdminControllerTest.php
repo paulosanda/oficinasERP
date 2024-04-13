@@ -2,9 +2,9 @@
 
 namespace Tests\Feature;
 
+use App\Models\Company;
 use Tests\TestCase;
 use App\Models\User;
-use App\Models\Client;
 use Database\Seeders\RoleSeeder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Artisan;
@@ -16,13 +16,13 @@ class UserAdminControllerTest extends TestCase
     use RefreshDatabase;
 
     private User|Collection|Model $user;
-    private Client|Collection|Model $client;
+    private Company|Collection|Model $company;
 
     public function setUp(): void
     {
         parent::setUp();
         Artisan::call('db:seed', [RoleSeeder::class]);
-        $this->client = Client::factory()->create();
+        $this->company = Company::factory()->create();
         $this->user = User::factory()->create();
     }
 
@@ -32,7 +32,7 @@ class UserAdminControllerTest extends TestCase
 
         $response = $this->withHeaders([
             'Authorization' => 'Bearer ' . $token,
-        ])->postJson(route('admin.user.create', $this->client->id), [
+        ])->postJson(route('admin.user.create', $this->company->id), [
             'user' => [
                 'name' => fake()->name,
                 'email' => fake()->email,
@@ -46,7 +46,7 @@ class UserAdminControllerTest extends TestCase
             'message' => 'success'
         ]);
 
-        $this->assertDatabaseCount('client_users', 1);
+        $this->assertDatabaseCount('company_users', 1);
 
         $this->assertDatabaseCount('user_roles', 3);
     }
@@ -57,7 +57,7 @@ class UserAdminControllerTest extends TestCase
 
         $response = $this->withHeaders([
             'Authorization' => 'Bearer ' . $token,
-        ])->postJson(route('admin.user.create', $this->client->id), [
+        ])->postJson(route('admin.user.create', $this->company->id), [
             'user' => [
                 'name' => fake()->name,
                 'email' => fake()->email,
