@@ -48,6 +48,39 @@ class CustomerController extends Controller
         return app(CustomerCreateAction::class)->execute($request);
     }
 
+    /**
+     * @OA\Put(
+     *     path="/api/company/customer",
+     *     operationId="updateCustomer",
+     *     tags={"Company"},
+     *     summary="altera customer",
+     *     security={{ "bearerAuth" : {} }},
+     *     @OA\Parameter(
+     *         name="Authorization",
+     *         in="header",
+     *         required=true,
+     *         @OA\Schema(type="string", format="Bearer {token}")
+     *     ),
+     *     @OA\RequestBody(
+     *         request="dadosdoCustomer",
+     *         @OA\JsonContent(ref="#/components/schemas/CustomerUpdate")
+     *     ),
+     *          @OA\Response(
+     *           response=200,
+     *           description="success",
+     *           @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="success")
+     *           )
+     *       ),
+     *     @OA\Response(
+     *           response=403,
+     *           description="Unauthorized",
+     *           @OA\JsonContent(
+     *               @OA\Property(property="message", type="string", example="Invalid ability provided")
+     *           )
+     *       ),
+     *)
+     */
     public function update(Request $request)
     {
         return app(CustomerUpdateAction::class)->execute($request);

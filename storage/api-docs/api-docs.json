@@ -418,6 +418,72 @@
             }
         },
         "/api/company/customer": {
+            "put": {
+                "tags": [
+                    "Company"
+                ],
+                "summary": "altera customer",
+                "operationId": "updateCustomer",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "Bearer {token}"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CustomerUpdate"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "success"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Invalid ability provided"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
             "post": {
                 "tags": [
                     "Company"
@@ -590,6 +656,75 @@
                     "email"
                 ],
                 "properties": {
+                    "razao_social": {
+                        "description": "razão social",
+                        "type": "string"
+                    },
+                    "cnpj": {
+                        "description": "cnpj do company",
+                        "type": "string"
+                    },
+                    "inscricao_estadual": {
+                        "description": "inscrição estadual do company",
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "inscricao_municipal": {
+                        "description": "inscrição municipal do company",
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "endereco": {
+                        "description": "endereço",
+                        "type": "string"
+                    },
+                    "numero": {
+                        "description": "numero",
+                        "type": "string"
+                    },
+                    "bairro": {
+                        "description": "bairro",
+                        "type": "string"
+                    },
+                    "cep": {
+                        "description": "cep",
+                        "type": "string"
+                    },
+                    "cidade": {
+                        "description": "cidade",
+                        "type": "string"
+                    },
+                    "estado": {
+                        "description": "estado",
+                        "type": "string"
+                    },
+                    "celular": {
+                        "description": "celular",
+                        "type": "string"
+                    },
+                    "email": {
+                        "description": "email",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "CompanyUpdate": {
+                "title": "CompanyUpdate",
+                "description": "dados do company",
+                "required": [
+                    "razao_social",
+                    "cnpj",
+                    "endereco",
+                    "numero",
+                    "bairro",
+                    "cep",
+                    "cidade",
+                    "estado",
+                    "celular",
+                    "email"
+                ],
+                "properties": {
                     "id": {
                         "description": "id do company",
                         "type": "integer",
@@ -655,6 +790,79 @@
                     "name"
                 ],
                 "properties": {
+                    "name": {
+                        "description": "nome do customer",
+                        "type": "string"
+                    },
+                    "email": {
+                        "description": "email do customer",
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "celular": {
+                        "description": "celular do customer",
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "telefone": {
+                        "description": "telefone do customer",
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "cpf": {
+                        "description": "cpf do customer",
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "nascimento": {
+                        "description": "data de nascimento do customer",
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "profissao": {
+                        "description": "ocupação do customer",
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "endereco": {
+                        "description": "endereco do customer",
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "numero": {
+                        "description": "numero do endereço do customer",
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "bairro": {
+                        "description": "bairro do customer",
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "cidade": {
+                        "description": "cidade do customer",
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "estado": {
+                        "description": "estado do customer",
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            },
+            "CustomerUpdate": {
+                "title": "CustomerUpdate",
+                "description": "dados do customer",
+                "required": [
+                    "name"
+                ],
+                "properties": {
+                    "id": {
+                        "description": "id do customer",
+                        "type": "integer"
+                    },
                     "name": {
                         "description": "nome do customer",
                         "type": "string"
