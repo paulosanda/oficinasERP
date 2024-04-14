@@ -124,6 +124,7 @@ class CustomerControllerTest extends TestCase
         ]);
     }
 
+
     private function customerData(): array
     {
         return [
@@ -142,4 +143,5 @@ class CustomerControllerTest extends TestCase
             'estado' => 'CE'
         ];
     }
+
 }
