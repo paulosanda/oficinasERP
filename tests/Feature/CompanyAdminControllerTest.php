@@ -204,5 +204,41 @@ class CompanyAdminControllerTest extends TestCase
         ]]);
     }
 
+    public function testUpdate(): void
+    {
+        $token = $this->user->createToken('teste', ['admin'])->plainTextToken;
+
+        $company = $this->companyData();
+        $company['id'] = 1;
+        $company['razao_social'] = 'updated';
+
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer ' . $token,
+        ])->putJson(route('admin.company.update'), $company);
+
+        $response->assertStatus(200);
+
+        $this->assertDatabaseHas('companies', [
+            'razao_social' => 'updated'
+        ]);
+    }
+
+    public function companyData(): array
+    {
+        return [
+            'razao_social' => fake()->company,
+            'cnpj' => fake()->numerify('###.###.###/0001-##'),
+            'inscricao_estadual' => fake()->numerify('###.###.###-##'),
+            'inscricao_municipal' => fake()->numerify('###.###.###'),
+            'endereco' => fake()->streetName,
+            'numero' => '5',
+            'bairro' => fake()->name,
+            'cep' => fake()->postcode,
+            'cidade' => fake()->city,
+            'estado' => 'SP',
+            'celular' => fake()->phoneNumber,
+            'email' => fake()->email
+        ];
+    }
 
 }
