@@ -26,6 +26,8 @@ Route::middleware(['auth:sanctum', 'ability:root,admin'])->group(function (){
               ->name('admin.create.company');
           Route::get('/', [CompanyAdminController::class, 'index'])
               ->name('admin.index.company');
+          Route::put('/',[CompanyAdminController::class, 'update'])
+              ->name('admin.company.update');
           Route::get('/company/roles', [RoleController::class, 'companyIndex'])
               ->name('admin.company.rules.index');
           Route::post('/user/{companyId}', [UserAdminController::class, 'store'])
