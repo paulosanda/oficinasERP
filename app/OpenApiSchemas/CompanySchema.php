@@ -30,7 +30,7 @@ class CompanySchema
  *     schema="CompanyUpdate",
  *     title="CompanyUpdate",
  *     description="dados do company",
- *     required={"razao_social", "cnpj","endereco","numero","bairro","cep","cidade","estado","celular","email"},
+ *     required={"id"},
  *     @OA\Property(property="id", type="integer", format="int64", description="id do company"),
  *     @OA\Property(property="razao_social", type="string", description="razão social"),
  *     @OA\Property(property="cnpj", type="string", description="cnpj do company"),

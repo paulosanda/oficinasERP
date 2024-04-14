@@ -61,6 +61,71 @@
                     }
                 ]
             },
+            "put": {
+                "tags": [
+                    "Admin"
+                ],
+                "summary": "atualiza cadastro de company",
+                "operationId": "updateCompany",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "token de acesso do usuário administrativo ou root",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "Bearer {token}"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Request body to update a company",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CompanyUpdate"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Company"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthorizes"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
             "post": {
                 "tags": [
                     "Admin"
@@ -713,16 +778,7 @@
                 "title": "CompanyUpdate",
                 "description": "dados do company",
                 "required": [
-                    "razao_social",
-                    "cnpj",
-                    "endereco",
-                    "numero",
-                    "bairro",
-                    "cep",
-                    "cidade",
-                    "estado",
-                    "celular",
-                    "email"
+                    "id"
                 ],
                 "properties": {
                     "id": {
