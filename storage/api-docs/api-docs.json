@@ -770,6 +770,12 @@
                     "email": {
                         "description": "email",
                         "type": "string"
+                    },
+                    "users": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/User"
+                        }
                     }
                 },
                 "type": "object"
@@ -977,6 +983,54 @@
                         "description": "estado do customer",
                         "type": "string",
                         "nullable": true
+                    }
+                },
+                "type": "object"
+            },
+            "Role": {
+                "title": "Role",
+                "description": "Dados da função do usuário",
+                "properties": {
+                    "id": {
+                        "description": "ID da função",
+                        "type": "integer"
+                    },
+                    "role": {
+                        "description": "Função do usuário",
+                        "type": "string"
+                    },
+                    "type": {
+                        "description": "Tipo da função",
+                        "type": "string"
+                    },
+                    "role_description": {
+                        "description": "Descrição da função",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "User": {
+                "title": "User",
+                "description": "Dados do usuário",
+                "properties": {
+                    "id": {
+                        "description": "ID do usuário",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "description": "Nome do usuário",
+                        "type": "string"
+                    },
+                    "email": {
+                        "description": "Email do usuário",
+                        "type": "string"
+                    },
+                    "roles": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Role"
+                        }
                     }
                 },
                 "type": "object"
