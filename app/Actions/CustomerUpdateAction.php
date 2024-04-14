@@ -47,7 +47,7 @@ class CustomerUpdateAction
 
             $customer->update($data);
 
-            return response()->json(['message' => 'success', 'customer created']);
+            return response()->json(['message' => 'success']);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()]);
         } catch (\Throwable $e) {
