@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Company;
+use App\Models\CompanyUser;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\UserRole;
@@ -181,6 +182,16 @@ class CompanyAdminControllerTest extends TestCase
     public function testIndex(): void
     {
         $token = $this->user->createToken('token', ['admin'])->plainTextToken;
+
+        $users =User::factory()->count(5)->create();
+
+        foreach ($users as $user){
+            CompanyUser::factory()->create([
+                'company_id' => 2,
+                'user_id' => $user->id
+            ]);
+        }
+
 
         $response = $this->withHeaders([
             'Authorization' => 'Bearer ' . $token,

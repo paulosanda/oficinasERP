@@ -10,6 +10,7 @@ class Company extends Model
 {
     use HasFactory;
 
+    protected $with = ['users'];
     protected $fillable = [
         'razao_social',
         'cnpj',
@@ -27,6 +28,6 @@ class Company extends Model
 
     public function users(): HasManyThrough
     {
-        return $this->hasManyThrough(User::class, CompanyUser::class, 'company_id', 'id', 'id', 'user_id');
+        return $this->hasManyThrough(User::class, CompanyUser::class, 'user_id', 'id', 'id', 'company_id');
     }
 }
