@@ -211,7 +211,7 @@
                             }
                         }
                     },
-                    "401": {
+                    "403": {
                         "description": "Não autorizado",
                         "content": {
                             "application/json": {
@@ -219,7 +219,7 @@
                                     "properties": {
                                         "error": {
                                             "type": "string",
-                                            "example": "Unauthenticated."
+                                            "example": "Invalid ability provided."
                                         }
                                     },
                                     "type": "object"
@@ -471,6 +471,91 @@
                                         "error": {
                                             "type": "string",
                                             "example": "Unauthorizes"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/admin/company/roles": {
+            "get": {
+                "tags": [
+                    "Admin"
+                ],
+                "summary": "lista roles de company",
+                "description": "lista roles de company",
+                "operationId": "companyRoles",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Token de acesso do usuário administrativo ou root",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "Bearer {token}"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "roles": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "description": "id da role",
+                                                        "type": "integer",
+                                                        "example": "3"
+                                                    },
+                                                    "role": {
+                                                        "description": "nome da role",
+                                                        "type": "string",
+                                                        "example": "master"
+                                                    },
+                                                    "type": {
+                                                        "description": "tipo de role",
+                                                        "type": "string",
+                                                        "example": "company"
+                                                    },
+                                                    "role_description": {
+                                                        "description": "descrição da role",
+                                                        "type": "string",
+                                                        "example": "master do cliente"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Não autorizado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Invalid ability provided."
                                         }
                                     },
                                     "type": "object"

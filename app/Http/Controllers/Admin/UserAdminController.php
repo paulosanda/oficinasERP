@@ -65,10 +65,10 @@ class UserAdminController extends Controller
      *
      *     ),
      *     @OA\Response(
-     *          response=401,
+     *          response=403,
      *          description="Não autorizado",
      *          @OA\JsonContent(
-     *              @OA\Property(property="error", type="string", example="Unauthenticated.")
+     *              @OA\Property(property="error", type="string", example="Invalid ability provided.")
      *           )
      *       ),
      *)

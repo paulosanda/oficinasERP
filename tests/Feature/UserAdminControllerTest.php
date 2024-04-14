@@ -49,6 +49,7 @@ class UserAdminControllerTest extends TestCase
         $this->assertDatabaseCount('company_users', 1);
 
         $this->assertDatabaseCount('user_roles', 3);
+
     }
 
     public function testCreateUserErrorNoAbility(): void

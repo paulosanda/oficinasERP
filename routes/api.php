@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\CompanyAdminController;
 use App\Http\Controllers\Admin\UserAdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\VehicleController;
 use App\Http\Middleware\InjectCompanyId;
 use Illuminate\Http\Request;
@@ -25,6 +26,8 @@ Route::middleware(['auth:sanctum', 'ability:root,admin'])->group(function (){
               ->name('admin.create.company');
           Route::get('/', [CompanyAdminController::class, 'index'])
               ->name('admin.index.company');
+          Route::get('/company/roles', [RoleController::class, 'companyIndex'])
+              ->name('admin.company.rules.index');
           Route::post('/user/{companyId}', [UserAdminController::class, 'store'])
               ->name('admin.user.create');
       });
