@@ -28,11 +28,8 @@ class CompanyAdminControllerTest extends TestCase
 
         Artisan::call('db:seed' ,[RoleSeeder::class]);
 
-        $this->user = User::factory()->create();
-
-        CompanyUser::factory()->create([
-            'company_id' => $this->company[0]['id'],
-            'user_id' => $this->user->id
+        $this->user = User::factory()->create([
+            'company_id' => 2
         ]);
 
         $role = Role::findOrFail(1);
@@ -46,7 +43,6 @@ class CompanyAdminControllerTest extends TestCase
 
     public function testCreateCompany(): void
     {
-
         $token = $this->user->createToken('teste', ['root'])->plainTextToken;
 
         $response = $this->withHeaders([
@@ -83,7 +79,7 @@ class CompanyAdminControllerTest extends TestCase
             'email'
         ]);
 
-        $this->assertDatabaseCount('companies', 11);
+        $this->assertDatabaseCount('companies', 14);
     }
 
     public function testCreateCompanyError422()
@@ -143,7 +139,7 @@ class CompanyAdminControllerTest extends TestCase
             ],
         ]);
 
-        $this->assertDatabaseCount('companies', 10);
+        $this->assertDatabaseCount('companies', 13);
     }
 
     public function testCreateCompanyWithoutInscricaoEstadual(): void
@@ -182,23 +178,13 @@ class CompanyAdminControllerTest extends TestCase
             'email'
         ]);
 
-        $this->assertDatabaseCount('companies', 11);
+        $this->assertDatabaseCount('companies', 14);
     }
 
     public function testIndex(): void
     {
 
         $token = $this->user->createToken('token', ['admin'])->plainTextToken;
-
-        $users =User::factory()->count(5)->create();
-
-        foreach ($users as $user){
-            CompanyUser::factory()->create([
-                'company_id' => 2,
-                'user_id' => $user->id
-            ]);
-        }
-
 
         $response = $this->withHeaders([
             'Authorization' => 'Bearer ' . $token,

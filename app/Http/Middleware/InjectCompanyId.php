@@ -19,7 +19,7 @@ class InjectCompanyId
         $user = Auth::user();
 
         if($user) {
-            $companyId = $user->company[0]['id'];
+            $companyId = $user->company_id;
             $request->merge(['company_id' => $companyId]);
         }
 

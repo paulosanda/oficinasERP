@@ -20,6 +20,7 @@ namespace App\OpenApiSchemas;
  *     @OA\Property(property="estado",type="string",description="estado"),
  *     @OA\Property(property="celular",type="string",description="celular"),
  *     @OA\Property(property="email", type="string", description="email"),
+ *     @OA\Property(property="users", type="array", @OA\Items(ref="#/components/schemas/User"))
  * )
  */
 class CompanySchema

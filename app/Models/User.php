@@ -14,13 +14,14 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
 
 
-    protected $with = ['company', 'roles'];
+    protected $with = ['roles'];
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
     protected $fillable = [
+        'company_id',
         'name',
         'email',
         'password',
@@ -47,11 +48,6 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
-    }
-
-    public function company(): HasManyThrough
-    {
-        return $this->hasManyThrough(Company::class, CompanyUser::class, 'user_id', 'id', 'id', 'company_id');
     }
 
     public function roles(): HasManyThrough
