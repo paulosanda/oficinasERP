@@ -23,14 +23,10 @@ class VehicleControllerTest extends TestCase
     {
         parent::setUp();
 
-        $this->user = User::factory()->create();
         $this->company = Company::factory()->create();
-
-        CompanyUser::create([
-            'company_id' => $this->company->id,
-            'user_id' => $this->user->id
+        $this->user = User::factory()->create([
+            'company_id' => $this->company->id
         ]);
-
         $this->customer = Customer::factory()->create([
             'company_id' => $this->company->id
         ]);

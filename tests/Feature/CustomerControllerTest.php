@@ -8,7 +8,6 @@ use App\Models\Role;
 use App\Models\User;
 use App\Models\Customer;
 use App\Models\UserRole;
-use App\Models\CompanyUser;
 use Database\Seeders\RoleSeeder;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -28,10 +27,7 @@ class CustomerControllerTest extends TestCase
         Artisan::call('db:seed', [RoleSeeder::class]);
 
         $role = Role::where('role', 'master')->first();
-        CompanyUser::factory()->create([
-            'company_id' => $this->company->id,
-            'user_id' => $this->user->id
-        ]);
+
         UserRole::create([
             'user_id' => $this->user->id,
             'role_id' => $role->id
@@ -69,9 +65,12 @@ class CustomerControllerTest extends TestCase
     public function testUpdateCustomer(): void
     {
         $customer = $this->customerData();
+
         $customer['company_id'] = $this->company->id;
 
         $customerModel = Customer::create($customer);
+        $customerModel->update(['company_id' => $this->company->id]);
+        $customerModel->refresh();
 
         $customerUpdate =  $this->customerData();
 
@@ -79,12 +78,14 @@ class CustomerControllerTest extends TestCase
         $customerUpdate['company_id'] = $this->company->id;
         $customerUpdate['name'] = 'updated';
 
+        $this->user->update(['company_id' => $this->company->id]);
+        $this->user->refresh();
+
         $token = $this->user->createToken('teste', ['master', 'operator'])->plainTextToken;
 
         $response = $this->withHeaders([
             'Authorization' => 'Bearer ' . $token,
         ])->putJson(route('customer.update'), $customerUpdate);
-
 
         $response->assertStatus(200);
 
@@ -130,6 +131,7 @@ class CustomerControllerTest extends TestCase
     private function customerData(): array
     {
         return [
+            'company_id' => $this->company->id,
             'name' => fake()->name,
             'email' => fake()->email,
             'celular' => fake()->phoneNumber,
@@ -145,5 +147,4 @@ class CustomerControllerTest extends TestCase
             'estado' => 'CE'
         ];
     }
-
 }

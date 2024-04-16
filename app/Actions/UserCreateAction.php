@@ -2,7 +2,6 @@
 
 namespace App\Actions;
 
-use App\Models\CompanyUser;
 use App\Models\User;
 use App\Models\UserRole;
 use Illuminate\Http\JsonResponse;
@@ -24,13 +23,12 @@ class UserCreateAction
     public function execute($companyId, Request $request): JsonResponse
     {
         $data = $request->validate($this->rules());
+        $data['user']['company_id'] = $companyId;
 
         try {
             $user = User::create($data['user']);
 
             $this->createUserRoles($data['roles'], $user->id);
-
-            $this->appendUserToCompany($companyId, $user->id);
 
             return response()->json(['message' => 'success']);
         } catch (\Exception $e) {
@@ -46,13 +44,5 @@ class UserCreateAction
                 'role_id' => $role
             ]);
         }
-    }
-
-    private function appendUserToCompany($companyId, $userId): void
-    {
-        CompanyUser::create([
-            'company_id' => $companyId,
-            'user_id' => $userId
-        ]);
     }
 }
