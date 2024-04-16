@@ -19,7 +19,7 @@ class CompanyAdminControllerTest extends TestCase
     use RefreshDatabase;
 
     private User $user;
-    private Company|Collection|Model $company;
+    private  Company|Model|Collection $company;
     public function setUp(): void
     {
         parent::setUp();
@@ -29,6 +29,11 @@ class CompanyAdminControllerTest extends TestCase
         Artisan::call('db:seed' ,[RoleSeeder::class]);
 
         $this->user = User::factory()->create();
+
+        CompanyUser::factory()->create([
+            'company_id' => $this->company[0]['id'],
+            'user_id' => $this->user->id
+        ]);
 
         $role = Role::findOrFail(1);
 
@@ -41,6 +46,7 @@ class CompanyAdminControllerTest extends TestCase
 
     public function testCreateCompany(): void
     {
+
         $token = $this->user->createToken('teste', ['root'])->plainTextToken;
 
         $response = $this->withHeaders([
@@ -181,6 +187,7 @@ class CompanyAdminControllerTest extends TestCase
 
     public function testIndex(): void
     {
+
         $token = $this->user->createToken('token', ['admin'])->plainTextToken;
 
         $users =User::factory()->count(5)->create();

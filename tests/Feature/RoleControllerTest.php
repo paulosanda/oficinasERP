@@ -5,7 +5,6 @@ namespace Tests\Feature;
 use App\Models\User;
 use Database\Seeders\RoleSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Artisan;
 use Tests\TestCase;
 
@@ -35,9 +34,10 @@ class RoleControllerTest extends TestCase
 
         $response->assertJsonStructure([
             'roles' => [[
-            'id',
-            'role'
-        ]]]);
+                'id',
+                'role'
+            ]]
+        ]);
     }
 
     public function testCompanyRUlesIndexInvalidAbility(): void
@@ -53,6 +53,5 @@ class RoleControllerTest extends TestCase
         $response->assertJson([
             'message' => 'Invalid ability provided.'
         ]);
-
     }
 }
