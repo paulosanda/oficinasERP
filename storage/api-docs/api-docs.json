@@ -666,7 +666,7 @@
                                                     "role_description": {
                                                         "description": "descrição da role",
                                                         "type": "string",
-                                                        "example": "master do cliente"
+                                                        "example": "master do company"
                                                     }
                                                 },
                                                 "type": "object"
@@ -770,12 +770,6 @@
                     "email": {
                         "description": "email",
                         "type": "string"
-                    },
-                    "users": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/User"
-                        }
                     }
                 },
                 "type": "object"

@@ -26,6 +26,7 @@ class CustomerControllerTest extends TestCase
         $this->user = User::factory()->create();
         $this->company = Company::factory()->create();
         Artisan::call('db:seed', [RoleSeeder::class]);
+
         $role = Role::where('role', 'master')->first();
         CompanyUser::factory()->create([
             'company_id' => $this->company->id,
@@ -40,6 +41,7 @@ class CustomerControllerTest extends TestCase
     public function testCreateCustomer(): void
     {
         $token = $this->user->createToken('test', ['master', 'operator'])->plainTextToken;
+
 
         $response = $this->withHeaders([
             'Authorization' => 'Bearer ' . $token,

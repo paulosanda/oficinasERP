@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class CompanyUserFactory extends Factory
 {
+
+    protected $table = 'company_users';
     /**
      * Define the model's default state.
      *

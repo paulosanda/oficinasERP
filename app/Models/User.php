@@ -5,7 +5,6 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
-use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -15,7 +14,7 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
 
 
-    protected $with = ['company','roles'];
+    protected $with = ['company', 'roles'];
     /**
      * The attributes that are mass assignable.
      *
@@ -50,9 +49,9 @@ class User extends Authenticatable
         ];
     }
 
-    public function company(): HasOneThrough
+    public function company(): HasManyThrough
     {
-        return $this->hasOneThrough(Company::class, CompanyUser::class, 'user_id', 'id', 'id', 'company_id');
+        return $this->hasManyThrough(Company::class, CompanyUser::class, 'user_id', 'id', 'id', 'company_id');
     }
 
     public function roles(): HasManyThrough

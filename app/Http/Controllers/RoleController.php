@@ -39,7 +39,7 @@ class RoleController extends Controller
      *                   @OA\Property(property="id", type="integer", description="id da role", example="3"),
      *                   @OA\Property(property="role", type="string", description="nome da role", example="master"),
      *                   @OA\Property(property="type", type="string", description="tipo de role", example="company"),
-     *                   @OA\Property(property="role_description", type="string", description="descrição da role", example="master do cliente"),
+     *                   @OA\Property(property="role_description", type="string", description="descrição da role", example="master do company"),
      *                  )
      *              )
      *         )
