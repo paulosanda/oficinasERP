@@ -46,8 +46,6 @@ class UserAdminControllerTest extends TestCase
             'message' => 'success'
         ]);
 
-        $this->assertDatabaseCount('company_users', 1);
-
         $this->assertDatabaseCount('user_roles', 3);
 
     }

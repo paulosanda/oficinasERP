@@ -770,6 +770,12 @@
                     "email": {
                         "description": "email",
                         "type": "string"
+                    },
+                    "users": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/User"
+                        }
                     }
                 },
                 "type": "object"
