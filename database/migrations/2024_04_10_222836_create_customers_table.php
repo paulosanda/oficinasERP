@@ -14,12 +14,16 @@ return new class extends Migration
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
             $table->foreignId('company_id')->constrained('companies');
+            $table->enum('tipo', ['pf', 'pj']);
             $table->string('name');
             $table->string('email')->nullable();
             $table->string('celular')->nullable();
             $table->string('telefone')->nullable();
             $table->string('cpf')->nullable();
             $table->string('rg')->nullable();
+            $table->string('cnpj')->nullable();
+            $table->string('inscricao_estadual')->nullable();
+            $table->string('inscricao_municipal')->nullable();
             $table->date('nascimento')->nullable();
             $table->string('profissao')->nullable();
             $table->string('endereco')->nullable();

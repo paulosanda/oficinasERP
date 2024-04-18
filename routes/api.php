@@ -3,6 +3,8 @@
 use App\Http\Controllers\Admin\CompanyAdminController;
 use App\Http\Controllers\Admin\UserAdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CheckupController;
+use App\Http\Controllers\CheckupObservationTypeController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\VehicleController;
@@ -36,7 +38,7 @@ Route::middleware(['auth:sanctum', 'ability:root,admin'])->group(function (){
    });
 });
 
-Route::middleware(['auth:sanctum', 'ability:master,operador', InjectCompanyId::class])->group(function(){
+Route::middleware(['auth:sanctum', 'ability:master,operator', InjectCompanyId::class])->group(function(){
     Route::prefix('company')->group(function (){
         Route::prefix('customer')->group(function (){
             Route::post('/', [CustomerController::class, 'store'])
@@ -45,6 +47,10 @@ Route::middleware(['auth:sanctum', 'ability:master,operador', InjectCompanyId::c
                 ->name('customer.update');
             Route::post('/vehicle', [VehicleController::class, 'store'])
                 ->name('customer.vehicle.store');
+            Route::post('/checkup', [CheckupController::class, 'store'])
+                ->name('customer.checkup.store');
+            Route::get('/checkup-observation-types', [CheckupObservationTypeController::class, 'index'])
+                ->name('checkup_observation.index');
         });
     });
 
