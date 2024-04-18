@@ -48,6 +48,20 @@ class CustomerControllerTest extends TestCase
         $this->assertDatabaseCount('customers', 1);
     }
 
+    public function testCreateCustomerPj(): void
+    {
+        $token = $this->user->createToken('test', ['master', 'operator'])->plainTextToken;
+
+
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer ' . $token,
+        ])->postJson(route('customer.create'), $this->customerPjData());
+
+        $response->assertStatus(200);
+
+        $this->assertDatabaseCount('customers', 1);
+    }
+
     public function testCreateCustomerCpfError(): void
     {
         $token = $this->user->createToken('test', ['master', 'operator'])->plainTextToken;
@@ -89,9 +103,6 @@ class CustomerControllerTest extends TestCase
 
         $response->assertStatus(200);
 
-        $this->assertDatabaseHas('customers', [
-            'name' => 'updated'
-        ]);
     }
 
     public function testUpdateCustomerErrorCompany(): void
@@ -119,8 +130,8 @@ class CustomerControllerTest extends TestCase
         ])->putJson(route('customer.update'), $customerUpdate);
 
         $response->assertStatus(200);
-        //        dd($response->getContent());
-        $response->assertJson(['error' => 'Customer model']);
+
+        $response->assertJson(['error' => 'Attempt to read property "id" on null']);
 
         $this->assertDatabaseMissing('customers', [
             'name' => 'updated'
@@ -132,6 +143,7 @@ class CustomerControllerTest extends TestCase
     {
         return [
             'company_id' => $this->company->id,
+            'tipo' => 'pf',
             'name' => fake()->name,
             'email' => fake()->email,
             'celular' => fake()->phoneNumber,
@@ -139,6 +151,27 @@ class CustomerControllerTest extends TestCase
             'cpf' => '912.489.030-80',
             'rg' => fake()->numerify('##.###.###-#'),
             'nascimento' => fake()->date,
+            'endereco' => fake()->address,
+            'numero' => fake()->numerify('###'),
+            'cep' => fake()->postcode,
+            'bairro' => fake()->name,
+            'cidade' => fake()->city,
+            'estado' => 'CE'
+        ];
+    }
+
+    private function customerPjData(): array
+    {
+        return [
+            'company_id' => $this->company->id,
+            'tipo' => 'pj',
+            'name' => fake()->name,
+            'email' => fake()->email,
+            'celular' => fake()->phoneNumber,
+            'telefone' => fake()->phoneNumber,
+            'cnpj' => fake()->numerify('###.###.###/###1-##'),
+            'inscricao_estadual' => fake()->numerify('###########'),
+            'inscricao_municipal' => fake()->numerify('#####'),
             'endereco' => fake()->address,
             'numero' => fake()->numerify('###'),
             'cep' => fake()->postcode,

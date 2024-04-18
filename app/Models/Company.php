@@ -11,6 +11,8 @@ class Company extends Model
 {
     use HasFactory;
 
+    const COMPANY_INDEX = 'company_id';
+
     protected $with = ['users'];
 
     protected $table = 'companies';

@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\Company;
 use App\Models\CompanyUser;
+use App\Models\QuoteNumbering;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\UserRole;
@@ -45,6 +46,10 @@ class CompanyAdminControllerTest extends TestCase
     {
         $token = $this->user->createToken('teste', ['root'])->plainTextToken;
 
+        $companiesQtity = Company::all()->count();
+
+        $quoteNumberingQtity = QuoteNumbering::all()->count();
+
         $response = $this->withHeaders([
             'Authorization' => 'Bearer '. $token,
         ])->postJson(route('admin.create.company'),[
@@ -79,7 +84,9 @@ class CompanyAdminControllerTest extends TestCase
             'email'
         ]);
 
-        $this->assertDatabaseCount('companies', 14);
+        $this->assertDatabaseCount('companies', $companiesQtity+1);
+
+        $this->assertDatabaseCount('quote_numberings', $quoteNumberingQtity+1);
     }
 
     public function testCreateCompanyError422()

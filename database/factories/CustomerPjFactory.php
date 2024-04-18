@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Customer>
  */
-class CustomerFactory extends Factory
+class CustomerPjFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -20,12 +20,14 @@ class CustomerFactory extends Factory
         $company = Company::factory()->create();
         return [
             'company_id' => $company->id,
-            'tipo' => 'pf',
+            'tipo' => 'pj',
             'name' => fake()->name,
             'email' => fake()->email,
             'celular' => fake()->phoneNumber,
             'telefone' => fake()->phoneNumber,
-            'cpf' => fake()->numerify('###.###.###-##'),
+            'cnpj' => fake()->numerify('###.###.###/###1-##'),
+            'inscricao_estadual' => fake()->numerify('##########'),
+            'inscricao_municipal' => fake()->numerify('#####'),
             'nascimento' => fake()->date(),
             'profissao' => 'ocupação',
             'endereco' => fake()->streetAddress,

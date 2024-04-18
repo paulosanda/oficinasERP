@@ -3,6 +3,7 @@
 namespace App\Actions;
 
 use App\Models\Company;
+use App\Models\QuoteNumbering;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 
@@ -32,6 +33,11 @@ class CompanyCreateAction
 
         try {
             $newCompany = Company::create($data);
+
+            QuoteNumbering::create([
+               'company_id' => $newCompany->id,
+               'numbering' => 0
+            ]);
 
             return response()->json($newCompany, 200);
         } catch (\Exception $e) {
