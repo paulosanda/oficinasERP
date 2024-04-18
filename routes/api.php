@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CheckupController;
 use App\Http\Controllers\CheckupObservationTypeController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\QuoteController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\VehicleController;
 use App\Http\Middleware\InjectCompanyId;
@@ -51,6 +52,10 @@ Route::middleware(['auth:sanctum', 'ability:master,operator', InjectCompanyId::c
                 ->name('customer.checkup.store');
             Route::get('/checkup-observation-types', [CheckupObservationTypeController::class, 'index'])
                 ->name('checkup_observation.index');
+            Route::prefix('quote')->group(function (){
+               Route::post('/', [QuoteController::class, 'store'])
+                   ->name('quote.store');
+            });
         });
     });
 
