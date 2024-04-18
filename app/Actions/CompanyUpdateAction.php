@@ -12,7 +12,6 @@ class CompanyUpdateAction
 {
     use EmptyEntity;
 
-    protected string $object = 'Company model';
     protected function rules(): array
     {
         return [
@@ -37,9 +36,9 @@ class CompanyUpdateAction
         $data = $request->validate($this->rules());
 
         try {
-            $company = Company::find($data['id']);
-            $this->isEmpty($company, $this->object);
+            $company = Company::findOrFail($data['id']);
             unset($data['id']);
+
             $company->update($data);
 
             return response()->json(['message' => 'success']);

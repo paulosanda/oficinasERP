@@ -12,6 +12,7 @@ class CustomerCreateAction
     protected function rules(): array
     {
         return [
+            'tipo' => 'string',
             'company_id' => 'required|integer',
             'name' => 'string|required',
             'email' => 'email',
@@ -19,6 +20,9 @@ class CustomerCreateAction
             'telefone' => 'string',
             'cpf' => 'cpf',
             'rg' => 'string',
+            'cnpj' => 'string',
+            'inscricao_estadual' => 'string',
+            'inscricao_municipal' => 'string',
             'nascimento' => 'string',
             'endereco' => 'string',
             'numero' => 'string',

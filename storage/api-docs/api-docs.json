@@ -482,6 +482,144 @@
                 ]
             }
         },
+        "/api/company/customer/checkup": {
+            "post": {
+                "tags": [
+                    "Company"
+                ],
+                "summary": "cria checkup veicular",
+                "operationId": "createCheckupVeicular",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "token de usuário company",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "Bearer {token}"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "dados para registro de checkup veicular",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Checkup"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "success"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthorizes"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/company/checkup-observation-types": {
+            "get": {
+                "tags": [
+                    "Company"
+                ],
+                "summary": "lista de observações",
+                "description": "lista de observações para checkup veicular",
+                "operationId": "checkupObservationTypes",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "token de acesso do usuário company",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "Bearer {token}"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "integer",
+                                                "example": "1"
+                                            },
+                                            "type": {
+                                                "type": "string",
+                                                "example": "amortecedores dianteiro"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Não autorizado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Invalid ability provided."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/api/company/customer": {
             "put": {
                 "tags": [
@@ -701,10 +839,182 @@
                     }
                 ]
             }
+        },
+        "/api/customer/vehicle": {
+            "post": {
+                "tags": [
+                    "Company"
+                ],
+                "summary": "cria vehicle",
+                "operationId": "createVehicle",
+                "parameters": [
+                    {
+                        "name": "Authoriztion",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "Bearer {token}"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "dados de vehicle",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/vehicle"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "success"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthorizes"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
         }
     },
     "components": {
         "schemas": {
+            "CheckupObservation": {
+                "title": "CheckupObservation",
+                "description": "observações do checkup",
+                "required": [
+                    "checkup_observation_type_id"
+                ],
+                "properties": {
+                    "checkup_observation_type_id": {
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "observation": {
+                        "type": "string",
+                        "example": "ooon noo noooobo",
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            },
+            "Checkup": {
+                "title": "Checkup",
+                "description": "Checkup veicular",
+                "required": [
+                    "vehicle_id"
+                ],
+                "properties": {
+                    "vehicle_id": {
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "avarias_frente": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "av_frente_foto": {
+                        "type": "string",
+                        "format": "binary",
+                        "example": "este deverá ser o upload de uma imagem",
+                        "nullable": true
+                    },
+                    "avarias_traseiro": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "av_traseira_foto": {
+                        "type": "string",
+                        "format": "binary",
+                        "example": "este deverá ser o upload de uma imagem",
+                        "nullable": true
+                    },
+                    "avarias_direito": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "av_direito_foto": {
+                        "type": "string",
+                        "format": "binary",
+                        "example": "este deverá ser o upload de uma imagem",
+                        "nullable": true
+                    },
+                    "avarias_esquerdo": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "av_esquerdo_foto": {
+                        "type": "string",
+                        "format": "binary",
+                        "example": "este deverá ser o upload de uma imagem",
+                        "nullable": true
+                    },
+                    "avarias_teto": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "av_teto_foto": {
+                        "type": "string",
+                        "format": "binary",
+                        "example": "este deverá ser o upload de uma imagem",
+                        "nullable": true
+                    },
+                    "combustivel": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "combustivel_foto": {
+                        "type": "string",
+                        "format": "binary",
+                        "example": "este deverá ser o upload de uma imagem",
+                        "nullable": true
+                    },
+                    "avaliacao": {
+                        "type": "string"
+                    },
+                    "checkup_observation": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/CheckupObservation"
+                        },
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            },
             "Company": {
                 "title": "Company",
                 "description": "dados do company",
@@ -849,9 +1159,15 @@
                 "title": "Customer",
                 "description": "dados do customer",
                 "required": [
-                    "name"
+                    "name",
+                    "tipo"
                 ],
                 "properties": {
+                    "tipo": {
+                        "description": "tipo de pessoa se pf ou pj",
+                        "type": "string",
+                        "example": "pf"
+                    },
                     "name": {
                         "description": "nome do customer",
                         "type": "string"
@@ -873,6 +1189,21 @@
                     },
                     "cpf": {
                         "description": "cpf do customer",
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "cnpj": {
+                        "description": "cnpj se for pj",
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "inscricao_estadual": {
+                        "description": "ie se for pj e houver",
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "inscricao_municipal": {
+                        "description": "inscricao municiapl para pj se houver",
                         "type": "string",
                         "nullable": true
                     },
@@ -918,16 +1249,22 @@
                 "title": "CustomerUpdate",
                 "description": "dados do customer",
                 "required": [
-                    "name"
+                    "id"
                 ],
                 "properties": {
                     "id": {
                         "description": "id do customer",
                         "type": "integer"
                     },
+                    "tipo": {
+                        "description": "tipo de pessoa se pf ou pj",
+                        "type": "string",
+                        "nullable": true
+                    },
                     "name": {
                         "description": "nome do customer",
-                        "type": "string"
+                        "type": "string",
+                        "nullable": true
                     },
                     "email": {
                         "description": "email do customer",
@@ -946,6 +1283,16 @@
                     },
                     "cpf": {
                         "description": "cpf do customer",
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "inscricao_estadual": {
+                        "description": "ie se for pj e houver",
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "inscricao_municipal": {
+                        "description": "inscricao municiapl para pj se houver",
                         "type": "string",
                         "nullable": true
                     },

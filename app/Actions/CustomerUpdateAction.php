@@ -3,6 +3,7 @@
 namespace App\Actions;
 
 
+use App\Models\Company;
 use App\Models\Customer;
 use App\Trait\EmptyEntity;
 use Illuminate\Http\JsonResponse;
@@ -12,18 +13,21 @@ class CustomerUpdateAction
 {
     use  EmptyEntity;
 
-    protected string $object = 'Customer model';
     protected function rules(): array
     {
         return [
             'company_id' => 'integer|required',
             'id' => 'integer|required',
+            'tipo' => 'string',
             'name' => 'string|required',
             'email' => 'email',
             'celular' => 'string',
             'telefone' => 'string',
             'cpf' => 'cpf',
             'rg' => 'string',
+            'cnpj' => 'string',
+            'inscricao_estadual' => 'string',
+            'inscricao_municipal' => 'string',
             'nascimento' => 'string',
             'endereco' => 'string',
             'numero' => 'string',
@@ -37,10 +41,10 @@ class CustomerUpdateAction
     public function execute(Request $request): JsonResponse
     {
         $data = $request->validate($this->rules());
-
         try{
+            $this->isEmpty(Customer::class, Company::COMPANY_INDEX, $data['company_id']);
+
             $customer = Customer::where('id', $data['id'])->where('company_id', $data['company_id'])->first();
-            $this->isEmpty($customer, $this->object);
 
             unset($data['id']);
             unset($data['company_id']);
