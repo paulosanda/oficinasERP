@@ -11,7 +11,7 @@ class QuotePart extends Model
 
     protected $fillable = [
         'quote_id',
-        'codigo_do_servico',
+        'codigo_do_produto',
         'descricao',
         'quantidade',
         'valor',

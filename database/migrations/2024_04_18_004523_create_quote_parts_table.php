@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('quote_parts', function (Blueprint $table) {
             $table->id();
             $table->foreignId('quote_id')->constrained('quotes');
-            $table->string('codigo_do_servico')->nullable();
+            $table->string('codigo_do_produto')->nullable();
             $table->string('descricao');
             $table->tinyInteger('quantidade');
             $table->string('valor');
