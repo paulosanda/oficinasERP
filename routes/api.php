@@ -9,6 +9,7 @@ use App\Http\Controllers\CheckupObservationTypeController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\QuoteController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\ScheduledServiceController;
 use App\Http\Controllers\VehicleController;
 use App\Http\Middleware\InjectCompanyId;
 use Illuminate\Http\Request;
@@ -63,6 +64,10 @@ Route::middleware(['auth:sanctum', 'ability:master,operator', InjectCompanyId::c
                Route::post('/', [QuoteController::class, 'store'])
                    ->name('quote.store');
             });
+            Route::get('/schedulable_services_avaliable', [ScheduledServiceController::class, 'listService'])
+                ->name('schedulable_services.list');
+            Route::post('/schedule-service', [ScheduledServiceController::class, 'store'])
+                ->name('schedule-service.store');
         });
     });
 
