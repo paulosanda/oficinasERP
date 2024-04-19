@@ -1,12 +1,15 @@
 <?php
 
 use App\Http\Controllers\Admin\CompanyAdminController;
+use App\Http\Controllers\Admin\SchedulableServiceAdminController;
 use App\Http\Controllers\Admin\UserAdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CheckupController;
 use App\Http\Controllers\CheckupObservationTypeController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\QuoteController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\ScheduledServiceController;
 use App\Http\Controllers\VehicleController;
 use App\Http\Middleware\InjectCompanyId;
 use Illuminate\Http\Request;
@@ -35,6 +38,12 @@ Route::middleware(['auth:sanctum', 'ability:root,admin'])->group(function (){
           Route::post('/user/{companyId}', [UserAdminController::class, 'store'])
               ->name('admin.user.create');
       });
+       Route::get('/schedulable-services', [SchedulableServiceAdminController::class, 'index'])
+           ->name('schedulable_services.index');
+       Route::post('/', [SchedulableServiceAdminController::class, 'store'])
+           ->name('scheculable_services.store');
+       Route::patch('/{schedulableServiceId}', [SchedulableServiceAdminController::class, 'update'])
+            ->name('schedulable_services.update');
    });
 });
 
@@ -51,6 +60,14 @@ Route::middleware(['auth:sanctum', 'ability:master,operator', InjectCompanyId::c
                 ->name('customer.checkup.store');
             Route::get('/checkup-observation-types', [CheckupObservationTypeController::class, 'index'])
                 ->name('checkup_observation.index');
+            Route::prefix('quote')->group(function (){
+               Route::post('/', [QuoteController::class, 'store'])
+                   ->name('quote.store');
+            });
+            Route::get('/schedulable_services_avaliable', [ScheduledServiceController::class, 'listService'])
+                ->name('schedulable_services.list');
+            Route::post('/schedule-service', [ScheduledServiceController::class, 'store'])
+                ->name('schedule-service.store');
         });
     });
 
