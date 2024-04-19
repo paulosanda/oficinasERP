@@ -38,5 +38,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $this->call(CheckupObservationTypeSeeder::class);
+
+        $this->call(SchedulableServiceSeeder::class);
     }
 }

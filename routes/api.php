@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\CompanyAdminController;
+use App\Http\Controllers\Admin\SchedulableServiceAdminController;
 use App\Http\Controllers\Admin\UserAdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CheckupController;
@@ -36,6 +37,12 @@ Route::middleware(['auth:sanctum', 'ability:root,admin'])->group(function (){
           Route::post('/user/{companyId}', [UserAdminController::class, 'store'])
               ->name('admin.user.create');
       });
+       Route::get('/schedulable-services', [SchedulableServiceAdminController::class, 'index'])
+           ->name('schedulable_services.index');
+       Route::post('/', [SchedulableServiceAdminController::class, 'store'])
+           ->name('scheculable_services.store');
+       Route::patch('/{schedulableServiceId}', [SchedulableServiceAdminController::class, 'update'])
+            ->name('schedulable_services.update');
    });
 });
 
