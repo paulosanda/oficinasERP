@@ -840,6 +840,141 @@
                 ]
             }
         },
+        "/api/company/schedulable_services_avaliable": {
+            "get": {
+                "tags": [
+                    "Company"
+                ],
+                "summary": "lista de serviços agendaveis",
+                "operationId": "schedulableServiceList",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "Bearer {token}"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "lista de serviços agendáveis",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "integer",
+                                                "example": "1"
+                                            },
+                                            "service": {
+                                                "type": "string",
+                                                "example": "Troca de óleo"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthorizes"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/company/schedule-service": {
+            "post": {
+                "tags": [
+                    "Company"
+                ],
+                "summary": "cria agendamento de serviço",
+                "operationId": "scheduleServiceCreate",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "Bearer {token}"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "dados para agendar serviço",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ScheduleService"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "success"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthorizes"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/api/customer/vehicle": {
             "post": {
                 "tags": [
@@ -1353,6 +1488,48 @@
                     "role_description": {
                         "description": "Descrição da função",
                         "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "ScheduleService": {
+                "title": "ScheduleService",
+                "description": "serviços agendados",
+                "required": [
+                    "customer_id",
+                    "servico",
+                    "data_prevista",
+                    "lembrete_ativo"
+                ],
+                "properties": {
+                    "customer_id": {
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "servico": {
+                        "type": "string",
+                        "example": "Troca de óleto"
+                    },
+                    "data_prevista": {
+                        "type": "string",
+                        "example": "2024-10-15"
+                    },
+                    "data_realizado": {
+                        "description": "apenas quando for realizado",
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "lembrete_ativo": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "observacao": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "resposta": {
+                        "type": "string",
+                        "nullable": true
                     }
                 },
                 "type": "object"
