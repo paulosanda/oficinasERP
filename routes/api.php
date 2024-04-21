@@ -27,47 +27,36 @@ Route::delete('/logout', [AuthController::class, 'logout'])
 Route::middleware(['auth:sanctum', 'ability:root,admin'])->group(function (){
    Route::prefix('admin')->group(function (){
       Route::prefix('/company')->group(function (){
-          Route::post('/', [CompanyAdminController::class, 'store'])
-              ->name('admin.create.company');
-          Route::get('/', [CompanyAdminController::class, 'index'])
-              ->name('admin.index.company');
-          Route::put('/',[CompanyAdminController::class, 'update'])
-              ->name('admin.company.update');
-          Route::get('/company/roles', [RoleController::class, 'companyIndex'])
-              ->name('admin.company.rules.index');
-          Route::post('/user/{companyId}', [UserAdminController::class, 'store'])
-              ->name('admin.user.create');
+
+          Route::post('/', [CompanyAdminController::class, 'store'])->name('admin.create.company');
+          Route::get('/', [CompanyAdminController::class, 'index'])->name('admin.index.company');
+          Route::put('/',[CompanyAdminController::class, 'update'])->name('admin.company.update');
+
+          Route::get('/roles', [RoleController::class, 'companyIndex'])->name('admin.company.rules.index');
+
+          Route::post('/user/{companyId}', [UserAdminController::class, 'store'])->name('admin.user.create');
       });
-       Route::get('/schedulable-services', [SchedulableServiceAdminController::class, 'index'])
-           ->name('schedulable_services.index');
-       Route::post('/', [SchedulableServiceAdminController::class, 'store'])
-           ->name('scheculable_services.store');
-       Route::patch('/{schedulableServiceId}', [SchedulableServiceAdminController::class, 'update'])
-            ->name('schedulable_services.update');
+       Route::get('/schedulable-services', [SchedulableServiceAdminController::class, 'index'])->name('schedulable_services.index');
+       Route::post('/schedulable-services', [SchedulableServiceAdminController::class, 'store'])->name('scheculable_services.store');
+       Route::patch('/schedulable-services/{schedulableServiceId}', [SchedulableServiceAdminController::class, 'update'])->name('schedulable_services.update');
    });
 });
 
 Route::middleware(['auth:sanctum', 'ability:master,operator', InjectCompanyId::class])->group(function(){
     Route::prefix('company')->group(function (){
         Route::prefix('customer')->group(function (){
-            Route::post('/', [CustomerController::class, 'store'])
-                ->name('customer.create');
-            Route::put('/',[CustomerController::class, 'update'])
-                ->name('customer.update');
-            Route::post('/vehicle', [VehicleController::class, 'store'])
-                ->name('customer.vehicle.store');
-            Route::post('/checkup', [CheckupController::class, 'store'])
-                ->name('customer.checkup.store');
-            Route::get('/checkup-observation-types', [CheckupObservationTypeController::class, 'index'])
-                ->name('checkup_observation.index');
+            Route::post('/', [CustomerController::class, 'store'])->name('customer.create');
+            Route::put('/',[CustomerController::class, 'update'])->name('customer.update');
+            Route::post('/vehicle', [VehicleController::class, 'store'])->name('customer.vehicle.store');
+            Route::post('/checkup', [CheckupController::class, 'store'])->name('customer.checkup.store');
+            Route::get('/checkup-observation-types', [CheckupObservationTypeController::class, 'index'])->name('checkup_observation.index');
+
             Route::prefix('quote')->group(function (){
-               Route::post('/', [QuoteController::class, 'store'])
-                   ->name('quote.store');
+               Route::post('/', [QuoteController::class, 'store'])->name('quote.store');
             });
-            Route::get('/schedulable_services_avaliable', [ScheduledServiceController::class, 'listService'])
-                ->name('schedulable_services.list');
-            Route::post('/schedule-service', [ScheduledServiceController::class, 'store'])
-                ->name('schedule-service.store');
+
+            Route::get('/schedulable_services_avaliable', [ScheduledServiceController::class, 'listService'])->name('schedulable_services.list');
+            Route::post('/schedule-service', [ScheduledServiceController::class, 'store'])->name('schedule-service.store');
         });
     });
 
