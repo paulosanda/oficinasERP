@@ -964,6 +964,76 @@
                 ]
             }
         },
+        "/api/company/quote": {
+            "post": {
+                "tags": [
+                    "Company"
+                ],
+                "summary": "cria orçamento",
+                "operationId": "createQuote",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "token de usuário company",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "Bearer {token}"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "dados para registro de orçamento",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Quote"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "success"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthorizes"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/admin/company/roles": {
             "get": {
                 "tags": [
@@ -1674,6 +1744,164 @@
                         "description": "estado do customer",
                         "type": "string",
                         "nullable": true
+                    }
+                },
+                "type": "object"
+            },
+            "QuotePart": {
+                "title": "QuotePart",
+                "description": "peças do orçamento",
+                "required": [
+                    "codigo_do_produto",
+                    "descricao",
+                    "quantidade",
+                    "valor",
+                    "sub_total"
+                ],
+                "properties": {
+                    "codigo_do_produto": {
+                        "type": "string",
+                        "example": "549"
+                    },
+                    "descricao": {
+                        "type": "string",
+                        "example": "Rolamento do cambio"
+                    },
+                    "quantidade": {
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "valor": {
+                        "type": "string",
+                        "example": "230"
+                    },
+                    "desconto": {
+                        "type": "string",
+                        "example": "0"
+                    },
+                    "sub_total": {
+                        "type": "string",
+                        "example": "230"
+                    }
+                },
+                "type": "object"
+            },
+            "Quote": {
+                "title": "Quote",
+                "description": "dados para orçamento",
+                "required": [
+                    "customer_id",
+                    "vehicle_id",
+                    "data_de_entrada",
+                    "descricao_do_problema",
+                    "sub_total_servico",
+                    "sub_total_produto",
+                    "total_bruto",
+                    "total_liquido",
+                    "total"
+                ],
+                "properties": {
+                    "customer_id": {
+                        "type": "integer",
+                        "example": "1009"
+                    },
+                    "vehicle_id": {
+                        "type": "integer",
+                        "example": "243"
+                    },
+                    "data_de_entrada": {
+                        "type": "string",
+                        "example": "2024-03-15"
+                    },
+                    "data_de_saida": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "descricao_do_problema": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "laudo": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "observacao": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "sub_total_servico": {
+                        "type": "string",
+                        "example": "300"
+                    },
+                    "sub_total_produto": {
+                        "type": "string",
+                        "example": "899,80"
+                    },
+                    "total_bruto": {
+                        "type": "string",
+                        "example": "1199,80"
+                    },
+                    "desconto": {
+                        "type": "string",
+                        "example": "0"
+                    },
+                    "total_liquido": {
+                        "type": "string",
+                        "example": "1199,80"
+                    },
+                    "total": {
+                        "type": "string",
+                        "example": "1199,80"
+                    },
+                    "quote_service": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/QuoteService"
+                        }
+                    },
+                    "quote_part": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/QuotePart"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "QuoteService": {
+                "title": "QuoteService",
+                "description": "serviços do orçamento",
+                "required": [
+                    "codigo_do_servico",
+                    "descricao",
+                    "quantidade",
+                    "valor",
+                    "sub_total"
+                ],
+                "properties": {
+                    "codigo_do_servico": {
+                        "type": "string",
+                        "example": "0123"
+                    },
+                    "descricao": {
+                        "type": "string",
+                        "example": "Troca de óleo"
+                    },
+                    "quandidade": {
+                        "type": "string",
+                        "example": "1"
+                    },
+                    "valor": {
+                        "type": "string",
+                        "example": "60"
+                    },
+                    "desconto": {
+                        "type": "string",
+                        "example": "0"
+                    },
+                    "sub_total": {
+                        "type": "string",
+                        "example": "60"
                     }
                 },
                 "type": "object"
