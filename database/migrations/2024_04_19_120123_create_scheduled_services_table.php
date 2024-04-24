@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('scheduled_services', function (Blueprint $table) {
             $table->id();
             $table->foreignId('company_id')->constrained('companies');
-            $table->foreignId('customer_id')->constrained('customer');
+            $table->foreignId('customer_id')->constrained('customers');
             $table->string('servico');
             $table->date('data_prevista', 'Y-m-d');
             $table->date('data_realizado', 'y-m-d')->nullable();

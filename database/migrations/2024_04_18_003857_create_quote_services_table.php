@@ -16,9 +16,9 @@ return new class extends Migration
             $table->foreignId('quote_id')->constrained('quotes');
             $table->string('codigo_do_servico')->nullable();
             $table->string('descricao');
-            $table->tinyInteger('quantidade');
+            $table->string('quantidade');
             $table->string('valor');
-            $table->tinyInteger('desconto')->nullable();
+            $table->string('desconto')->nullable();
             $table->string('sub_total');
             $table->timestamps();
         });
