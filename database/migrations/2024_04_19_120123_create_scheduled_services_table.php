@@ -15,12 +15,12 @@ return new class extends Migration
             $table->id();
             $table->foreignId('company_id')->constrained('companies');
             $table->foreignId('customer_id')->constrained('customers');
-            $table->string('servico');
-            $table->date('data_prevista', 'Y-m-d');
-            $table->date('data_realizado', 'y-m-d')->nullable();
-            $table->boolean('lembrete_ativo')->default(true);
-            $table->string('observacao')->nullable();
-            $table->string('resposta')->nullable();
+            $table->string('service');
+            $table->date('scheduled_date', 'Y-m-d');
+            $table->date('completion_date', 'y-m-d')->nullable();
+            $table->boolean('reminder_active')->default(true);
+            $table->string('observation')->nullable();
+            $table->string('consumer_answer')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

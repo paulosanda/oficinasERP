@@ -15,12 +15,12 @@ class ScheduledService extends Model
     protected $fillable = [
         'company_id',
         'customer_id',
-        'servico',
-        'data_prevista',
-        'data_realizado',
-        'lembrete_ativo',
-        'observacao',
-        'resposta',
+        'service',
+        'scheduled_date',
+        'completion_date',
+        'reminder_active',
+        'observation',
+        'consumer_answer',
     ];
 
     public function company(): BelongsTo

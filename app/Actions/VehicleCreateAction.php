@@ -12,15 +12,15 @@ class VehicleCreateAction
     {
         return [
             'customer_id' => 'integer|required',
-            'marca' => 'string',
-            'modelo'=> 'string',
-            'cor' => 'string',
-            'ano' => 'string',
-            'placa' => 'string|required',
-            'numero_chassi' => 'string',
+            'brand' => 'string',
+            'model'=> 'string',
+            'color' => 'string',
+            'year' => 'string',
+            'plate' => 'string|required',
+            'identification_number' => 'string',
             'renavam' => 'string',
-            'media_mensal_km_rodado' => 'string',
-            'observacoes' => 'string',
+            'monthly_mileage' => 'string',
+            'observation' => 'string',
         ];
     }
 

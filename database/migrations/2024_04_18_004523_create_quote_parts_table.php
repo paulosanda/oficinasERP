@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::create('quote_parts', function (Blueprint $table) {
             $table->id();
             $table->foreignId('quote_id')->constrained('quotes');
-            $table->string('codigo_do_produto')->nullable();
-            $table->string('descricao');
-            $table->tinyInteger('quantidade');
-            $table->string('valor');
-            $table->string('desconto')->nullable();
-            $table->string('sub_total');
+            $table->string('part_code')->nullable();
+            $table->string('description');
+            $table->tinyInteger('quantity');
+            $table->string('value');
+            $table->string('discount')->nullable();
+            $table->string('subtotal');
             $table->timestamps();
         });
     }

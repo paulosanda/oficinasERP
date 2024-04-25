@@ -17,17 +17,17 @@ class CompanyFactory extends Factory
     public function definition(): array
     {
         return [
-            'razao_social' => fake()->name,
+            'company_name' => fake()->name,
             'cnpj' => fake()->numerify('###.###.###/0001-##'),
             'inscricao_estadual' => fake()->numerify('###.###.###-##'),
             'inscricao_municipal' => fake()->numerify('###.###.###'),
-            'endereco' => fake()->streetAddress,
-            'numero' => fake()->numerify,
-            'bairro' =>fake()->name,
-            'cep' => fake()->postcode,
-            'cidade' => fake()->city,
-            'estado' => 'SP',
-            'celular' => fake()->numerify('##-##### ###'),
+            'address' => fake()->streetAddress,
+            'number' => fake()->numerify,
+            'neighborhood' =>fake()->name,
+            'postal_code' => fake()->postcode,
+            'city' => fake()->city,
+            'estate' => 'SP',
+            'cellphone' => fake()->numerify('##-##### ###'),
             'email' => fake()->email
         ];
     }

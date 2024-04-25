@@ -53,34 +53,34 @@ class CompanyAdminControllerTest extends TestCase
         $response = $this->withHeaders([
             'Authorization' => 'Bearer '. $token,
         ])->postJson(route('admin.create.company'),[
-            'razao_social' => fake()->company,
+            'company_name' => fake()->company,
             'cnpj' => fake()->numerify('###.###.###/0001-##'),
             'inscricao_estadual' => fake()->numerify('###.###.###-##'),
             'inscricao_municipal' => fake()->numerify('###.###.###'),
-            'endereco' => fake()->streetName,
-            'numero' => '5',
-            'bairro' => fake()->name,
-            'cep' => fake()->postcode,
-            'cidade' => fake()->city,
-            'estado' => 'SP',
-            'celular' => fake()->phoneNumber,
+            'address' => fake()->streetName,
+            'number' => '5',
+            'neighborhood' => fake()->name,
+            'postal_code' => fake()->postcode,
+            'city' => fake()->city,
+            'estate' => 'SP',
+            'cellphone' => fake()->phoneNumber,
             'email' => fake()->email
         ]);
 
         $response->assertStatus(200);
 
         $response->assertJsonStructure([
-            'razao_social',
+            'company_name',
             'cnpj',
             'inscricao_estadual',
             'inscricao_municipal',
-            'endereco',
-            'numero',
-            'bairro',
-            'cep',
-            'cidade',
-            'estado',
-            'celular',
+            'address',
+            'number',
+            'neighborhood',
+            'postal_code',
+            'city',
+            'estate',
+            'cellphone',
             'email'
         ]);
 
@@ -96,17 +96,17 @@ class CompanyAdminControllerTest extends TestCase
         $response = $this->withHeaders([
             'Authorization' => 'Bearer '. $token,
                 ])->postJson(route('admin.create.company'),[
-                    'razao_social' => fake()->company,
+                    'company_name' => fake()->company,
                     'cnpj' => fake()->numerify('###.###.###/0001-##'),
                     'inscricao_estadual' => fake()->numerify('###.###.###-##'),
                     'inscricao_municipal' => fake()->numerify('###.###.###'),
-                    'endereco' => fake()->streetName,
-                    'numero' => fake()->numberBetween(1, 1000),
-                    'bairro' => fake()->name,
-                    'cep' => fake()->postcode,
-                    'cidade' => fake()->city,
-                    'estado' => 'SP',
-                    'celular' => fake()->phoneNumber,
+                    'address' => fake()->streetName,
+                    'number' => fake()->numberBetween(1, 1000),
+                    'neighborhood' => fake()->name,
+                    'postal_code' => fake()->postcode,
+                    'city' => fake()->city,
+                    'estate' => 'SP',
+                    'cellphone' => fake()->phoneNumber,
                     'email' => fake()->email
             ]);
 
@@ -127,13 +127,13 @@ class CompanyAdminControllerTest extends TestCase
                     'cnpj' => fake()->numerify('###.###.###/0001-##'),
                     'inscricao_estadual' => fake()->numerify('###.###.###-##'),
                     'inscricao_municipal' => fake()->numerify('###.###.###'),
-                    'endereco' => fake()->streetName,
-                    'numero' => '50',
-                    'bairro' => fake()->name,
-                    'cep' => fake()->postcode,
-                    'cidade' => fake()->city,
-                    'estado' => 'SP',
-                    'celular' => fake()->phoneNumber,
+                    'address' => fake()->streetName,
+                    'number' => '50',
+                    'neighborhood' => fake()->name,
+                    'postal_code' => fake()->postcode,
+                    'city' => fake()->city,
+                    'estate' => 'SP',
+                    'cellphone' => fake()->phoneNumber,
                     'email' => fake()->email
              ]);
 
@@ -142,7 +142,7 @@ class CompanyAdminControllerTest extends TestCase
         $response->assertJson([
             'message' => 'validation.required',
             'errors' => [
-                'razao_social' => ['validation.required'],
+                'company_name' => ['validation.required'],
             ],
         ]);
 
@@ -156,32 +156,32 @@ class CompanyAdminControllerTest extends TestCase
         $response = $this->withHeaders([
             'Authorization' => 'Bearer '. $token,
         ])->postJson(route('admin.create.company'),[
-            'razao_social' => fake()->company,
+            'company_name' => fake()->company,
             'cnpj' => fake()->numerify('###.###.###/0001-##'),
             'inscricao_municipal' => fake()->numerify('###.###.###'),
-            'endereco' => fake()->streetName,
-            'numero' => '5',
-            'bairro' => fake()->name,
-            'cep' => fake()->postcode,
-            'cidade' => fake()->city,
-            'estado' => 'SP',
-            'celular' => fake()->phoneNumber,
+            'address' => fake()->streetName,
+            'number' => '5',
+            'neighborhood' => fake()->name,
+            'postal_code' => fake()->postcode,
+            'city' => fake()->city,
+            'estate' => 'SP',
+            'cellphone' => fake()->phoneNumber,
             'email' => fake()->email
         ]);
 
         $response->assertStatus(200);
 
         $response->assertJsonStructure([
-            'razao_social',
+            'company_name',
             'cnpj',
             'inscricao_municipal',
-            'endereco',
-            'numero',
-            'bairro',
-            'cep',
-            'cidade',
-            'estado',
-            'celular',
+            'address',
+            'number',
+            'neighborhood',
+            'postal_code',
+            'city',
+            'estate',
+            'cellphone',
             'email'
         ]);
 
@@ -200,17 +200,17 @@ class CompanyAdminControllerTest extends TestCase
         $response->assertStatus(200);
 
         $response->assertJsonStructure([[
-            'razao_social',
+            'company_name',
             'cnpj',
             'inscricao_estadual',
             'inscricao_municipal',
-            'endereco',
-            'numero',
-            'bairro',
-            'cep',
-            'cidade',
-            'estado',
-            'celular',
+            'address',
+            'number',
+            'neighborhood',
+            'postal_code',
+            'city',
+            'estate',
+            'cellphone',
             'email'
         ]]);
     }
@@ -221,7 +221,7 @@ class CompanyAdminControllerTest extends TestCase
 
         $company = $this->companyData();
         $company['id'] = 1;
-        $company['razao_social'] = 'updated';
+        $company['company_name'] = 'updated';
 
         $response = $this->withHeaders([
             'Authorization' => 'Bearer ' . $token,
@@ -230,24 +230,24 @@ class CompanyAdminControllerTest extends TestCase
         $response->assertStatus(200);
 
         $this->assertDatabaseHas('companies', [
-            'razao_social' => 'updated'
+            'company_name' => 'updated'
         ]);
     }
 
     public function companyData(): array
     {
         return [
-            'razao_social' => fake()->company,
+            'company_name' => fake()->company,
             'cnpj' => fake()->numerify('###.###.###/0001-##'),
             'inscricao_estadual' => fake()->numerify('###.###.###-##'),
             'inscricao_municipal' => fake()->numerify('###.###.###'),
-            'endereco' => fake()->streetName,
-            'numero' => '5',
-            'bairro' => fake()->name,
-            'cep' => fake()->postcode,
-            'cidade' => fake()->city,
-            'estado' => 'SP',
-            'celular' => fake()->phoneNumber,
+            'address' => fake()->streetName,
+            'number' => '5',
+            'neighborhood' => fake()->name,
+            'postal_code' => fake()->postcode,
+            'city' => fake()->city,
+            'estate' => 'SP',
+            'cellphone' => fake()->phoneNumber,
             'email' => fake()->email
         ];
     }

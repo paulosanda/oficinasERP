@@ -143,20 +143,20 @@ class CustomerControllerTest extends TestCase
     {
         return [
             'company_id' => $this->company->id,
-            'tipo' => 'pf',
+            'type' => 'pf',
             'name' => fake()->name,
             'email' => fake()->email,
-            'celular' => fake()->phoneNumber,
-            'telefone' => fake()->phoneNumber,
+            'cellphone' => fake()->phoneNumber,
+            'telephone' => fake()->phoneNumber,
             'cpf' => '912.489.030-80',
             'rg' => fake()->numerify('##.###.###-#'),
-            'nascimento' => fake()->date,
-            'endereco' => fake()->address,
-            'numero' => fake()->numerify('###'),
-            'cep' => fake()->postcode,
-            'bairro' => fake()->name,
-            'cidade' => fake()->city,
-            'estado' => 'CE'
+            'birthday' => fake()->date,
+            'address' => fake()->address,
+            'number' => fake()->numerify('###'),
+            'postal_code' => fake()->postcode,
+            'neighborhood' => fake()->name,
+            'city' => fake()->city,
+            'estate' => 'CE'
         ];
     }
 
@@ -164,20 +164,20 @@ class CustomerControllerTest extends TestCase
     {
         return [
             'company_id' => $this->company->id,
-            'tipo' => 'pj',
+            'type' => 'pj',
             'name' => fake()->name,
             'email' => fake()->email,
-            'celular' => fake()->phoneNumber,
-            'telefone' => fake()->phoneNumber,
+            'cellphone' => fake()->phoneNumber,
+            'telephone' => fake()->phoneNumber,
             'cnpj' => fake()->numerify('###.###.###/###1-##'),
             'inscricao_estadual' => fake()->numerify('###########'),
             'inscricao_municipal' => fake()->numerify('#####'),
-            'endereco' => fake()->address,
-            'numero' => fake()->numerify('###'),
-            'cep' => fake()->postcode,
-            'bairro' => fake()->name,
-            'cidade' => fake()->city,
-            'estado' => 'CE'
+            'address' => fake()->address,
+            'number' => fake()->numerify('###'),
+            'postal_code' => fake()->postcode,
+            'neighborhood' => fake()->name,
+            'city' => fake()->city,
+            'estate' => 'CE'
         ];
     }
 }

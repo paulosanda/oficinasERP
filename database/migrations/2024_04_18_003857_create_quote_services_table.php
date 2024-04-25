@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::create('quote_services', function (Blueprint $table) {
             $table->id();
             $table->foreignId('quote_id')->constrained('quotes');
-            $table->string('codigo_do_servico')->nullable();
-            $table->string('descricao');
-            $table->string('quantidade');
-            $table->string('valor');
-            $table->string('desconto')->nullable();
-            $table->string('sub_total');
+            $table->string('service_code')->nullable();
+            $table->string('description');
+            $table->string('quantity');
+            $table->string('value');
+            $table->string('discount')->nullable();
+            $table->string('subtotal');
             $table->timestamps();
         });
     }

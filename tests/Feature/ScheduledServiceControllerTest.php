@@ -69,11 +69,11 @@ class ScheduledServiceControllerTest extends TestCase
        $this->assertDatabaseHas('scheduled_services', [
            'company_id' => $this->company->id,
            'customer_id' => $payload['customer_id'],
-           'data_prevista' => $payload['data_prevista'],
-           'data_realizado' => null,
-           'lembrete_ativo' => $payload['lembrete_ativo'],
-           'observacao' => $payload['observacao'],
-           'resposta' => null
+           'scheduled_date' => $payload['scheduled_date'],
+           'completion_date' => null,
+           'reminder_active' => $payload['reminder_active'],
+           'observation' => $payload['observation'],
+           'customer_answer' => null
        ]);
 
 
@@ -86,9 +86,9 @@ class ScheduledServiceControllerTest extends TestCase
        return [
            'customer_id' => $this->customer->id,
            'servico' => fake()->randomElement($services),
-           'data_prevista' => fake()->date('Y-m-d', 'now'),
-           'lembrete_ativo' => true,
-           'observacao' => fake()->text
+           'scheduled_date' => fake()->date('Y-m-d', 'now'),
+           'reminder_active' => true,
+           'observation' => fake()->text
            ];
    }
 }
