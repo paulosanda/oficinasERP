@@ -17,17 +17,17 @@ class Company extends Model
 
     protected $table = 'companies';
     protected $fillable = [
-        'razao_social',
+        'company_name',
         'cnpj',
         'inscricao_estadual',
         'inscricao_municipal',
-        'endereco',
-        'numero',
-        'bairro',
-        'cep',
-        'cidade',
-        'estado',
-        'celular',
+        'address',
+        'number',
+        'neighborhood',
+        'postal_code',
+        'city',
+        'estate',
+        'cellphone',
         'email'
     ];
 

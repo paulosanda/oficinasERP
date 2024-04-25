@@ -62,16 +62,16 @@ class QuoteControllerTest extends TestCase
         $this->assertDatabaseHas('quotes', [
             'company_id' => $this->company->id,
             'customer_id' => $this->customer->id,
-            'data_de_entrada' => $payload['data_de_entrada'],
-            'data_de_saida' => null,
-            'descricao_do_problema' => $payload['descricao_do_problema'],
-            'laudo' => $payload['laudo'],
-            'observacao' => $payload['observacao'],
-            'sub_total_servico' => $payload['sub_total_servico'],
-            'sub_total_produto' => $payload['sub_total_produto'],
-            'total_bruto' => $payload['total_bruto'],
-            'desconto' => $payload['desconto'],
-            'total_liquido'=> $payload['total_liquido'],
+            'entry_date' => $payload['entry_date'],
+            'exit_date' => null,
+            'problem_description' => $payload['problem_description'],
+            'report' => $payload['report'],
+            'observation' => $payload['observation'],
+            'subtotal_service' => $payload['subtotal_service'],
+            'subtotal_part' => $payload['subtotal_part'],
+            'gross_total' => $payload['gross_total'],
+            'discount' => $payload['discount'],
+            'net_total'=> $payload['net_total'],
             'total' => $payload['total'],
         ]);
 
@@ -81,57 +81,57 @@ class QuoteControllerTest extends TestCase
         ]);
 
         $this->assertDatabaseHas('quote_services', [
-            'codigo_do_servico' => $payload['quote_service'][0]['codigo_do_servico'],
-            'descricao' => $payload['quote_service'][0]['descricao'],
-            'quantidade' => $payload['quote_service'][0]['quantidade'],
-            'valor' => $payload['quote_service'][0]['valor'],
-            'desconto' => $payload['quote_service'][0]['desconto'],
-            'sub_total' => $payload['quote_service'][0]['sub_total']
+            'service_code' => $payload['quote_service'][0]['service_code'],
+            'description' => $payload['quote_service'][0]['description'],
+            'quantity' => $payload['quote_service'][0]['quantity'],
+            'value' => $payload['quote_service'][0]['value'],
+            'discount' => $payload['quote_service'][0]['discount'],
+            'subtotal' => $payload['quote_service'][0]['subtotal']
         ]);
 
         $this->assertDatabaseHas('quote_services', [
-            'codigo_do_servico' => $payload['quote_service'][1]['codigo_do_servico'],
-            'descricao' => $payload['quote_service'][1]['descricao'],
-            'quantidade' => $payload['quote_service'][1]['quantidade'],
-            'valor' => $payload['quote_service'][1]['valor'],
-            'desconto' => $payload['quote_service'][1]['desconto'],
-            'sub_total' => $payload['quote_service'][1]['sub_total']
+            'service_code' => $payload['quote_service'][1]['service_code'],
+            'description' => $payload['quote_service'][1]['description'],
+            'quantity' => $payload['quote_service'][1]['quantity'],
+            'value' => $payload['quote_service'][1]['value'],
+            'discount' => $payload['quote_service'][1]['discount'],
+            'subtotal' => $payload['quote_service'][1]['subtotal']
         ]);
 
         $this->assertDatabaseHas('quote_services', [
-            'codigo_do_servico' => $payload['quote_service'][2]['codigo_do_servico'],
-            'descricao' => $payload['quote_service'][2]['descricao'],
-            'quantidade' => $payload['quote_service'][2]['quantidade'],
-            'valor' => $payload['quote_service'][2]['valor'],
-            'desconto' => $payload['quote_service'][2]['desconto'],
-            'sub_total' => $payload['quote_service'][2]['sub_total']
+            'service_code' => $payload['quote_service'][2]['service_code'],
+            'description' => $payload['quote_service'][2]['description'],
+            'quantity' => $payload['quote_service'][2]['quantity'],
+            'value' => $payload['quote_service'][2]['value'],
+            'discount' => $payload['quote_service'][2]['discount'],
+            'subtotal' => $payload['quote_service'][2]['subtotal']
         ]);
 
         $this->assertDatabaseHas('quote_parts',[
-            'codigo_do_produto' => $payload['quote_part'][0]['codigo_do_produto'],
-            'descricao' => $payload['quote_part'][0]['descricao'],
-            'quantidade' => $payload['quote_part'][0]['quantidade'],
-            'valor' => $payload['quote_part'][0]['valor'],
-            'desconto' => $payload['quote_part'][0]['desconto'],
-            'sub_total' => $payload['quote_part'][0]['sub_total']
+            'part_code' => $payload['quote_part'][0]['part_code'],
+            'description' => $payload['quote_part'][0]['description'],
+            'quantity' => $payload['quote_part'][0]['quantity'],
+            'value' => $payload['quote_part'][0]['value'],
+            'discount' => $payload['quote_part'][0]['discount'],
+            'subtotal' => $payload['quote_part'][0]['subtotal']
         ]);
 
         $this->assertDatabaseHas('quote_parts',[
-            'codigo_do_produto' => $payload['quote_part'][1]['codigo_do_produto'],
-            'descricao' => $payload['quote_part'][1]['descricao'],
-            'quantidade' => $payload['quote_part'][1]['quantidade'],
-            'valor' => $payload['quote_part'][1]['valor'],
-            'desconto' => $payload['quote_part'][1]['desconto'],
-            'sub_total' => $payload['quote_part'][1]['sub_total']
+            'part_code' => $payload['quote_part'][1]['part_code'],
+            'description' => $payload['quote_part'][1]['description'],
+            'quantity' => $payload['quote_part'][1]['quantity'],
+            'value' => $payload['quote_part'][1]['value'],
+            'discount' => $payload['quote_part'][1]['discount'],
+            'subtotal' => $payload['quote_part'][1]['subtotal']
         ]);
 
         $this->assertDatabaseHas('quote_parts',[
-            'codigo_do_produto' => $payload['quote_part'][2]['codigo_do_produto'],
-            'descricao' => $payload['quote_part'][2]['descricao'],
-            'quantidade' => $payload['quote_part'][2]['quantidade'],
-            'valor' => $payload['quote_part'][2]['valor'],
-            'desconto' => $payload['quote_part'][2]['desconto'],
-            'sub_total' => $payload['quote_part'][2]['sub_total']
+            'part_code' => $payload['quote_part'][2]['part_code'],
+            'description' => $payload['quote_part'][2]['description'],
+            'quantity' => $payload['quote_part'][2]['quantity'],
+            'value' => $payload['quote_part'][2]['value'],
+            'discount' => $payload['quote_part'][2]['discount'],
+            'subtotal' => $payload['quote_part'][2]['subtotal']
         ]);
     }
 
@@ -162,67 +162,67 @@ class QuoteControllerTest extends TestCase
         return [
             'customer_id' => $this->customer->id,
             'vehicle_id' => $this->vehicle->id,
-            'data_de_entrada' => fake()->date('Y-m-d'),
-            'data_de_saida' => '',
-            'descricao_do_problema' => fake()->text,
-            'laudo' => fake()->text,
-            'observacao' => fake()->text,
-            'sub_total_servico' => '500',
-            'sub_total_produto' => '737,64',
-            'total_bruto' => '1237,64',
-            'desconto' => '0',
-            'total_liquido' => '1237,64',
+            'entry_date' => fake()->date('Y-m-d'),
+            'exit_date' => '',
+            'problem_description' => fake()->text,
+            'report' => fake()->text,
+            'observation' => fake()->text,
+            'subtotal_service' => '500',
+            'subtotal_part' => '737,64',
+            'gross_total' => '1237,64',
+            'discount' => '0',
+            'net_total' => '1237,64',
             'total' => '1237,64',
             'quote_service' => [
                 [
-                    'codigo_do_servico' => fake()->numerify('###'),
-                    'descricao' => fake()->text,
-                    'quantidade' => '1',
-                    'valor' => '50',
-                    'desconto' => '0',
-                    'sub_total' => '50'
+                    'service_code' => fake()->numerify('###'),
+                    'description' => fake()->text,
+                    'quantity' => '1',
+                    'value' => '50',
+                    'discount' => '0',
+                    'subtotal' => '50'
                 ],
                 [
-                    'codigo_do_servico' => fake()->numerify('###'),
-                    'descricao' => fake()->text,
-                    'quantidade' => '4',
-                    'valor' => '50',
-                    'desconto' => '0',
-                    'sub_total' => '200'
+                    'service_code' => fake()->numerify('###'),
+                    'description' => fake()->text,
+                    'quantity' => '4',
+                    'value' => '50',
+                    'discount' => '0',
+                    'subtotal' => '200'
                 ],
                 [
-                    'codigo_do_servico' => fake()->numerify('###'),
-                    'descricao' => fake()->text,
-                    'quantidade' => '1',
-                    'valor' => '300',
-                    'desconto' => '50',
-                    'sub_total' => '250'
+                    'service_code' => fake()->numerify('###'),
+                    'description' => fake()->text,
+                    'quantity' => '1',
+                    'value' => '300',
+                    'discount' => '50',
+                    'subtotal' => '250'
                 ],
             ],
             'quote_part' => [
                 [
-                    'codigo_do_produto' => fake()->numerify('######'),
-                    'descricao' => fake()->text,
-                    'quantidade' => '1',
-                    'valor' => '150',
-                    'desconto' => '0',
-                    'sub_total' => '150'
+                    'part_code' => fake()->numerify('######'),
+                    'description' => fake()->text,
+                    'quantity' => '1',
+                    'value' => '150',
+                    'discount' => '0',
+                    'subtotal' => '150'
                 ],
                 [
-                    'codigo_do_produto' => fake()->numerify('#####'),
-                    'descricao' => fake()->text,
-                    'quantidade' => '2',
-                    'valor' => '200',
-                    'desconto' => '0',
-                    'sub_total' => '400'
+                    'part_code' => fake()->numerify('#####'),
+                    'description' => fake()->text,
+                    'quantity' => '2',
+                    'value' => '200',
+                    'discount' => '0',
+                    'subtotal' => '400'
                 ],
                 [
-                    'codigo_do_produto' => fake()->numerify('#####'),
-                    'descricao' => fake()->text,
-                    'quantidade' => '3',
-                    'valor' => '46,91',
-                    'desconto' => '0',
-                    'sub_total' => '187,64'
+                    'part_code' => fake()->numerify('#####'),
+                    'description' => fake()->text,
+                    'quantity' => '3',
+                    'value' => '46,91',
+                    'discount' => '0',
+                    'subtotal' => '187,64'
                 ]
             ]
         ];

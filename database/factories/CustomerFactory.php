@@ -20,20 +20,20 @@ class CustomerFactory extends Factory
         $company = Company::factory()->create();
         return [
             'company_id' => $company->id,
-            'tipo' => 'pf',
+            'type' => 'pf',
             'name' => fake()->name,
             'email' => fake()->email,
-            'celular' => fake()->phoneNumber,
-            'telefone' => fake()->phoneNumber,
+            'cellphone' => fake()->phoneNumber,
+            'telephone' => fake()->phoneNumber,
             'cpf' => fake()->numerify('###.###.###-##'),
-            'nascimento' => fake()->date(),
-            'profissao' => 'ocupação',
-            'endereco' => fake()->streetAddress,
-            'numero' => fake()->numberBetween(1,100),
-            'cep' => fake()->postcode,
-            'bairro' => fake()->name,
-            'cidade' => fake()->city,
-            'estado' => 'TO',
+            'birthday' => fake()->date(),
+            'profession' => 'ocupação',
+            'address' => fake()->streetAddress,
+            'number' => fake()->numberBetween(1,100),
+            'postal_code' => fake()->postcode,
+            'neighborhood' => fake()->name,
+            'city' => fake()->city,
+            'estate' => 'TO',
         ];
     }
 }

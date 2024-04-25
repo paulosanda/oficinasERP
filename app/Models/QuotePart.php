@@ -11,11 +11,11 @@ class QuotePart extends Model
 
     protected $fillable = [
         'quote_id',
-        'codigo_do_produto',
-        'descricao',
-        'quantidade',
-        'valor',
-        'desconto',
-        'sub_total',
+        'part_code',
+        'description',
+        'quantity',
+        'value',
+        'discount',
+        'subtotal',
     ];
 }

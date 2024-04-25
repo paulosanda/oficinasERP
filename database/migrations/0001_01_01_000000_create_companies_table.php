@@ -13,17 +13,17 @@ return new class extends Migration
     {
         Schema::create('companies', function (Blueprint $table) {
             $table->id();
-            $table->string('razao_social');
+            $table->string('company_name');
             $table->string('cnpj');
             $table->string('inscricao_estadual')->nullable();
             $table->string('inscricao_municipal')->nullable();
-            $table->string('endereco');
-            $table->string('numero');
-            $table->string('bairro');
-            $table->string('cep');
-            $table->string('cidade');
-            $table->string('estado');
-            $table->string('celular');
+            $table->string('address');
+            $table->string('number');
+            $table->string('neighborhood');
+            $table->string('postal_code');
+            $table->string('city');
+            $table->string('estate');
+            $table->string('cellphone');
             $table->string('email');
             $table->timestamps();
         });

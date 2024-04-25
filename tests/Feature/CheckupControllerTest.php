@@ -69,19 +69,19 @@ class CheckupControllerTest extends TestCase
 
         $this->assertDatabaseHas('checkups',[
             'vehicle_id' => $this->vehicle->id,
-            'avarias_frente' => $payload['avarias_frente'],
-            'av_frente_foto' => $payload['av_frente_foto'],
-            'avarias_traseiro' => $payload['avarias_traseiro'],
-            'av_traseira_foto' => $payload['av_traseira_foto'],
-            'avarias_direito' => $payload['avarias_direito'],
-            'av_direito_foto' => $payload['av_direito_foto'],
-            'avarias_esquerdo' => $payload['avarias_esquerdo'],
-            'av_esquerdo_foto' => $payload['av_esquerdo_foto'],
-            'avarias_teto' => $payload['avarias_teto'],
-            'av_teto_foto' => $payload['av_teto_foto'],
-            'combustivel' => $payload['combustivel'],
-            'combustivel_foto' => $payload['combustivel_foto'],
-            'avaliacao' => $payload['avaliacao']
+            'front_damage' => $payload['front_damage'],
+            'front_photo' => $payload['front_photo'],
+            'back_damage' => $payload['back_damage'],
+            'back_photo' => $payload['back_photo'],
+            'right_side_damage' => $payload['right_side_damage'],
+            'right_side_photo' => $payload['right_side_photo'],
+            'left_side_damage' => $payload['left_side_damage'],
+            'left_side_photo' => $payload['left_side_photo'],
+            'roof_damage' => $payload['roof_damage'],
+            'roof_photo' => $payload['roof_photo'],
+            'fuel_gauge' => $payload['fuel_gauge'],
+            'fuel_gauge_photo' => $payload['fuel_gauge_photo'],
+            'evaluation' => $payload['evaluation']
         ]);
 
         $this->assertDatabaseHas('checkup_observations', [
@@ -125,25 +125,25 @@ class CheckupControllerTest extends TestCase
 
    public function checkUpData(): array
    {
-       $combustivel = ['vazio', '1/4','1/2','3/4', 'cheio'];
+       $fuel_gauge = ['vazio', '1/4','1/2','3/4', 'cheio'];
 
-       $avaliacao = ['aprovado para uso', 'manutenção recomendada'];
+       $evaluation = ['aprovado para uso', 'manutenção recomendada'];
 
        return [
            'vehicle_id' => $this->vehicle->id,
-           'avarias_frente' => fake()->text,
-           'av_frente_foto' => fake()->url,
-           'avarias_traseiro' => fake()->text,
-           'av_traseira_foto' => fake()->url,
-           'avarias_direito' => fake()->text,
-           'av_direito_foto' => fake()->url,
-           'avarias_esquerdo' => fake()->text,
-           'av_esquerdo_foto' => fake()->url,
-           'avarias_teto' => fake()->text,
-           'av_teto_foto' => fake()->url,
-           'combustivel' => fake()->randomElement($combustivel),
-           'combustivel_foto' => fake()->url,
-           'avaliacao' => fake()->randomElement($avaliacao),
+           'front_damage' => fake()->text,
+           'front_photo' => fake()->url,
+           'back_damage' => fake()->text,
+           'back_photo' => fake()->url,
+           'right_side_damage' => fake()->text,
+           'right_side_photo' => fake()->url,
+           'left_side_damage' => fake()->text,
+           'left_side_photo' => fake()->url,
+           'roof_damage' => fake()->text,
+           'roof_photo' => fake()->url,
+           'fuel_gauge' => fake()->randomElement($fuel_gauge),
+           'fuel_gauge_photo' => fake()->url,
+           'evaluation' => fake()->randomElement($evaluation),
            'checkup_observation' => [
                ['checkup_observation_type_id' => 1,
                'observation' => fake()->text],

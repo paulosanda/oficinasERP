@@ -12,24 +12,24 @@ class CustomerCreateAction
     protected function rules(): array
     {
         return [
-            'tipo' => 'string',
+            'type' => 'string',
             'company_id' => 'required|integer',
             'name' => 'string|required',
             'email' => 'email',
-            'celular' => 'string',
-            'telefone' => 'string',
+            'cellphone' => 'string',
+            'telephone' => 'string',
             'cpf' => 'cpf',
             'rg' => 'string',
             'cnpj' => 'string',
             'inscricao_estadual' => 'string',
             'inscricao_municipal' => 'string',
-            'nascimento' => 'string',
-            'endereco' => 'string',
-            'numero' => 'string',
-            'cep' => 'string',
-            'bairro' => 'string',
-            'cidade' => 'string',
-            'estado' => 'string'
+            'birthday' => 'string',
+            'address' => 'string',
+            'number' => 'string',
+            'postal_code' => 'string',
+            'neighborhood' => 'string',
+            'city' => 'string',
+            'estate' => 'string'
         ];
     }
 

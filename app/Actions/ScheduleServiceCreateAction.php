@@ -14,12 +14,12 @@ class ScheduleServiceCreateAction
         return [
             'company_id' => 'integer|required',
             'customer_id' => 'integer|required',
-            'servico' => 'string|required',
-            'data_prevista' => 'date|required|date_format:Y-m-d',
-            'data_realizado' => 'date|date_format:Y-m-d',
-            'lembrete_ativo' => 'boolean|required',
-            'observacao' => 'string',
-            'resposta' => 'string',
+            'service' => 'string|required',
+            'scheduled_date' => 'date|required|date_format:Y-m-d',
+            'completion_date' => 'date|date_format:Y-m-d',
+            'reminder_active' => 'boolean|required',
+            'observation' => 'string',
+            'consumer_answer' => 'string',
         ];
     }
 

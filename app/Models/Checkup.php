@@ -11,19 +11,19 @@ class Checkup extends Model
 
     protected $fillable = [
         'vehicle_id',
-        'avarias_frente',
-        'av_frente_foto',
-        'avarias_traseiro',
-        'av_traseira_foto',
-        'avarias_direito',
-        'av_direito_foto',
-        'avarias_esquerdo',
-        'av_esquerdo_foto',
-        'avarias_teto',
-        'av_teto_foto',
-        'combustivel',
-        'combustivel_foto',
-        'avaliacao'
+        'front_damage',
+        'front_photo',
+        'back_damage',
+        'back_photo',
+        'right_side_damage',
+        'right_side_photo',
+        'left_side_damage',
+        'left_side_photo',
+        'roof_damage',
+        'roof_photo',
+        'fuel_gauge',
+        'fuel_gauge_photo',
+        'evaluation'
     ];
 
     public function vehicle()

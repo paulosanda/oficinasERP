@@ -14,19 +14,19 @@ return new class extends Migration
         Schema::create('checkups', function (Blueprint $table) {
             $table->id();
             $table->foreignId('vehicle_id')->constrained('vehicles');
-            $table->string('avarias_frente')->nullable();
-            $table->string('av_frente_foto')->nullable();
-            $table->string('avarias_traseiro')->nullable();
-            $table->string('av_traseira_foto')->nullable();
-            $table->string('avarias_direito')->nullable();
-            $table->string('av_direito_foto')->nullable();
-            $table->string('avarias_esquerdo')->nullable();
-            $table->string('av_esquerdo_foto')->nullable();
-            $table->string('avarias_teto')->nullable();
-            $table->string('av_teto_foto')->nullable();
-            $table->enum('combustivel',['vazio', '1/4','1/2','3/4', 'cheio'])->nullable();
-            $table->string('combustivel_foto')->nullable();
-            $table->enum('avaliacao', ['aprovado para uso', 'manutenção recomendada'])->nullable();
+            $table->string('front_damage')->nullable();
+            $table->string('front_photo')->nullable();
+            $table->string('back_damage')->nullable();
+            $table->string('back_photo')->nullable();
+            $table->string('right_side_damage')->nullable();
+            $table->string('right_side_photo')->nullable();
+            $table->string('left_side_damage')->nullable();
+            $table->string('left_side_photo')->nullable();
+            $table->string('roof_damage')->nullable();
+            $table->string('roof_photo')->nullable();
+            $table->enum('fuel_gauge',['vazio', '1/4','1/2','3/4', 'cheio'])->nullable();
+            $table->string('fuel_gauge_photo')->nullable();
+            $table->enum('evaluation', ['aprovado para uso', 'manutenção recomendada'])->nullable();
             $table->timestamps();
         });
     }
