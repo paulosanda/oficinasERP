@@ -12,17 +12,17 @@ class CompanyCreateAction
     protected function rules(): array
     {
         return [
-            'razao_social' => 'string|required',
+            'company_name' => 'string|required',
             'cnpj' => 'string|required',
             'inscricao_estadual' => 'string',
             'inscricao_municipal' => 'string',
-            'endereco' => 'string|required',
-            'numero' => 'string|required',
-            'bairro' => 'string|required',
-            'cep' => 'string|required',
-            'cidade' => 'string|required',
-            'estado' => 'string|required',
-            'celular' => 'string|required',
+            'address' => 'string|required',
+            'number' => 'string|required',
+            'neighborhood' => 'string|required',
+            'postal_code' => 'string|required',
+            'city' => 'string|required',
+            'estate' => 'string|required',
+            'cellphone' => 'string|required',
             'email' => 'email|required'
         ];
     }

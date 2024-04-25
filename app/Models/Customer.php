@@ -13,24 +13,24 @@ class Customer extends Model
     protected $with = ['vehicle'];
     protected $fillable = [
         'company_id',
-        'tipo',
+        'type',
         'name',
         'email',
-        'celular',
-        'telefone',
+        'cellphone',
+        'telephone',
         'cpf',
         'rg',
         'cnpj',
         'inscricao_estadual',
         'inscricao_municipal',
-        'nascimento',
-        'profissao',
-        'endereco',
-        'numero',
-        'cep',
-        'bairro',
-        'cidade',
-        'estado'
+        'birthday',
+        'profession',
+        'address',
+        'number',
+        'postal_code',
+        'neighborhood',
+        'city',
+        'estate'
     ];
 
     public function vehicle(): HasMany
@@ -58,22 +58,22 @@ class Customer extends Model
         return decrypt($value);
     }
 
-    public function setCelularAttribute(string $value): void
+    public function setCellphoneAttribute(string $value): void
     {
-        $this->attributes['celular'] = encrypt($value);
+        $this->attributes['cellphone'] = encrypt($value);
     }
 
-    public function getCelularAttribute(string $value): string
+    public function getCellphoneAttribute(string $value): string
     {
         return decrypt($value);
     }
 
-    public function setTelefoneAttribute(string $value): void
+    public function setTelephoneAttribute(string $value): void
     {
-        $this->attributes['telefone'] = encrypt($value);
+        $this->attributes['telephone'] = encrypt($value);
     }
 
-    public function getTelefoneAttribute(string $value): string
+    public function getTelephoneAttribute(string $value): string
     {
         return decrypt($value);
     }
@@ -88,42 +88,42 @@ class Customer extends Model
         return decrypt($value);
     }
 
-    public function setEnderecoAttribute(string $value): void
+    public function setAddressAttribute(string $value): void
     {
-        $this->attributes['endereco'] = encrypt($value);
+        $this->attributes['address'] = encrypt($value);
     }
 
-    public function getEnderecoAttribute(string $value): string
-    {
-        return decrypt($value);
-    }
-
-    public function setCepAttribute(string $value): void
-    {
-        $this->attributes['cep'] = encrypt($value);
-    }
-
-    public function getCepAttribute(string $value): string
+    public function getAddressAttribute(string $value): string
     {
         return decrypt($value);
     }
 
-    public function setBairroAttribute(string $value): void
+    public function setPostalCodeAttribute(string $value): void
     {
-        $this->attributes['bairro'] = encrypt($value);
+        $this->attributes['postal_code'] = encrypt($value);
     }
 
-    public function getBairroAttribute(string $value): string
+    public function getPostalCodeAttribute(string $value): string
     {
         return decrypt($value);
     }
 
-    public function setCidadeAttribute(string $value): void
+    public function setNeighborhoodAttribute(string $value): void
     {
-        $this->attributes['cidade'] = encrypt($value);
+        $this->attributes['neighborhood'] = encrypt($value);
     }
 
-    public function getCidadeAttribute(string $value): string
+    public function getNeighborhoodAttribute(string $value): string
+    {
+        return decrypt($value);
+    }
+
+    public function setCityAttribute(string $value): void
+    {
+        $this->attributes['city'] = encrypt($value);
+    }
+
+    public function getCityAttribute(string $value): string
     {
         return decrypt($value);
     }

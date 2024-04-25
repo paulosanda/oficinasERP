@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $company = Company::factory()->create([
-            'razao_social' => 'PS Tech'
+            'company_name' => 'PS Tech'
         ]);
 
         $user = User::factory()->create([

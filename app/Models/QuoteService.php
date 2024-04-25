@@ -11,11 +11,11 @@ class QuoteService extends Model
 
     protected $fillable = [
         'quote_id',
-        'codigo_do_servico',
-        'descricao',
-        'quantidade',
-        'valor',
-        'desconto',
-        'sub_total'
+        'service_code',
+        'description',
+        'quantity',
+        'value',
+        'discount',
+        'subtotal'
     ];
 }

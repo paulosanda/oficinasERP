@@ -62,27 +62,27 @@ class VehicleControllerTest extends TestCase
 
     private function vehicle(): array
     {
-        $marca = $this->marca();
-        $modelo = $this->modelo($marca);
+        $brand = $this->brand();
+        $model = $this->model($brand);
         $km = fake()->numberBetween('###');
 
         return [
             'customer_id' => $this->customer->id,
-            'marca' => $marca,
-            'modelo' => $modelo,
-            'cor' => fake()->colorName,
-            'ano' => fake()->date('Y'),
-            'placa' => $this->placa(),
-            'numero_chassi' => $this->chassi(),
+            'brand' => $brand,
+            'model' => $model,
+            'color' => fake()->colorName,
+            'year' => fake()->date('Y'),
+            'plate' => $this->plate(),
+            'identification_number' => $this->chassi(),
             'renavam' => $this->renavam(),
-            'media_mensal_km_rodado' => strval($km),
-            'observacoes' => fake()->text,
+            'monthly_mileage' => strval($km),
+            'observation' => fake()->text,
         ];
     }
 
-    private function marca(): string
+    private function brand(): string
     {
-        $marca = [
+        $brand = [
             'Honda',
             'Toyota',
             'Volkswagen',
@@ -91,24 +91,24 @@ class VehicleControllerTest extends TestCase
 
         $index = fake()->numberBetween(0, 3);
 
-        return $marca[$index];
+        return $brand[$index];
     }
 
-    private function modelo($marca): string
+    private function model($brand): string
     {
-        $modelo = [
+        $model = [
             'Honda' => 'Civic',
             'Toyota' => 'Lexus',
             'Volkswagen' => 'Fox',
             'Fiat' => 'Toro'
         ];
 
-        return $modelo[$marca];
+        return $model[$brand];
     }
 
-    private function placa(): string
+    private function plate(): string
     {
-        $placas = [
+        $plates = [
             "AAA1A11",
             "BBB2B22",
             "CCC3C33",
@@ -123,7 +123,7 @@ class VehicleControllerTest extends TestCase
 
         $index = fake()->numberBetween(0, 9);
 
-        return $placas[$index];
+        return $plates[$index];
     }
 
     private function chassi(): string

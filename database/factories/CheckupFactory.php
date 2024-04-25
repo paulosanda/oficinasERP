@@ -20,25 +20,25 @@ class CheckupFactory extends Factory
     {
         $vehicle = Vehicle::factory()->create();
 
-        $combustivel = ['vazio', '1/4','1/2','3/4', 'cheio'];
+        $fuel = ['vazio', '1/4','1/2','3/4', 'cheio'];
 
-        $avaliacao = ['aprovado para uso', 'manutenção recomendada'];
+        $evaluation = ['aprovado para uso', 'manutenção recomendada'];
 
         return [
             'vehicle_id' => $vehicle->id,
-            'avarias_frente' => fake()->text,
-            'av_frente_foto' => fake()->url,
-            'avarias_traseiro' => fake()->text,
-            'av_traseira_foto' => fake()->url,
-            'avarias_direito' => fake()->text,
-            'av_direito_foto' => fake()->url,
-            'avarias_esquerdo' => fake()->text,
-            'av_esquerdo_foto' => fake()->url,
-            'avarias_teto' => fake()->text,
-            'av_teto_foto' => fake()->url,
-            'combustivel' => fake()->randomElement($combustivel),
-            'combustivel_foto' => fake()->url,
-            'avaliacao' => fake()->randomElement($avaliacao)
+            'front_damage' => fake()->text,
+            'front_photo' => fake()->url,
+            'back_damage' => fake()->text,
+            'back_photo' => fake()->url,
+            'right_side_damage' => fake()->text,
+            'right_side_photo' => fake()->url,
+            'left_side_damage' => fake()->text,
+            'left_side_photo' => fake()->url,
+            'roof_damage' => fake()->text,
+            'roof_photo' => fake()->url,
+            'fuel_gauge' => fake()->randomElement($fuel),
+            'fuel_gauge_photo' => fake()->url,
+            'evaluation' => fake()->randomElement($evaluation)
         ];
     }
 }

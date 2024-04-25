@@ -16,17 +16,17 @@ class CompanyUpdateAction
     {
         return [
             'id' => 'integer|required',
-            'razao_social' => 'string',
+            'company_name' => 'string',
             'cnpj' => 'string',
             'inscricao_estadual' => 'string',
             'inscricao_municipal' => 'string',
-            'endereco' => 'string',
-            'numero' => 'string',
-            'bairro' => 'string',
-            'cep' => 'string',
-            'cidade' => 'string',
-            'estado' => 'string',
-            'celular' => 'string',
+            'address' => 'string',
+            'number' => 'string',
+            'neighborhood' => 'string',
+            'postal_code' => 'string',
+            'city' => 'string',
+            'estate' => 'string',
+            'cellphone' => 'string',
             'email' => 'email'
         ];
     }

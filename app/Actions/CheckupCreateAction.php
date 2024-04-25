@@ -15,19 +15,19 @@ class CheckupCreateAction
     {
         $rules = [
             'vehicle_id' => 'integer|required',
-            'avarias_frente' => 'string',
-            'av_frente_foto' => 'string',
-            'avarias_traseiro' => 'string',
-            'av_traseira_foto' => 'string',
-            'avarias_direito' => 'string',
-            'av_direito_foto' => 'string',
-            'avarias_esquerdo' => 'string',
-            'av_esquerdo_foto' => 'string',
-            'avarias_teto' => 'string',
-            'av_teto_foto' => 'string',
-            'combustivel' => 'string',
-            'combustivel_foto' => 'string',
-            'avaliacao' => 'string',
+            'front_damage' => 'string',
+            'front_photo' => 'string',
+            'back_damage' => 'string',
+            'back_photo' => 'string',
+            'right_side_damage' => 'string',
+            'right_side_photo' => 'string',
+            'left_side_damage' => 'string',
+            'left_side_photo' => 'string',
+            'roof_damage' => 'string',
+            'roof_photo' => 'string',
+            'fuel_gauge' => 'string',
+            'fuel_gauge_photo' => 'string',
+            'evaluation' => 'string',
         ];
 
         if (request()->has('checkup_observation') && is_array(request('checkup_observation'))) {

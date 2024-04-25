@@ -11,14 +11,14 @@ class Vehicle extends Model
 
     protected $fillable = [
         'customer_id',
-        'marca',
-        'modelo',
-        'cor',
-        'ano',
-        'placa',
-        'numero_chassi',
+        'brand',
+        'model',
+        'color',
+        'year',
+        'plate',
+        'identification_number',
         'renavam',
-        'media_mensal_km_rodado',
-        'observacoes',
+        'monthly_mileage',
+        'observation',
     ];
 }

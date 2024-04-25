@@ -79,14 +79,15 @@ class VehicleFactory extends Factory
 
         return [
             'customer_id' => $customer->id,
-            'marca' => fake()->randomElement($marca),
-            'modelo' => $modelo[fake()->randomElement($marca)],
-            'cor' => fake()->colorName,
-            'ano' => fake()->date('Y'),
-            'placa' => fake()->randomElement($placas),
-            'numero_chassi' => fake()->randomElement($chassi),
+            'brand' => fake()->randomElement($marca),
+            'model' => $modelo[fake()->randomElement($marca)],
+            'color' => fake()->colorName,
+            'year' => fake()->date('Y'),
+            'plate' => fake()->randomElement($placas),
+            'identification_number' => fake()->randomElement($chassi),
             'renavam' => fake()->randomElement($renavam),
-            'media_mensal_km_rodado' =>strval($km),
+            'monthly_mileage' =>strval($km),
+            'observation' => fake()->text
         ];
     }
 }

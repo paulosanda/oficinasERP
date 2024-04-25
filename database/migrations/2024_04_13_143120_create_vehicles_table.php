@@ -14,15 +14,15 @@ return new class extends Migration
         Schema::create('vehicles', function (Blueprint $table) {
             $table->id();
             $table->foreignId('customer_id')->constrained('customers')->onDelete('cascade');
-            $table->string('marca')->nullable();
-            $table->string('modelo')->nullable();
-            $table->string('cor')->nullable();
-            $table->string('ano')->nullable();
-            $table->string('placa');
-            $table->string('numero_chassi')->nullable();
+            $table->string('brand')->nullable();
+            $table->string('model')->nullable();
+            $table->string('color')->nullable();
+            $table->string('year')->nullable();
+            $table->string('plate');
+            $table->string('identification_number')->nullable();
             $table->string('renavam')->nullable();
-            $table->string('media_mensal_km_rodado')->nullable();
-            $table->text('observacoes')->nullable();
+            $table->string('monthly_mileage')->nullable();
+            $table->text('observation')->nullable();
             $table->timestamps();
         });
     }
