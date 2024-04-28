@@ -4,6 +4,7 @@ namespace App\Actions;
 
 use App\Models\Company;
 use App\Models\QuoteNumbering;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 
@@ -40,7 +41,7 @@ class CompanyCreateAction
             ]);
 
             return response()->json($newCompany, 200);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()]);
         }
     }

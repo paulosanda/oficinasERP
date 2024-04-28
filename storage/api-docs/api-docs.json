@@ -1119,6 +1119,91 @@
                 ]
             }
         },
+        "/api/admin/roles": {
+            "get": {
+                "tags": [
+                    "Admin"
+                ],
+                "summary": "roles administrativas do sistema",
+                "description": "roles para usuários administrativos do sistema",
+                "operationId": "adminRoles",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "token de usuário administrativo ou super usuário",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "Bearer {token}"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "roles": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "description": "id",
+                                                        "type": "integer",
+                                                        "example": "3"
+                                                    },
+                                                    "role": {
+                                                        "description": "role",
+                                                        "type": "string",
+                                                        "example": "root"
+                                                    },
+                                                    "type": {
+                                                        "description": "tipo de role",
+                                                        "type": "string",
+                                                        "example": "admin"
+                                                    },
+                                                    "role_description": {
+                                                        "description": "descrição da role",
+                                                        "type": "string",
+                                                        "example": "super usuário do sistema"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Não autorizado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Invalid ability provided."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/api/company/schedulable_services_avaliable": {
             "get": {
                 "tags": [
