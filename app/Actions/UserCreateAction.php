@@ -4,6 +4,7 @@ namespace App\Actions;
 
 use App\Models\User;
 use App\Models\UserRole;
+use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -31,7 +32,7 @@ class UserCreateAction
             $this->createUserRoles($data['roles'], $user->id);
 
             return response()->json(['message' => 'success']);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()]);
         }
     }

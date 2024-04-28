@@ -6,8 +6,10 @@ namespace App\Actions;
 use App\Models\Company;
 use App\Models\Customer;
 use App\Trait\EmptyEntity;
+use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Throwable;
 
 class CustomerUpdateAction
 {
@@ -52,9 +54,9 @@ class CustomerUpdateAction
             $customer->update($data);
 
             return response()->json(['message' => 'success']);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()]);
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             return response()->json(['error' => $e->getMessage()]);
         }
     }

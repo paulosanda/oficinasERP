@@ -4,6 +4,7 @@ namespace App\Actions;
 
 
 use App\Models\ScheduledService;
+use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -31,7 +32,7 @@ class ScheduleServiceCreateAction
             $response = ScheduledService::create($data);
 
             return response()->json(['message' => 'success']);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()]);
         }
     }

@@ -26,14 +26,12 @@ Route::delete('/logout', [AuthController::class, 'logout'])
 
 Route::middleware(['auth:sanctum', 'ability:root,admin'])->group(function (){
    Route::prefix('admin')->group(function (){
+      Route::get('/roles',  [RoleController::class, 'adminIndex'])->name('admin.roles.index');
       Route::prefix('/company')->group(function (){
-
           Route::post('/', [CompanyAdminController::class, 'store'])->name('admin.create.company');
           Route::get('/', [CompanyAdminController::class, 'index'])->name('admin.index.company');
           Route::put('/',[CompanyAdminController::class, 'update'])->name('admin.company.update');
-
           Route::get('/roles', [RoleController::class, 'companyIndex'])->name('admin.company.rules.index');
-
           Route::post('/user/{companyId}', [UserAdminController::class, 'store'])->name('admin.user.create');
       });
        Route::get('/schedulable-services', [SchedulableServiceAdminController::class, 'index'])->name('schedulable_services.index');

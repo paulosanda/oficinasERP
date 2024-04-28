@@ -2,10 +2,11 @@
 
 namespace Database\Factories;
 
+use App\Models\QuoteNumbering;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\QuoteNumbering>
+ * @extends Factory<QuoteNumbering>
  */
 class QuoteNumberingFactory extends Factory
 {

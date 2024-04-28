@@ -4,6 +4,7 @@ namespace App\Trait;
 
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Validation\ValidationException;
+use Throwable;
 use function PHPUnit\Framework\isEmpty;
 
 trait EmptyEntity
@@ -15,7 +16,7 @@ trait EmptyEntity
      * @param string $field O nome do campo usado na consulta.
      * @param mixed $value O valor do campo usado na consulta.
      *
-     * @throws \Throwable
+     * @throws Throwable
      * /
      * //    public function isEmpty($data, $property): void
 * //    {
@@ -24,7 +25,7 @@ trait EmptyEntity
 * //    }
  *
 * /**
-     * @throws \Throwable
+     * @throws Throwable
      */
     public function isEmpty($model, $field, $value): void
     {
