@@ -6,6 +6,7 @@ namespace App\Actions;
 
 use App\Models\Checkup;
 use App\Models\CheckupObservation;
+use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -48,7 +49,7 @@ class CheckupCreateAction
             $this->createCheckUpObservation($checkUpId, $data);
 
             return response()->json(['message' => 'success'], 200);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()], 422);
         }
     }

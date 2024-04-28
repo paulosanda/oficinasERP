@@ -54,4 +54,22 @@ class RoleControllerTest extends TestCase
             'message' => 'Invalid ability provided.'
         ]);
     }
+
+    public function testAdminRolesIndex(): void
+    {
+        $token = $this->user->createToken('teste', ['root', 'admin'])->plainTextToken;
+
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer ' . $token,
+        ])->getJson(route('admin.roles.index'));
+
+        $response->assertStatus(200);
+
+        $response->assertJsonStructure([
+            'roles' => [[
+                'id',
+                'role'
+            ]]
+        ]);
+    }
 }

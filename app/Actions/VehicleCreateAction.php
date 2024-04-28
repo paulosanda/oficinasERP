@@ -3,6 +3,7 @@
 namespace App\Actions;
 
 use App\Models\Vehicle;
+use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -33,7 +34,7 @@ class VehicleCreateAction
 
             return response()->json(['message' => 'success'], 200);
 
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()]);
         }
 

@@ -2,10 +2,11 @@
 
 namespace Database\Factories;
 
+use App\Models\CheckupObservation;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\CheckupObservation>
+ * @extends Factory<CheckupObservation>
  */
 class CheckupObservationFactory extends Factory
 {
