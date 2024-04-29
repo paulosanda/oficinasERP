@@ -24,6 +24,9 @@ Route::delete('/logout', [AuthController::class, 'logout'])
     ->middleware('auth:sanctum')
     ->name('logout');
 
+/**
+ * Rotas administrativas
+ */
 Route::middleware(['auth:sanctum', 'ability:root,admin'])->group(function (){
    Route::prefix('admin')->group(function (){
       Route::get('/roles',  [RoleController::class, 'adminIndex'])->name('admin.roles.index');
@@ -40,6 +43,9 @@ Route::middleware(['auth:sanctum', 'ability:root,admin'])->group(function (){
    });
 });
 
+/**
+ * Rotas de companies
+ */
 Route::middleware(['auth:sanctum', 'ability:master,operator', InjectCompanyId::class])->group(function(){
     Route::prefix('company')->group(function (){
         Route::prefix('customer')->group(function (){
@@ -58,4 +64,14 @@ Route::middleware(['auth:sanctum', 'ability:master,operator', InjectCompanyId::c
         });
     });
 
+});
+
+/**
+ * Rotas administrativas e companies
+ */
+Route::middleware(['auth:sanctum', 'ability:root,admin,master,operator',  InjectCompanyId::class])->group(function (){
+   Route::prefix('user')->group(function (){
+      Route::get('/', [UserAdminController::class, 'index'])->name('user.index');
+      Route::put('/{user_id}', [UserAdminController::class, 'update'])->name('user.update');
+   });
 });

@@ -12,6 +12,7 @@ class Company extends Model
     use HasFactory;
 
     const COMPANY_INDEX = 'company_id';
+    const SYSTEM_ADMIN = 1;
 
     protected $with = ['users'];
 

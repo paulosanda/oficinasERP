@@ -401,6 +401,53 @@
                 ]
             }
         },
+        "/api/user": {
+            "get": {
+                "tags": [
+                    "Admin,Company"
+                ],
+                "summary": "lista usuários",
+                "description": "lista todos os usários de user for admin do sistema, se for company apenas os da company",
+                "operationId": "UserIndex",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "token de acesso do usuário",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "Bearer {token}"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "users": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/User"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/api/admin/user/{company_id}": {
             "post": {
                 "tags": [
@@ -509,6 +556,88 @@
                 ]
             }
         },
+        "/api/user/{user_id/}": {
+            "put": {
+                "tags": [
+                    "Admin,Company"
+                ],
+                "summary": "alteração de dados de usuário",
+                "description": "alteração de dados e ou bloqueio de usuário",
+                "operationId": "UserUpdate",
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "id do usuário a ser atualizado",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Token de acesso do usuário",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "Bearer {token}"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "dados que serão alterados, os demais devem ser null",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UserUpdate"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "success"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthorizes"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/api/login": {
             "post": {
                 "tags": [
@@ -571,6 +700,22 @@
                                             "description": "Mensagem de erro",
                                             "type": "string",
                                             "example": "Credenciais invalidas"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "UserDisable",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "seu acesso está bloqueado"
                                         }
                                     },
                                     "type": "object"
@@ -2120,11 +2265,51 @@
                         "description": "Email do usuário",
                         "type": "string"
                     },
+                    "enable": {
+                        "description": "usuário ativo",
+                        "type": "boolean",
+                        "example": "true"
+                    },
                     "roles": {
                         "type": "array",
                         "items": {
                             "$ref": "#/components/schemas/Role"
                         }
+                    }
+                },
+                "type": "object"
+            },
+            "UserUpdate": {
+                "title": "UserUpdate",
+                "description": "Dados para update de User, somente devem ser enviados no request os dados que serão alterados os demais devem ser null",
+                "properties": {
+                    "name": {
+                        "description": "nome do usuário para update",
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "email": {
+                        "description": "email do usuário para update",
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "enable": {
+                        "description": "true para usuário ativo, false para bloquear",
+                        "type": "boolean",
+                        "nullable": true
+                    },
+                    "password": {
+                        "description": "novo password em caso de alteração",
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "roles": {
+                        "description": "novas roles para o usuário ou null se não houver mudança,somente as novas serão implementadas, as anteriores serão deletedas",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Role"
+                        },
+                        "nullable": true
                     }
                 },
                 "type": "object"
