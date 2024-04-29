@@ -41,6 +41,7 @@ class CustomerController extends Controller
      *              @OA\Property(property="error", type="string", example="Unauthorizes")
      *          )
      *      ),
+     *
      * )
      */
     public function store(Request $request)

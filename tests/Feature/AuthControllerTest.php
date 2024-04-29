@@ -78,4 +78,17 @@ class AuthControllerTest extends TestCase
             'error'=> 'credenciais inválidas'
         ]);
     }
+
+    public function testLogingDisabled()
+    {
+        $this->user->update(['enable' => 0]);
+
+        $response = $this->postJson(route('login'), [
+            'email' => $this->user->email,
+            'password' => $this->password
+        ]);
+
+        $response->assertStatus(403);
+
+    }
 }
