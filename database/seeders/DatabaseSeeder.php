@@ -25,7 +25,8 @@ class DatabaseSeeder extends Seeder
             'company_id' => $company->id,
             'name' => 'Paulo Sanda',
             'email' => 'paulosanda@gmail.com',
-            'password' => '123'
+            'password' => '123',
+            'enable' => true
         ]);
 
         $this->call(RoleSeeder::class);

@@ -44,6 +44,13 @@ class AuthController extends Controller
      *         ),
      *     ),
      *     @OA\Response(
+     *         response=403,
+     *         description="UserDisable",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="error", type="string", example="seu acesso está bloqueado")
+     *         )
+     *     ),
+     *     @OA\Response(
      *         response=422,
      *         description="Erro de validação",
      *         @OA\JsonContent(
@@ -75,6 +82,10 @@ class AuthController extends Controller
 
         if(Auth::attempt($credentials)) {
             $user = Auth::user();
+
+            if(!$user->enable) {
+                return response()->json(['error' => 'seu acesso está bloqueado'], 403);
+            }
 
             $roles = $user->toArray();
 
