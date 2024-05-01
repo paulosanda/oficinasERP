@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('customer_id')->constrained('customers');
             $table->string('service');
             $table->date('scheduled_date', 'Y-m-d');
-            $table->date('completion_date', 'y-m-d')->nullable();
+            $table->date('completion_date', 'Y-m-d')->nullable();
             $table->boolean('reminder_active')->default(true);
             $table->string('observation')->nullable();
             $table->string('consumer_answer')->nullable();
