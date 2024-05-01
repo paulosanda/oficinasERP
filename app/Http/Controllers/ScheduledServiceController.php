@@ -11,7 +11,7 @@ class ScheduledServiceController extends Controller
 {
     /**
      * @OA\Get(
-     *     path="/api/company/schedulable_services_avaliable",
+     *     path="/api/company/services",
      *     operationId="schedulableServiceList",
      *     tags={"Company"},
      *     summary="lista de serviços agendaveis",
