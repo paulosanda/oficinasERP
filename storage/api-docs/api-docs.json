@@ -1433,7 +1433,7 @@
         "/admin/company/roles": {
             "get": {
                 "tags": [
-                    "Admin"
+                    "Admin,Company"
                 ],
                 "summary": "lista roles de company",
                 "description": "lista roles de company",

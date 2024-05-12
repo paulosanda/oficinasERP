@@ -38,7 +38,7 @@ Route::middleware(['auth:sanctum', 'ability:root,admin'])->group(function (){
           Route::post('/', [CompanyAdminController::class, 'store'])->name('admin.create.company');
           Route::get('/', [CompanyAdminController::class, 'index'])->name('admin.index.company');
           Route::put('/',[CompanyAdminController::class, 'update'])->name('admin.company.update');
-          Route::get('/roles', [RoleController::class, 'companyIndex'])->name('admin.company.rules.index');
+
           Route::post('/user/{companyId}', [UserAdminController::class, 'store'])->name('admin.user.create');
       });
 
@@ -98,4 +98,6 @@ Route::middleware(['auth:sanctum', 'ability:root,admin,master',  InjectCompanyId
       Route::get('/', [UserAdminController::class, 'index'])->name('user.index');
       Route::put('/{user_id}', [UserAdminController::class, 'update'])->name('user.update');
    });
+
+    Route::get('/roles', [RoleController::class, 'companyIndex'])->name('admin.company.rules.index');
 });

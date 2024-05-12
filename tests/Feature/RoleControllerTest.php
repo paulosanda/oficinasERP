@@ -40,20 +40,6 @@ class RoleControllerTest extends TestCase
         ]);
     }
 
-    public function testCompanyRUlesIndexInvalidAbility(): void
-    {
-        $token = $this->user->createToken('teste', ['master'])->plainTextToken;
-
-        $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $token,
-        ])->getJson(route('admin.company.rules.index'));
-
-        $response->assertStatus(403);
-
-        $response->assertJson([
-            'message' => 'Invalid ability provided.'
-        ]);
-    }
 
     public function testAdminRolesIndex(): void
     {
