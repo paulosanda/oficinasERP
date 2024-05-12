@@ -12,6 +12,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\QuoteController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ScheduledServiceController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\VehicleController;
 use App\Http\Middleware\InjectCompanyId;
 use Illuminate\Http\Request;
@@ -59,6 +60,16 @@ Route::middleware(['auth:sanctum', 'ability:root,admin'])->group(function (){
          Route::put('/{systemServiceID}', [SystemServiceAdminController::class, 'update'])->name('system_service.update');
        });
    });
+});
+
+//Rotas company ability master
+Route::middleware(['auth:sanctum', 'ability:master', InjectCompanyId::class])->group(function (){
+    Route::prefix('company')->group(function (){
+       Route::prefix('user')->group(function (){
+          Route::post('/', [UserController::class, 'store'])->name('company_user.store');
+          Route::delete('/{userId}',[UserController::class,'delete'])->name('company_user.delete');
+       });
+    });
 });
 
 /**
