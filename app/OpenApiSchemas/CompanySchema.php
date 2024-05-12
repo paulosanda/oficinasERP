@@ -4,8 +4,8 @@ namespace App\OpenApiSchemas;
 
 /**
  * @OA\Schema(
- *     schema="Company",
- *     title="Company",
+ *     schema="BodyRequestCompany",
+ *     title="BodyRequestCompany",
  *     description="dados do company",
  *     required={"company_name", "cnpj","address","number","neighborhood","postal_code","city","estate","cellphone","email"},
  *     @OA\Property(property="company_name", type="string", description="razão social"),
@@ -28,8 +28,8 @@ class CompanySchema
 
 /**
  * @OA\Schema(
- *     schema="CompanyUpdate",
- *     title="CompanyUpdate",
+ *     schema="Company",
+ *     title="Company",
  *     description="dados do company",
  *     required={"id"},
  *     @OA\Property(property="id", type="integer", format="int64", description="id do company"),
