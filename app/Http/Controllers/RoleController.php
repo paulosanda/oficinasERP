@@ -12,7 +12,7 @@ class RoleController extends Controller
      *@OA\Get(
      *     path="/admin/company/roles",
      *     operationId="companyRoles",
-     *     tags={"Admin"},
+     *     tags={"Admin,Company"},
      *     summary="lista roles de company",
      *     description="lista roles de company",
      *     security={{ "bearerAuth": {} }},
