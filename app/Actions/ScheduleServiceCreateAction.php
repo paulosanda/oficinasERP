@@ -13,14 +13,15 @@ class ScheduleServiceCreateAction
     public function rules(): array
     {
         return [
+            'vehicle_id' => 'integer|required',
             'company_id' => 'integer|required',
             'customer_id' => 'integer|required',
-            'service' => 'string|required',
+            'schedulable_service_id' => 'integer|required',
             'scheduled_date' => 'date|required|date_format:Y-m-d',
             'completion_date' => 'date|date_format:Y-m-d',
             'reminder_active' => 'boolean|required',
             'observation' => 'string',
-            'consumer_answer' => 'string',
+            'customer_answer' => 'string',
         ];
     }
 

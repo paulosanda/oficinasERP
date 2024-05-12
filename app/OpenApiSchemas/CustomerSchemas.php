@@ -4,8 +4,8 @@ namespace App\OpenApiSchemas;
 
 /**
  * @OA\Schema(
- *     schema="Customer",
- *     title="Customer",
+ *     schema="BodyRequestCustomer",
+ *     title="BodyRequestCustomer",
  *     required={"name", "type"},
  *     description="dados do customer",
  *     @OA\Property(property="type", type="string", description="tipo de pessoa se pf ou pj", example="pf"),
@@ -34,8 +34,8 @@ class CustomerSchemas
 
 /**
  * @OA\Schema(
- *     schema="CustomerUpdate",
- *     title="CustomerUpdate",
+ *     schema="Customer",
+ *     title="Customer",
  *     required={"id"},
  *     description="dados do customer",
  *     @OA\Property(property="id", type="integer", description="id do customer"),

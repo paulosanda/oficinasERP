@@ -7,9 +7,9 @@ use App\Models\SchedulableService;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends Factory<SchedulableService>
+ * @extends Factory<MessageType>
  */
-class SchedulableServiceFactory extends Factory
+class MessageTypeFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,9 +18,13 @@ class SchedulableServiceFactory extends Factory
      */
     public function definition(): array
     {
-        $messageType = MessageType::factory()->create();
+        $schedulableService = SchedulableService::factory()->create();
+
         return [
-            'service' => fake()->word
+            'schedulable_service_id' => $schedulableService->id,
+            'model_name' => fake()->word(),
+            'title' => fake()->title(),
+            'message' => fake()->text
         ];
     }
 }

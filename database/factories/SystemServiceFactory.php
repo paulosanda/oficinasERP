@@ -2,14 +2,12 @@
 
 namespace Database\Factories;
 
-use App\Models\MessageType;
-use App\Models\SchedulableService;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends Factory<SchedulableService>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\SystemService>
  */
-class SchedulableServiceFactory extends Factory
+class SystemServiceFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,9 +16,9 @@ class SchedulableServiceFactory extends Factory
      */
     public function definition(): array
     {
-        $messageType = MessageType::factory()->create();
         return [
-            'service' => fake()->word
+            'service_name' => fake()->word,
+            'service_price' => fake()->numerify('###')
         ];
     }
 }

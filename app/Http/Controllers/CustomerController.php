@@ -25,7 +25,7 @@ class CustomerController extends Controller
      *         request="dadosDoCustomer",
      *         description="dados do customer",
      *         @OA\JsonContent(
-     *              ref="#/components/schemas/Customer")
+     *              ref="#/components/schemas/BodyRequestCustomer")
      *     ),
      *     @OA\Response(
      *          response=200,
@@ -64,7 +64,7 @@ class CustomerController extends Controller
      *     ),
      *     @OA\RequestBody(
      *         request="dadosdoCustomer",
-     *         @OA\JsonContent(ref="#/components/schemas/CustomerUpdate")
+     *         @OA\JsonContent(ref="#/components/schemas/Customer")
      *     ),
      *          @OA\Response(
      *           response=200,
