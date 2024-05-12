@@ -7,6 +7,8 @@ use App\Models\UserRole;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class UserCreateAction
 {
@@ -23,6 +25,7 @@ class UserCreateAction
 
     public function execute($companyId, Request $request): JsonResponse
     {
+        Log::info('creating company user by user: ', [Auth::user()->toArray()]);
         $data = $request->validate($this->rules());
         $data['user']['company_id'] = $companyId;
 
@@ -40,6 +43,7 @@ class UserCreateAction
     public function createUserRoles($data, $userId): void
     {
         foreach ($data as $role) {
+
             UserRole::create([
                 'user_id' => $userId,
                 'role_id' => $role
