@@ -84,7 +84,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/CompanyUpdate"
+                                "$ref": "#/components/schemas/Company"
                             }
                         }
                     }
@@ -149,7 +149,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Company"
+                                "$ref": "#/components/schemas/BodyRequestCompany"
                             }
                         }
                     }
@@ -177,6 +177,133 @@
                                         "error": {
                                             "type": "string",
                                             "example": "Unauthorizes"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/admin/messages": {
+            "get": {
+                "tags": [
+                    "Admin"
+                ],
+                "summary": "MessagesList",
+                "description": "lista de tipos de mensagens para serem enviadas aos clientes em serviços agendados",
+                "operationId": "messagesIndex",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "token de acesso do usuário admin",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "Bearer {token}"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/MessageType"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Não autorizado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Invalid ability provided."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Admin"
+                ],
+                "summary": "newMessage",
+                "description": "criar nova message",
+                "operationId": "messageStore",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "token de acesso do usuário admin",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "Bearer {token}"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "dados para criar uma nova mensagem",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/MessageType"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "success"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Não autorizado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Invalid ability provided."
                                         }
                                     },
                                     "type": "object"
@@ -373,6 +500,130 @@
                                         }
                                     },
                                     "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthorizes"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "api/admin/system-service": {
+            "get": {
+                "tags": [
+                    "Admin"
+                ],
+                "summary": "serviços do sistema",
+                "description": "serviços do sistema",
+                "operationId": "SystemServices",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "Bearer {token}"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/SystemService"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthorizes"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/admin/system-service": {
+            "post": {
+                "tags": [
+                    "Admin"
+                ],
+                "summary": "createSystemService",
+                "description": "cria serviços do sistema",
+                "operationId": "createSystemService",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "Bearer {token}"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "request body to create system service",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/BodyRequestSystemService"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Company"
+                                    }
                                 }
                             }
                         }
@@ -996,7 +1247,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/CustomerUpdate"
+                                "$ref": "#/components/schemas/Customer"
                             }
                         }
                     }
@@ -1063,7 +1314,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Customer"
+                                "$ref": "#/components/schemas/BodyRequestCustomer"
                             }
                         }
                     }
@@ -1349,7 +1600,7 @@
                 ]
             }
         },
-        "/api/company/schedulable_services_avaliable": {
+        "/api/company/services": {
             "get": {
                 "tags": [
                     "Company"
@@ -1415,6 +1666,62 @@
                 ]
             }
         },
+        "/api/company/customer/schedule-service": {
+            "get": {
+                "tags": [
+                    "Company"
+                ],
+                "summary": "lista serviços agendados",
+                "operationId": "scheduledServicesIndex",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "Bearer {token}"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "succes",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/ScheduleService"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthorizes"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/api/company/schedule-service": {
             "post": {
                 "tags": [
@@ -1438,7 +1745,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/ScheduleService"
+                                "$ref": "#/components/schemas/BodyRequestScheduleService"
                             }
                         }
                     }
@@ -1677,8 +1984,8 @@
                 },
                 "type": "object"
             },
-            "Company": {
-                "title": "Company",
+            "BodyRequestCompany": {
+                "title": "BodyRequestCompany",
                 "description": "dados do company",
                 "required": [
                     "company_name",
@@ -1752,8 +2059,8 @@
                 },
                 "type": "object"
             },
-            "CompanyUpdate": {
-                "title": "CompanyUpdate",
+            "Company": {
+                "title": "Company",
                 "description": "dados do company",
                 "required": [
                     "id"
@@ -1817,8 +2124,8 @@
                 },
                 "type": "object"
             },
-            "Customer": {
-                "title": "Customer",
+            "BodyRequestCustomer": {
+                "title": "BodyRequestCustomer",
                 "description": "dados do customer",
                 "required": [
                     "name",
@@ -1907,8 +2214,8 @@
                 },
                 "type": "object"
             },
-            "CustomerUpdate": {
-                "title": "CustomerUpdate",
+            "Customer": {
+                "title": "Customer",
                 "description": "dados do customer",
                 "required": [
                     "id"
@@ -1992,6 +2299,37 @@
                         "description": "estado do customer",
                         "type": "string",
                         "nullable": true
+                    }
+                },
+                "type": "object"
+            },
+            "MessageType": {
+                "title": "MessageType",
+                "description": "tipo de mensagem",
+                "required": [
+                    "model_name",
+                    "title"
+                ],
+                "properties": {
+                    "schedulable_service_id": {
+                        "description": "id do tipo de serviços agendável",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "model_name": {
+                        "description": "modelo de mensagem usado em whatsapp",
+                        "type": "string",
+                        "example": "troca_de_oleo"
+                    },
+                    "title": {
+                        "description": "titulo da mensagem",
+                        "type": "string",
+                        "example": "Troca de óleo"
+                    },
+                    "message": {
+                        "description": "mensagem, não será usada se for whatsapp, pois a mensagem é configurada no whatsapp bussines api",
+                        "type": "string",
+                        "example": "Está na hora de fazer a troca de óleo do seu $vechile_model"
                     }
                 },
                 "type": "object"
@@ -2201,25 +2539,115 @@
                 },
                 "type": "object"
             },
-            "ScheduleService": {
-                "title": "ScheduleService",
-                "description": "serviços agendados",
-                "required": [
-                    "customer_id",
-                    "service",
-                    "scheduled_date",
-                    "reminder_active"
-                ],
+            "SchedulableService": {
+                "title": "SchedulableService",
+                "description": "dados de schedulable_services",
                 "properties": {
-                    "customer_id": {
-                        "description": "id do consumidor",
+                    "id": {
+                        "description": "id",
                         "type": "integer",
                         "example": "1"
                     },
                     "service": {
                         "description": "serviço",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "ScheduleService": {
+                "title": "ScheduleService",
+                "description": "dados do serviço agendado",
+                "properties": {
+                    "id": {
+                        "description": "id",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "vehicle_id": {
+                        "description": "vehicle_id",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "company_id": {
+                        "description": "company_id",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "customer_id": {
+                        "description": "customer_id",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "schedulable_service_id": {
+                        "description": "schedulable_service_id",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "scheduled_date": {
+                        "description": "data do agendamento",
                         "type": "string",
-                        "example": "Troca de óleto"
+                        "example": "2024-05-01"
+                    },
+                    "completion_date": {
+                        "description": "data realização",
+                        "type": "string",
+                        "example": "2024-05-05",
+                        "nullable": true
+                    },
+                    "reminder_active": {
+                        "description": "lembrete ativo",
+                        "type": "boolean",
+                        "example": "true"
+                    },
+                    "observation": {
+                        "description": "observações",
+                        "type": "string",
+                        "example": "true",
+                        "nullable": true
+                    },
+                    "customer_answer": {
+                        "description": "resposta do customer",
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "company": {
+                        "$ref": "#/components/schemas/Company"
+                    },
+                    "customer": {
+                        "$ref": "#/components/schemas/Customer"
+                    },
+                    "schedulable_service": {
+                        "$ref": "#/components/schemas/SchedulableService"
+                    }
+                },
+                "type": "object"
+            },
+            "BodyRequestScheduleService": {
+                "title": "BodyRequestScheduleService",
+                "description": "serviços agendados",
+                "required": [
+                    "customer_id",
+                    "schedulable_service_id",
+                    "vehicle_id",
+                    "scheduled_date",
+                    "reminder_active"
+                ],
+                "properties": {
+                    "vehicle_id": {
+                        "description": "vehicle_id",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "customer_id": {
+                        "description": "id do consumidor",
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "schedulable_service_id": {
+                        "description": "serviço",
+                        "type": "integer",
+                        "example": "1"
                     },
                     "scheduled_date": {
                         "description": "data de agendamento",
@@ -2241,10 +2669,57 @@
                         "type": "string",
                         "nullable": true
                     },
-                    "consumer_answer": {
+                    "customer_answer": {
                         "description": "resposta do cliente",
                         "type": "string",
                         "nullable": true
+                    }
+                },
+                "type": "object"
+            },
+            "SystemService": {
+                "title": "SystemService",
+                "description": "dados dos serviços do sistema",
+                "required": [
+                    "id",
+                    "service_name",
+                    "service_price"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "service_name": {
+                        "description": "nome do serviço",
+                        "type": "string",
+                        "example": "whatsapp"
+                    },
+                    "service_price": {
+                        "description": "preço do serviço",
+                        "type": "string",
+                        "example": "50"
+                    }
+                },
+                "type": "object"
+            },
+            "BodyRequestSystemService": {
+                "title": "BodyRequestSystemService",
+                "description": "cadastro de serviço do sistema",
+                "required": [
+                    "service_name",
+                    "service_price"
+                ],
+                "properties": {
+                    "service_name": {
+                        "description": "nome do serviço",
+                        "type": "string",
+                        "example": "whatsapp"
+                    },
+                    "service_price": {
+                        "description": "preço do serviço",
+                        "type": "string",
+                        "example": "50"
                     }
                 },
                 "type": "object"

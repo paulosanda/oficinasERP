@@ -13,14 +13,15 @@ return new class extends Migration
     {
         Schema::create('scheduled_services', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('vehicle_id')->constrained('vehicles');
             $table->foreignId('company_id')->constrained('companies');
             $table->foreignId('customer_id')->constrained('customers');
-            $table->string('service');
+            $table->foreignId('schedulable_service_id')->constrained('schedulable_services');
             $table->date('scheduled_date', 'Y-m-d');
             $table->date('completion_date', 'Y-m-d')->nullable();
             $table->boolean('reminder_active')->default(true);
             $table->string('observation')->nullable();
-            $table->string('consumer_answer')->nullable();
+            $table->string('customer_answer')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\Admin\CompanyAdminController;
+use App\Http\Controllers\Admin\MessageTypeAdminController;
 use App\Http\Controllers\Admin\SchedulableServiceAdminController;
+use App\Http\Controllers\Admin\SystemServiceAdminController;
 use App\Http\Controllers\Admin\UserAdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CheckupController;
@@ -29,7 +31,9 @@ Route::delete('/logout', [AuthController::class, 'logout'])
  */
 Route::middleware(['auth:sanctum', 'ability:root,admin'])->group(function (){
    Route::prefix('admin')->group(function (){
+
       Route::get('/roles',  [RoleController::class, 'adminIndex'])->name('admin.roles.index');
+
       Route::prefix('/company')->group(function (){
           Route::post('/', [CompanyAdminController::class, 'store'])->name('admin.create.company');
           Route::get('/', [CompanyAdminController::class, 'index'])->name('admin.index.company');
@@ -37,9 +41,23 @@ Route::middleware(['auth:sanctum', 'ability:root,admin'])->group(function (){
           Route::get('/roles', [RoleController::class, 'companyIndex'])->name('admin.company.rules.index');
           Route::post('/user/{companyId}', [UserAdminController::class, 'store'])->name('admin.user.create');
       });
-       Route::get('/schedulable-services', [SchedulableServiceAdminController::class, 'index'])->name('schedulable_services.index');
-       Route::post('/schedulable-services', [SchedulableServiceAdminController::class, 'store'])->name('scheculable_services.store');
-       Route::patch('/schedulable-services/{schedulableServiceId}', [SchedulableServiceAdminController::class, 'update'])->name('schedulable_services.update');
+
+      Route::get('/schedulable-services', [SchedulableServiceAdminController::class, 'index'])->name('schedulable_services.index');
+      Route::post('/schedulable-services', [SchedulableServiceAdminController::class, 'store'])->name('scheculable_services.store');
+      Route::patch('/schedulable-services/{schedulableServiceId}', [SchedulableServiceAdminController::class, 'update'])->name('schedulable_services.update');
+
+      Route::prefix('messages')->group(function (){
+         Route::get('/', [MessageTypeAdminController::class, 'index'])->name('message.index');
+         Route::post('/', [MessageTypeAdminController::class, 'store'])->name('message.store');
+         Route::put('/{messageTypeId}', [MessageTypeAdminController::class, 'update'])->name('message.update');
+      });
+
+//      system service routes
+    Route::prefix('system-service')->group(function (){
+         Route::get('/', [SystemServiceAdminController::class, 'index'])->name('system_service.index');
+         Route::post('/', [SystemServiceAdminController::class, 'store'])->name('system_service.store');
+         Route::put('/{systemServiceID}', [SystemServiceAdminController::class, 'update'])->name('system_service.update');
+       });
    });
 });
 
@@ -62,7 +80,11 @@ Route::middleware(['auth:sanctum', 'ability:master,operator', InjectCompanyId::c
                 Route::get('/services', [ScheduledServiceController::class, 'listService'])->name('schedulable_services.list');
 
             });
-            Route::post('/schedule-service', [ScheduledServiceController::class, 'store'])->name('schedule-service.store');
+            Route::prefix('schedule-service')->group(function (){
+                Route::post('/', [ScheduledServiceController::class, 'store'])->name('schedule_service.store');
+                Route::get('/', [ScheduledServiceController::class, 'index'])->name('schedule_service.index');
+            });
+
         });
     });
 

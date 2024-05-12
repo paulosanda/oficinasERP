@@ -70,7 +70,7 @@ class CompanyAdminController extends Controller
      *         request="CreateCompany",
      *         description="Request body to create company",
      *         @OA\JsonContent(
-     *             ref="#/components/schemas/Company"
+     *             ref="#/components/schemas/BodyRequestCompany"
      *         )
      *     ),
      *     @OA\Response(
@@ -112,7 +112,7 @@ class CompanyAdminController extends Controller
      *     @OA\RequestBody(
      *         request="updateCompany",
      *         description="Request body to update a company",
-     *         @OA\JsonContent(ref="#/components/schemas/CompanyUpdate")
+     *         @OA\JsonContent(ref="#/components/schemas/Company")
      *     ),
      *     @OA\Response(
      *     response=200,
