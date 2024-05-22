@@ -140,9 +140,9 @@ class CompanyAdminControllerTest extends TestCase
         $response->assertStatus(422);
 
         $response->assertJson([
-            'message' => 'validation.required',
+            'message' => 'The company name field is required.',
             'errors' => [
-                'company_name' => ['validation.required'],
+                'company_name' => ['The company name field is required.'],
             ],
         ]);
 
