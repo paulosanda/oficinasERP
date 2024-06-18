@@ -47,7 +47,7 @@ class SchedulableServiceAdminController extends Controller
 
     /**
      * @OA\Post(
-     *     path="\api\admin\schedulable-services",
+     *     path="/api/admin/schedulable-services",
      *     operationId="createSchedulableService",
      *     tags={"Admin"},
      *     summary="criar novos serviços agendáveis",
@@ -95,7 +95,7 @@ class SchedulableServiceAdminController extends Controller
 
     /**
      * @OA\Patch(
-     *     path="\api\admin\schedulable-services",
+     *     path="/api/admin/schedulable-services",
      *     operationId="updateSchedulableServices",
      *     tags={"Admin"},
      *     summary="altera tipo de serviços agendáveis",

@@ -12,7 +12,7 @@ class SystemServiceAdminController extends Controller
 {
     /**
      * @OA\Get(
-     *     path="api/admin/system-service",
+     *     path="/api/admin/system-service",
      *     operationId="SystemServices",
      *     tags={"Admin"},
      *     summary="serviços do sistema",

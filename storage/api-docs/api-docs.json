@@ -376,9 +376,7 @@
                         "bearerAuth": []
                     }
                 ]
-            }
-        },
-        "\\api\\admin\\schedulable-services": {
+            },
             "post": {
                 "tags": [
                     "Admin"
@@ -528,7 +526,7 @@
                 ]
             }
         },
-        "api/admin/system-service": {
+        "/api/admin/system-service": {
             "get": {
                 "tags": [
                     "Admin"
@@ -583,9 +581,7 @@
                         "bearerAuth": []
                     }
                 ]
-            }
-        },
-        "/api/admin/system-service": {
+            },
             "post": {
                 "tags": [
                     "Admin"
