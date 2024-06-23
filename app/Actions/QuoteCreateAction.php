@@ -2,20 +2,17 @@
 
 namespace App\Actions;
 
-
 use App\Models\Quote;
 use App\Models\QuoteNumbering;
 use App\Models\QuotePart;
 use App\Models\QuoteService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use PHPUnit\Exception;
-use function Symfony\Component\Translation\t;
 
 class QuoteCreateAction
 {
-    public function rules():array
+    public function rules(): array
     {
         return [
             'company_id' => 'integer|required',
@@ -34,8 +31,8 @@ class QuoteCreateAction
             'total' => 'string|required',
             'quote_service.*.service_code' => 'string|nullable',
             'quote_service.*.description' => 'string|nullable',
-            'quote_service.*.quantity'  => 'integer|nullable',
-            'quote_service.*.value'  => 'string|nullable',
+            'quote_service.*.quantity' => 'integer|nullable',
+            'quote_service.*.value' => 'string|nullable',
             'quote_service.*.discount' => 'string|nullable',
             'quote_service.*.subtotal' => 'string|nullable',
             'quote_part.*.part_code' => 'string|nullable',
@@ -55,7 +52,7 @@ class QuoteCreateAction
         $numbering = $this->getCompanyNumbering($data);
         $data['company_numbering'] = $numbering;
 
-        try{
+        try {
             $quote = Quote::create($data);
 
             $this->createServices($data, $quote->id);
@@ -73,7 +70,7 @@ class QuoteCreateAction
 
     private function createServices($data, $quoteId): void
     {
-        foreach($data['quote_service'] as $service) {
+        foreach ($data['quote_service'] as $service) {
             $service['quote_id'] = $quoteId;
             QuoteService::create($service);
         }
@@ -96,5 +93,4 @@ class QuoteCreateAction
 
         return $numbering->numbering;
     }
-
 }

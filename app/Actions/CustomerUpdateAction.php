@@ -2,7 +2,6 @@
 
 namespace App\Actions;
 
-
 use App\Models\Company;
 use App\Models\Customer;
 use App\Trait\EmptyEntity;
@@ -13,7 +12,7 @@ use Throwable;
 
 class CustomerUpdateAction
 {
-    use  EmptyEntity;
+    use EmptyEntity;
 
     protected function rules(): array
     {
@@ -36,14 +35,14 @@ class CustomerUpdateAction
             'postal_code' => 'string',
             'neighborhood' => 'string',
             'city' => 'string',
-            'estate' => 'string'
+            'estate' => 'string',
         ];
     }
 
     public function execute(Request $request): JsonResponse
     {
         $data = $request->validate($this->rules());
-        try{
+        try {
             $this->isEmpty(Customer::class, Company::COMPANY_INDEX, $data['company_id']);
 
             $customer = Customer::where('id', $data['id'])->where('company_id', $data['company_id'])->first();

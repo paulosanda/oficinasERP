@@ -25,7 +25,7 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
-        $company=Company::factory()->create();
+        $company = Company::factory()->create();
 
         return [
             'company_id' => $company->id,
@@ -34,7 +34,7 @@ class UserFactory extends Factory
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
-            'enable' => true
+            'enable' => true,
         ];
     }
 

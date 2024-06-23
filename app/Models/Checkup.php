@@ -23,7 +23,7 @@ class Checkup extends Model
         'roof_photo',
         'fuel_gauge',
         'fuel_gauge_photo',
-        'evaluation'
+        'evaluation',
     ];
 
     public function vehicle()

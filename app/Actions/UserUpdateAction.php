@@ -22,9 +22,10 @@ class UserUpdateAction
             'password' => 'string|nullable',
             'enable' => 'boolean',
             'roles' => 'array',
-            'roles.*.id' => 'integer'
+            'roles.*.id' => 'integer',
         ];
     }
+
     public function execute($userId, Request $request): JsonResponse
     {
         try {
@@ -36,16 +37,16 @@ class UserUpdateAction
 
             $user->update($dataNullRemoved);
 
-            if(isset($data['roles'])) {
+            if (isset($data['roles'])) {
                 $this->updateRoles($userId, $data);
 
             }
-            return  response()->json(['message' => 'success']);
+
+            return response()->json(['message' => 'success']);
 
         } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
-
 
     }
 
@@ -53,14 +54,13 @@ class UserUpdateAction
     {
         $roles = UserRole::where('user_id', $userId)->delete();
 
-        foreach($data['roles'] as $role) {
+        foreach ($data['roles'] as $role) {
 
             UserRole::create([
-               'user_id' => $userId,
-               'role_id' => $role['id']
+                'user_id' => $userId,
+                'role_id' => $role['id'],
             ]);
         }
 
     }
-
 }

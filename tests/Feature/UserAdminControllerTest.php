@@ -3,20 +3,21 @@
 namespace Tests\Feature;
 
 use App\Models\Company;
-use App\Models\UserRole;
-use Tests\TestCase;
 use App\Models\User;
+use App\Models\UserRole;
 use Database\Seeders\RoleSeeder;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Artisan;
+use Tests\TestCase;
 
 class UserAdminControllerTest extends TestCase
 {
     use RefreshDatabase;
 
     private User|Collection|Model $user;
+
     private Company|Collection|Model $company;
 
     public function setUp(): void
@@ -32,19 +33,19 @@ class UserAdminControllerTest extends TestCase
         $token = $this->user->createToken('teste', ['admin'])->plainTextToken;
 
         $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
         ])->postJson(route('admin.user.create', $this->company->id), [
             'user' => [
                 'name' => fake()->name,
                 'email' => fake()->email,
-                'password' => fake()->password
+                'password' => fake()->password,
             ],
-            'roles' => [3, 2]
+            'roles' => [3, 2],
         ]);
         $response->assertStatus(200);
 
         $response->assertJson([
-            'message' => 'success'
+            'message' => 'success',
         ]);
 
         $this->assertDatabaseCount('user_roles', 3);
@@ -56,14 +57,14 @@ class UserAdminControllerTest extends TestCase
         $token = $this->user->createToken('teste', ['master'])->plainTextToken;
 
         $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
         ])->postJson(route('admin.user.create', $this->company->id), [
             'user' => [
                 'name' => fake()->name,
                 'email' => fake()->email,
-                'password' => fake()->password
+                'password' => fake()->password,
             ],
-            'roles' => [3, 2]
+            'roles' => [3, 2],
         ]);
 
         $response->assertStatus(403);
@@ -83,7 +84,7 @@ class UserAdminControllerTest extends TestCase
         $token = $this->user->createToken('teste', ['root'])->plainTextToken;
 
         $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
         ])->getJson(route('user.index'));
 
         $response->assertStatus(200);
@@ -106,7 +107,7 @@ class UserAdminControllerTest extends TestCase
         $token = $this->user->createToken('teste', ['master'])->plainTextToken;
 
         $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
         ])->getJson(route('user.index'));
 
         $response->assertStatus(200);
@@ -128,20 +129,20 @@ class UserAdminControllerTest extends TestCase
         $token = $this->user->createToken('teste', ['root'])->plainTextToken;
 
         $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
         ])->putJson(route('user.update', $payload['id']), $payload);
 
         $response->assertStatus(200);
 
         $this->assertDatabaseHas('users', [
-            'enable' => false
+            'enable' => false,
         ]);
 
         $this->assertDatabaseHas('Users', [
-           'name' => $payload['name'],
-           'company_id' => $payload['company_id'],
-           'email' => $payload['email'],
-           'enable' => $payload['enable']
+            'name' => $payload['name'],
+            'company_id' => $payload['company_id'],
+            'email' => $payload['email'],
+            'enable' => $payload['enable'],
         ]);
 
     }
@@ -153,7 +154,7 @@ class UserAdminControllerTest extends TestCase
         $token = $this->user->createToken('teste', ['master'])->plainTextToken;
 
         $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
         ])->putJson(route('user.update', $user['id']), $user);
 
         $response->assertStatus(200);
@@ -168,5 +169,4 @@ class UserAdminControllerTest extends TestCase
 
         return $user;
     }
-
 }

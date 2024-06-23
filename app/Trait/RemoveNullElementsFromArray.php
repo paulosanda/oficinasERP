@@ -6,9 +6,8 @@ trait RemoveNullElementsFromArray
 {
     public function removeNull($array): array
     {
-        return array_filter($array, function ($value){
+        return array_filter($array, function ($value) {
             return $value !== null;
         });
     }
-
 }

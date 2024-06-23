@@ -19,11 +19,13 @@ class UserController extends Controller
      *     summary="cria novo usuário para company",
      *     description="cria novo usuário para um company, e registra a(s) role(s)",
      *     security={{ "bearerAuth": {} }},
+     *
      *     @OA\Parameter(
      *           name="Authorization",
      *           in="header",
      *           required=true,
      *           description="Token de acesso do usuário",
+     *
      *           @OA\Schema(
      *               type="string",
      *               format="Bearer {token}"
@@ -33,7 +35,9 @@ class UserController extends Controller
      *     @OA\RequestBody(
      *      required=true,
      *      description="dados para criação de usuário",
+     *
      *      @OA\JsonContent(
+     *
      *          @OA\Property(
      *              property="user",
      *              type="object",
@@ -44,24 +48,31 @@ class UserController extends Controller
      *          @OA\Property(
      *              property="roles",
      *              type="array",
+     *
      *              @OA\Items(type="integer"),
      *              example="{1, 2, 3}",
      *              description="chaves indices das roles"
      *          )
      *      )
      *  ),
+     *
      *      @OA\Response(
      *          response=200,
      *          description="success",
+     *
      *          @OA\JsonContent(
+     *
      *              @OA\Property(property="message", type="string", example="usuario criado")
      *          )
      *
      *     ),
+     *
      *     @OA\Response(
      *          response=403,
      *          description="Não autorizado",
+     *
      *          @OA\JsonContent(
+     *
      *              @OA\Property(property="error", type="string", example="Invalid ability provided.")
      *           )
      *       ),
@@ -81,45 +92,58 @@ class UserController extends Controller
      *     tags={"Company"},
      *     summary="deleteUser",
      *     description="deleta usuários",
+     *
      *     @OA\Parameter(
      *         name="userId",
      *         description="id do user",
      *         required=true,
      *         in="path",
+     *
      *          @OA\Schema(
      *              type="integer"
      *          )
      *
      *     ),
      *     security={{ "bearerAuth": {} }},
+     *
      *     @OA\Parameter(
      *         name="Authorization",
      *            in="header",
      *            required=true,
      *            description="Token de acesso do usuário",
+     *
      *            @OA\Schema(
      *                type="string",
      *                format="Bearer {token}"
      *            ),
      *     ),
+     *
      *     @OA\Response(
      *     response=200,
      *     description="success",
+     *
      *     @OA\JsonContent(
+     *
      *         @OA\Property(property="message", type="string", example="usuario criado")
      *          )
      *      ),
+     *
      *      @OA\Response(
      *           response=403,
      *           description="Não autorizado",
+     *
      *           @OA\JsonContent(
+     *
      *               @OA\Property(property="error", type="string", example="Invalid ability provided.")
      *            )
      *      ),
+     *
      *     @OA\Response(
      *         response = 500,
      *         description="invalid user",
+     *
      *        @OA\JsonContent(
+     *
      *            @OA\Property(property="error", type="string", example="invalid user")
      *        )
      *     )
@@ -131,9 +155,10 @@ class UserController extends Controller
 
         $companyId = Auth::user()->company_id;
 
-        if($user->company_id != $companyId) {
+        if ($user->company_id != $companyId) {
 
             Log::info('erro na tentativa e deletar usuário realizada por: ', [Auth::user()->toArray()]);
+
             return response()->json(['error' => 'invalid user'], 500);
         } else {
             Log::info('Usuário deletado: ', [$userId]);

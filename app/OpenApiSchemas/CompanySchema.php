@@ -8,6 +8,7 @@ namespace App\OpenApiSchemas;
  *     title="BodyRequestCompany",
  *     description="dados do company",
  *     required={"company_name", "cnpj","address","number","neighborhood","postal_code","city","estate","cellphone","email"},
+ *
  *     @OA\Property(property="company_name", type="string", description="razão social"),
  *     @OA\Property(property="cnpj", type="string", description="cnpj do company"),
  *     @OA\Property(property="inscricao_estadual",type="string",nullable=true,description="inscrição estadual do company"),
@@ -23,8 +24,7 @@ namespace App\OpenApiSchemas;
  *     @OA\Property(property="users", type="array", @OA\Items(ref="#/components/schemas/User"))
  * )
  */
-class CompanySchema
-{}
+class CompanySchema {}
 
 /**
  * @OA\Schema(
@@ -32,6 +32,7 @@ class CompanySchema
  *     title="Company",
  *     description="dados do company",
  *     required={"id"},
+ *
  *     @OA\Property(property="id", type="integer", format="int64", description="id do company"),
  *     @OA\Property(property="company_name", type="string", description="razão social"),
  *     @OA\Property(property="cnpj", type="string", description="cnpj do company"),
@@ -47,5 +48,4 @@ class CompanySchema
  *     @OA\Property(property="email", type="string", description="email"),
  * )
  */
-class CompanyUpdateSchema
-{}
+class CompanyUpdateSchema {}

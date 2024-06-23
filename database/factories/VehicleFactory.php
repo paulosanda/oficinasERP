@@ -24,58 +24,56 @@ class VehicleFactory extends Factory
             'Honda',
             'Toyota',
             'Volkswagen',
-            'Fiat'
+            'Fiat',
         ];
 
         $modelo = [
             'Honda' => 'Civic',
             'Toyota' => 'Lexus',
             'Volkswagen' => 'Fox',
-            'Fiat' => 'Toro'
+            'Fiat' => 'Toro',
         ];
 
         $placas = [
-            "AAA1A11",
-            "BBB2B22",
-            "CCC3C33",
-            "DDD4D44",
-            "EEE5E55",
-            "FFF6F66",
-            "GGG7G77",
-            "HHH8H88",
-            "III9I99",
-            "JJJ0J00"
+            'AAA1A11',
+            'BBB2B22',
+            'CCC3C33',
+            'DDD4D44',
+            'EEE5E55',
+            'FFF6F66',
+            'GGG7G77',
+            'HHH8H88',
+            'III9I99',
+            'JJJ0J00',
         ];
 
         $chassi = [
-            "1HGCM82633A003569",
-            "5NPEB4ACXCH462566",
-            "JTEBU14R290153061",
-            "WAUZZZ8K3CA090190",
-            "1FTFW1CF5EFA02085",
-            "JTJBT20X440065783",
-            "WDDNG7DB7BA372992",
-            "5TFEY5F10BX108057",
-            "1GYS3BEF5DR210485",
-            "3FA6P0HDXGR288553"
+            '1HGCM82633A003569',
+            '5NPEB4ACXCH462566',
+            'JTEBU14R290153061',
+            'WAUZZZ8K3CA090190',
+            '1FTFW1CF5EFA02085',
+            'JTJBT20X440065783',
+            'WDDNG7DB7BA372992',
+            '5TFEY5F10BX108057',
+            '1GYS3BEF5DR210485',
+            '3FA6P0HDXGR288553',
         ];
 
-
         $renavam = [
-            "12345678901",
-            "23456789012",
-            "34567890123",
-            "45678901234",
-            "56789012345",
-            "67890123456",
-            "78901234567",
-            "89012345678",
-            "90123456789",
-            "01234567890"
+            '12345678901',
+            '23456789012',
+            '34567890123',
+            '45678901234',
+            '56789012345',
+            '67890123456',
+            '78901234567',
+            '89012345678',
+            '90123456789',
+            '01234567890',
         ];
 
         $km = fake()->numberBetween('###');
-
 
         return [
             'customer_id' => $customer->id,
@@ -86,8 +84,8 @@ class VehicleFactory extends Factory
             'plate' => fake()->randomElement($placas),
             'identification_number' => fake()->randomElement($chassi),
             'renavam' => fake()->randomElement($renavam),
-            'monthly_mileage' =>strval($km),
-            'observation' => fake()->text
+            'monthly_mileage' => strval($km),
+            'observation' => fake()->text,
         ];
     }
 }

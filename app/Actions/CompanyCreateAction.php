@@ -5,8 +5,8 @@ namespace App\Actions;
 use App\Models\Company;
 use App\Models\QuoteNumbering;
 use Exception;
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class CompanyCreateAction
 {
@@ -24,7 +24,7 @@ class CompanyCreateAction
             'city' => 'string|required',
             'estate' => 'string|required',
             'cellphone' => 'string|required',
-            'email' => 'email|required'
+            'email' => 'email|required',
         ];
     }
 
@@ -36,8 +36,8 @@ class CompanyCreateAction
             $newCompany = Company::create($data);
 
             QuoteNumbering::create([
-               'company_id' => $newCompany->id,
-               'numbering' => 0
+                'company_id' => $newCompany->id,
+                'numbering' => 0,
             ]);
 
             return response()->json($newCompany, 200);

@@ -15,7 +15,7 @@ class MessageType extends Model
         'schedulable_service_id',
         'model_name',
         'title',
-        'message'
+        'message',
     ];
 
     public function company(): BelongsTo
@@ -28,4 +28,3 @@ class MessageType extends Model
         return $this->belongsTo(SchedulableService::class);
     }
 }
-

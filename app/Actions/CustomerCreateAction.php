@@ -7,7 +7,6 @@ use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-
 class CustomerCreateAction
 {
     protected function rules(): array
@@ -30,7 +29,7 @@ class CustomerCreateAction
             'postal_code' => 'string',
             'neighborhood' => 'string',
             'city' => 'string',
-            'estate' => 'string'
+            'estate' => 'string',
         ];
     }
 

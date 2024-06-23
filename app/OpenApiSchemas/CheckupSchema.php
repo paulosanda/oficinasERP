@@ -8,6 +8,7 @@ namespace App\OpenApiSchemas;
  *     title="Checkup",
  *     required={"vehicle_id"},
  *     description="Checkup veicular",
+ *
  *     @OA\Property(property="vehicle_id", type="integer", example="1"),
  *     @OA\Property(property="front_damage", type="string", nullable=true, description="avarias frontais", example="farol quebrado"),
  *     @OA\Property(property="front_photo", type="string", format="binary", nullable=true, example="este deverá ser o upload de uma imagem"),
@@ -25,5 +26,4 @@ namespace App\OpenApiSchemas;
  *     @OA\Property(property="checkup_observation", type="array" , nullable=true, @OA\Items(ref="#/components/schemas/CheckupObservation")),
  * )
  */
-class CheckupSchema
-{}
+class CheckupSchema {}

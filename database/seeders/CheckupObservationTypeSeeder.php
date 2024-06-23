@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\CheckupObservationType;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class CheckupObservationTypeSeeder extends Seeder
@@ -25,12 +24,12 @@ class CheckupObservationTypeSeeder extends Seeder
             'Suspensão traseira',
             'Barulho',
             'Luz painel',
-            'Outros'
+            'Outros',
         ];
 
         foreach ($types as $type) {
             CheckupObservationType::create([
-                'type' => $type
+                'type' => $type,
             ]);
         }
     }
