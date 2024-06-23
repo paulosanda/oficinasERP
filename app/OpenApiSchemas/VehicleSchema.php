@@ -8,6 +8,7 @@ namespace App\OpenApiSchemas;
  *     title="Vehicle",
  *     required={"customer_id", "plate"},
  *     description="dados do veículo",
+ *
  *     @OA\Property(property="customer_id", type="integer", description="id do customer"),
  *     @OA\Property(property="brand", type="string", nullable=true, description="marca do veículo"),
  *     @OA\Property(property="model", type="string", nullable=true, description="modelo do veículo"),
@@ -20,6 +21,4 @@ namespace App\OpenApiSchemas;
  *     @OA\Property(property="observation", type="string", nullable=true, description="observações para o cadastro do veículo"),
  *)
  */
-class VehicleSchema
-{
-}
+class VehicleSchema {}

@@ -12,6 +12,6 @@ class CheckupObservation extends Model
     protected $fillable = [
         'checkup_id',
         'checkup_observation_type_id',
-        'observation'
+        'observation',
     ];
 }

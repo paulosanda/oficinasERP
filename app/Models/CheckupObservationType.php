@@ -10,6 +10,6 @@ class CheckupObservationType extends Model
     use HasFactory;
 
     protected $fillable = [
-        'type'
+        'type',
     ];
 }

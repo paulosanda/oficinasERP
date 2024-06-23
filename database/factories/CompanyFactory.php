@@ -24,12 +24,12 @@ class CompanyFactory extends Factory
             'inscricao_municipal' => fake()->numerify('###.###.###'),
             'address' => fake()->streetAddress,
             'number' => fake()->numerify,
-            'neighborhood' =>fake()->name,
+            'neighborhood' => fake()->name,
             'postal_code' => fake()->postcode,
             'city' => fake()->city,
             'estate' => 'SP',
             'cellphone' => fake()->numerify('##-##### ###'),
-            'email' => fake()->email
+            'email' => fake()->email,
         ];
     }
 }

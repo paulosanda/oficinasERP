@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\SchedulableService;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class SchedulableServiceSeeder extends Seeder
@@ -27,12 +26,12 @@ class SchedulableServiceSeeder extends Seeder
             'Inspeção dos sistemas de iluminação',
             'Verificação do sistema de escape',
             'Verificação do sistema de ar condicionado',
-            'Inspeção dos componentes do motor e transmissão'
+            'Inspeção dos componentes do motor e transmissão',
         ];
 
         foreach ($services as $service) {
             SchedulableService::create([
-                'service' => $service
+                'service' => $service,
             ]);
         }
     }

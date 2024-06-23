@@ -3,21 +3,25 @@
 namespace Tests\Feature;
 
 use App\Models\Company;
-use Tests\TestCase;
+use App\Models\Customer;
 use App\Models\Role;
 use App\Models\User;
-use App\Models\Customer;
 use App\Models\UserRole;
 use Database\Seeders\RoleSeeder;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Artisan;
+use Tests\TestCase;
 
 class CustomerControllerTest extends TestCase
 {
     use RefreshDatabase;
+
     private User $user;
+
     private Company $company;
+
     private Role $role;
+
     public function setUp(): void
     {
         parent::setUp();
@@ -30,7 +34,7 @@ class CustomerControllerTest extends TestCase
 
         UserRole::create([
             'user_id' => $this->user->id,
-            'role_id' => $role->id
+            'role_id' => $role->id,
         ]);
     }
 
@@ -38,9 +42,8 @@ class CustomerControllerTest extends TestCase
     {
         $token = $this->user->createToken('test', ['master', 'operator'])->plainTextToken;
 
-
         $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
         ])->postJson(route('customer.create'), $this->customerData());
 
         $response->assertStatus(200);
@@ -52,9 +55,8 @@ class CustomerControllerTest extends TestCase
     {
         $token = $this->user->createToken('test', ['master', 'operator'])->plainTextToken;
 
-
         $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
         ])->postJson(route('customer.create'), $this->customerPjData());
 
         $response->assertStatus(200);
@@ -70,7 +72,7 @@ class CustomerControllerTest extends TestCase
         $data['cpf'] = fake()->numerify('#.###.###.###.##');
 
         $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
         ])->postJson(route('customer.create'), $data);
 
         $response->assertStatus(422);
@@ -86,7 +88,7 @@ class CustomerControllerTest extends TestCase
         $customerModel->update(['company_id' => $this->company->id]);
         $customerModel->refresh();
 
-        $customerUpdate =  $this->customerData();
+        $customerUpdate = $this->customerData();
 
         $customerUpdate['id'] = $customerModel->id;
         $customerUpdate['company_id'] = $this->company->id;
@@ -98,7 +100,7 @@ class CustomerControllerTest extends TestCase
         $token = $this->user->createToken('teste', ['master', 'operator'])->plainTextToken;
 
         $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
         ])->putJson(route('customer.update'), $customerUpdate);
 
         $response->assertStatus(200);
@@ -114,7 +116,7 @@ class CustomerControllerTest extends TestCase
 
         $customerModel = Customer::create($customer);
 
-        $customerUpdate =  $this->customerData();
+        $customerUpdate = $this->customerData();
 
         $customerUpdate['id'] = $customerModel->id;
         $customerUpdate['company_id'] = $this->company->id;
@@ -122,11 +124,10 @@ class CustomerControllerTest extends TestCase
 
         $anotherCompany = Company::factory()->create();
 
-
         $token = $this->user->createToken('teste', ['master', 'operator'])->plainTextToken;
 
         $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
         ])->putJson(route('customer.update'), $customerUpdate);
 
         $response->assertStatus(200);
@@ -134,10 +135,9 @@ class CustomerControllerTest extends TestCase
         $response->assertJson(['error' => 'Attempt to read property "id" on null']);
 
         $this->assertDatabaseMissing('customers', [
-            'name' => 'updated'
+            'name' => 'updated',
         ]);
     }
-
 
     private function customerData(): array
     {
@@ -156,7 +156,7 @@ class CustomerControllerTest extends TestCase
             'postal_code' => fake()->postcode,
             'neighborhood' => fake()->name,
             'city' => fake()->city,
-            'estate' => 'CE'
+            'estate' => 'CE',
         ];
     }
 
@@ -177,7 +177,7 @@ class CustomerControllerTest extends TestCase
             'postal_code' => fake()->postcode,
             'neighborhood' => fake()->name,
             'city' => fake()->city,
-            'estate' => 'CE'
+            'estate' => 'CE',
         ];
     }
 }

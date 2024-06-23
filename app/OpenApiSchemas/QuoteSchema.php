@@ -8,6 +8,7 @@ namespace App\OpenApiSchemas;
  *     title="Quote",
  *     description="dados para orçamento",
  *     required={"customer_id", "vehicle_id", "entry_date", "problem_description", "subtotal_service","subtotal_part","gross_total","net_total", "total"},
+ *
  *     @OA\Property(property="customer_id", type="integer",description="id do consumidor", example="1009"),
  *     @OA\Property(property="vehicle_id", type="integer", description="id do veículo", example="243"),
  *     @OA\Property(property="entry_date", type="string", description="data de entrada do veículo", example="2024-03-15"),
@@ -24,14 +25,16 @@ namespace App\OpenApiSchemas;
  *     @OA\Property(
  *         property="quote_service",
  *         type="array",
+ *
  *         @OA\Items(ref="#/components/schemas/QuoteService")
  *     ),
+ *
  *     @OA\Property(
  *         property="quote_part",
  *         type="array",
+ *
  *         @OA\Items(ref="#/components/schemas/QuotePart")
  *     )
  * )
  */
-class QuoteSchema
-{}
+class QuoteSchema {}

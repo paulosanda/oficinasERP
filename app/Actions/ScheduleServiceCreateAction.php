@@ -2,7 +2,6 @@
 
 namespace App\Actions;
 
-
 use App\Models\ScheduledService;
 use Exception;
 use Illuminate\Http\JsonResponse;

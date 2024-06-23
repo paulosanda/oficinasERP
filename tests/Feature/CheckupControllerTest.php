@@ -19,11 +19,17 @@ class CheckupControllerTest extends TestCase
     use RefreshDatabase;
 
     private User $user;
+
     private Company $company;
+
     private Customer $customer;
+
     private Vehicle $vehicle;
+
     private Checkup $checkup;
+
     private Collection|CheckupObservationType $checkupObservationType;
+
     public function setUp(): void
     {
         parent::setUp();
@@ -32,18 +38,18 @@ class CheckupControllerTest extends TestCase
 
         $this->company = Company::factory()->create();
         $this->user = User::factory()->create([
-            'company_id' => $this->company->id
+            'company_id' => $this->company->id,
         ]);
         $this->customer = Customer::factory()->create([
-           'company_id' => $this->company->id
+            'company_id' => $this->company->id,
         ]);
 
         $this->vehicle = Vehicle::factory()->create([
-            'customer_id' => $this->customer->id
+            'customer_id' => $this->customer->id,
         ]);
 
         $this->checkup = Checkup::factory()->create([
-            'vehicle_id' => $this->vehicle->id
+            'vehicle_id' => $this->vehicle->id,
         ]);
 
         $this->checkupObservationType = CheckupObservationType::all();
@@ -56,7 +62,7 @@ class CheckupControllerTest extends TestCase
 
         $payload = $this->checkUpData();
         $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
         ])->postJson(route('customer.checkup.store'),
             $payload
         );
@@ -67,7 +73,7 @@ class CheckupControllerTest extends TestCase
 
         $this->assertDatabaseCount('checkups', 2);
 
-        $this->assertDatabaseHas('checkups',[
+        $this->assertDatabaseHas('checkups', [
             'vehicle_id' => $this->vehicle->id,
             'front_damage' => $payload['front_damage'],
             'front_photo' => $payload['front_photo'],
@@ -81,32 +87,32 @@ class CheckupControllerTest extends TestCase
             'roof_photo' => $payload['roof_photo'],
             'fuel_gauge' => $payload['fuel_gauge'],
             'fuel_gauge_photo' => $payload['fuel_gauge_photo'],
-            'evaluation' => $payload['evaluation']
+            'evaluation' => $payload['evaluation'],
         ]);
 
         $this->assertDatabaseHas('checkup_observations', [
             'checkup_observation_type_id' => $payload['checkup_observation'][0]['checkup_observation_type_id'],
-            'observation' => $payload['checkup_observation'][0]['observation']
+            'observation' => $payload['checkup_observation'][0]['observation'],
         ]);
         $this->assertDatabaseHas('checkup_observations', [
             'checkup_observation_type_id' => $payload['checkup_observation'][1]['checkup_observation_type_id'],
-            'observation' => $payload['checkup_observation'][1]['observation']
+            'observation' => $payload['checkup_observation'][1]['observation'],
         ]);
         $this->assertDatabaseHas('checkup_observations', [
             'checkup_observation_type_id' => $payload['checkup_observation'][2]['checkup_observation_type_id'],
-            'observation' => $payload['checkup_observation'][2]['observation']
+            'observation' => $payload['checkup_observation'][2]['observation'],
         ]);
         $this->assertDatabaseHas('checkup_observations', [
             'checkup_observation_type_id' => $payload['checkup_observation'][3]['checkup_observation_type_id'],
-            'observation' => $payload['checkup_observation'][3]['observation']
+            'observation' => $payload['checkup_observation'][3]['observation'],
         ]);
         $this->assertDatabaseHas('checkup_observations', [
             'checkup_observation_type_id' => $payload['checkup_observation'][4]['checkup_observation_type_id'],
-            'observation' => $payload['checkup_observation'][4]['observation']
+            'observation' => $payload['checkup_observation'][4]['observation'],
         ]);
         $this->assertDatabaseHas('checkup_observations', [
             'checkup_observation_type_id' => $payload['checkup_observation'][5]['checkup_observation_type_id'],
-            'observation' => $payload['checkup_observation'][5]['observation']
+            'observation' => $payload['checkup_observation'][5]['observation'],
         ]);
     }
 
@@ -115,49 +121,49 @@ class CheckupControllerTest extends TestCase
         $token = $this->user->createToken('teste', ['noAbility'])->plainTextToken;
 
         $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' , $token,
+            'Authorization' => 'Bearer ', $token,
         ])->postJson(route('customer.checkup.store'), $this->checkUpData());
 
         $response->assertStatus(401);
 
-        $response->assertJson(['message'=>'Unauthenticated.']);
+        $response->assertJson(['message' => 'Unauthenticated.']);
     }
 
-   public function checkUpData(): array
-   {
-       $fuel_gauge = ['vazio', '1/4','1/2','3/4', 'cheio'];
+    public function checkUpData(): array
+    {
+        $fuel_gauge = ['vazio', '1/4', '1/2', '3/4', 'cheio'];
 
-       $evaluation = ['aprovado para uso', 'manutenção recomendada'];
+        $evaluation = ['aprovado para uso', 'manutenção recomendada'];
 
-       return [
-           'vehicle_id' => $this->vehicle->id,
-           'front_damage' => fake()->text,
-           'front_photo' => fake()->url,
-           'back_damage' => fake()->text,
-           'back_photo' => fake()->url,
-           'right_side_damage' => fake()->text,
-           'right_side_photo' => fake()->url,
-           'left_side_damage' => fake()->text,
-           'left_side_photo' => fake()->url,
-           'roof_damage' => fake()->text,
-           'roof_photo' => fake()->url,
-           'fuel_gauge' => fake()->randomElement($fuel_gauge),
-           'fuel_gauge_photo' => fake()->url,
-           'evaluation' => fake()->randomElement($evaluation),
-           'checkup_observation' => [
-               ['checkup_observation_type_id' => 1,
-               'observation' => fake()->text],
-               ['checkup_observation_type_id' => 2,
-                   'observation' => fake()->text],
-               ['checkup_observation_type_id' => 3,
-                   'observation' => fake()->text],
-               ['checkup_observation_type_id' => 4,
-                   'observation' => fake()->text],
-               ['checkup_observation_type_id' => 5,
-                   'observation' => fake()->text],
-               ['checkup_observation_type_id' => 6,
-                   'observation' => fake()->text],
-           ]
-       ];
-   }
+        return [
+            'vehicle_id' => $this->vehicle->id,
+            'front_damage' => fake()->text,
+            'front_photo' => fake()->url,
+            'back_damage' => fake()->text,
+            'back_photo' => fake()->url,
+            'right_side_damage' => fake()->text,
+            'right_side_photo' => fake()->url,
+            'left_side_damage' => fake()->text,
+            'left_side_photo' => fake()->url,
+            'roof_damage' => fake()->text,
+            'roof_photo' => fake()->url,
+            'fuel_gauge' => fake()->randomElement($fuel_gauge),
+            'fuel_gauge_photo' => fake()->url,
+            'evaluation' => fake()->randomElement($evaluation),
+            'checkup_observation' => [
+                ['checkup_observation_type_id' => 1,
+                    'observation' => fake()->text],
+                ['checkup_observation_type_id' => 2,
+                    'observation' => fake()->text],
+                ['checkup_observation_type_id' => 3,
+                    'observation' => fake()->text],
+                ['checkup_observation_type_id' => 4,
+                    'observation' => fake()->text],
+                ['checkup_observation_type_id' => 5,
+                    'observation' => fake()->text],
+                ['checkup_observation_type_id' => 6,
+                    'observation' => fake()->text],
+            ],
+        ];
+    }
 }

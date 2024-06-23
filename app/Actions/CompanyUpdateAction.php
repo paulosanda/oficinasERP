@@ -9,7 +9,6 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Throwable;
 
-
 class CompanyUpdateAction
 {
     use EmptyEntity;
@@ -29,7 +28,7 @@ class CompanyUpdateAction
             'city' => 'string',
             'estate' => 'string',
             'cellphone' => 'string',
-            'email' => 'email'
+            'email' => 'email',
         ];
     }
 
@@ -46,7 +45,7 @@ class CompanyUpdateAction
             return response()->json(['message' => 'success']);
         } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()]);
-        }  catch (Throwable $e) {
+        } catch (Throwable $e) {
             return response()->json(['error' => $e->getMessage()]);
         }
 

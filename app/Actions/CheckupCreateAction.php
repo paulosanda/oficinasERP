@@ -2,8 +2,6 @@
 
 namespace App\Actions;
 
-
-
 use App\Models\Checkup;
 use App\Models\CheckupObservation;
 use Exception;
@@ -70,10 +68,9 @@ class CheckupCreateAction
                 CheckupObservation::create([
                     'checkup_id' => $checkUpId,
                     'checkup_observation_type_id' => $observation['checkup_observation_type_id'],
-                    'observation' => $observation['observation']
+                    'observation' => $observation['observation'],
                 ]);
             }
         }
     }
-
 }

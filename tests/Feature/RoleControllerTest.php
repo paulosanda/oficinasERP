@@ -13,6 +13,7 @@ class RoleControllerTest extends TestCase
     use RefreshDatabase;
 
     private User $user;
+
     public function setUp(): void
     {
         parent::setUp();
@@ -27,7 +28,7 @@ class RoleControllerTest extends TestCase
         $token = $this->user->createToken('teste', ['root'])->plainTextToken;
 
         $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
         ])->getJson(route('admin.company.rules.index'));
 
         $response->assertStatus(200);
@@ -35,18 +36,17 @@ class RoleControllerTest extends TestCase
         $response->assertJsonStructure([
             'roles' => [[
                 'id',
-                'role'
-            ]]
+                'role',
+            ]],
         ]);
     }
-
 
     public function testAdminRolesIndex(): void
     {
         $token = $this->user->createToken('teste', ['root', 'admin'])->plainTextToken;
 
         $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
         ])->getJson(route('admin.roles.index'));
 
         $response->assertStatus(200);
@@ -54,8 +54,8 @@ class RoleControllerTest extends TestCase
         $response->assertJsonStructure([
             'roles' => [[
                 'id',
-                'role'
-            ]]
+                'role',
+            ]],
         ]);
     }
 }

@@ -19,8 +19,9 @@ class SchedulableServiceFactory extends Factory
     public function definition(): array
     {
         $messageType = MessageType::factory()->create();
+
         return [
-            'service' => fake()->word
+            'service' => fake()->word,
         ];
     }
 }

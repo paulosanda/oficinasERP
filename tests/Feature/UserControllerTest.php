@@ -32,7 +32,7 @@ class UserControllerTest extends TestCase
         $newUser = $this->newUserData();
 
         $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
         ])->postJson(route('company_user.store'), $newUser);
 
         $response->assertStatus(200);
@@ -55,7 +55,7 @@ class UserControllerTest extends TestCase
         $token = $this->user->createToken('teste', ['operator'])->plainTextToken;
 
         $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' , $token,
+            'Authorization' => 'Bearer ', $token,
         ])->postJson(route('company_user.store'), $newUser);
 
         $response->assertStatus(401);
@@ -68,19 +68,19 @@ class UserControllerTest extends TestCase
 
         $user = User::factory()->create([
             'company_id' => $this->user->company_id,
-            'name' => $newUser['user']['name']
+            'name' => $newUser['user']['name'],
         ]);
 
         $token = $this->user->createToken('teste', ['master'])->plainTextToken;
 
         $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
         ])->delete(route('company_user.delete', $user->id));
 
         $response->assertStatus(200);
 
         $this->assertSoftDeleted('Users', [
-            'id' => $user->id
+            'id' => $user->id,
         ]);
     }
 
@@ -90,13 +90,13 @@ class UserControllerTest extends TestCase
             'id' => 10000,
         ]);
         $user = User::factory()->create([
-            'company_id' => $company->id
+            'company_id' => $company->id,
         ]);
 
         $token = $this->user->createToken('teste', ['master'])->plainTextToken;
 
         $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
         ])->delete(route('company_user.delete', $user->id));
 
         $response->assertStatus(500);
@@ -104,7 +104,7 @@ class UserControllerTest extends TestCase
         $response->assertJson(['error' => 'invalid user']);
 
         $this->assertDatabaseHas('users', [
-            'name' => $user->name
+            'name' => $user->name,
         ]);
     }
 
@@ -117,7 +117,7 @@ class UserControllerTest extends TestCase
                 'password' => fake()->password,
                 'enable' => 1,
             ],
-            'roles' => [3]
+            'roles' => [3],
 
         ];
     }

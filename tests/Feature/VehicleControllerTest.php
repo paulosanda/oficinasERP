@@ -3,7 +3,6 @@
 namespace Tests\Feature;
 
 use App\Models\Company;
-use App\Models\CompanyUser;
 use App\Models\Customer;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
@@ -16,19 +15,21 @@ class VehicleControllerTest extends TestCase
     use RefreshDatabase;
 
     private User|Collection|Model $user;
+
     private Company|Collection|Model $company;
 
     private Customer|Collection|Model $customer;
+
     public function setUp(): void
     {
         parent::setUp();
 
         $this->company = Company::factory()->create();
         $this->user = User::factory()->create([
-            'company_id' => $this->company->id
+            'company_id' => $this->company->id,
         ]);
         $this->customer = Customer::factory()->create([
-            'company_id' => $this->company->id
+            'company_id' => $this->company->id,
         ]);
     }
 
@@ -37,7 +38,7 @@ class VehicleControllerTest extends TestCase
         $token = $this->user->createToken('test', ['master', 'operator'])->plainTextToken;
 
         $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
         ])->postJson(route('customer.vehicle.store'), $this->vehicle());
 
         $response->assertStatus(200);
@@ -50,7 +51,7 @@ class VehicleControllerTest extends TestCase
         $token = $this->user->createToken('test', ['error'])->plainTextToken;
 
         $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
         ])->postJson(route('customer.vehicle.store'));
 
         $response->assertStatus(403);
@@ -86,7 +87,7 @@ class VehicleControllerTest extends TestCase
             'Honda',
             'Toyota',
             'Volkswagen',
-            'Fiat'
+            'Fiat',
         ];
 
         $index = fake()->numberBetween(0, 3);
@@ -100,7 +101,7 @@ class VehicleControllerTest extends TestCase
             'Honda' => 'Civic',
             'Toyota' => 'Lexus',
             'Volkswagen' => 'Fox',
-            'Fiat' => 'Toro'
+            'Fiat' => 'Toro',
         ];
 
         return $model[$brand];
@@ -109,16 +110,16 @@ class VehicleControllerTest extends TestCase
     private function plate(): string
     {
         $plates = [
-            "AAA1A11",
-            "BBB2B22",
-            "CCC3C33",
-            "DDD4D44",
-            "EEE5E55",
-            "FFF6F66",
-            "GGG7G77",
-            "HHH8H88",
-            "III9I99",
-            "JJJ0J00"
+            'AAA1A11',
+            'BBB2B22',
+            'CCC3C33',
+            'DDD4D44',
+            'EEE5E55',
+            'FFF6F66',
+            'GGG7G77',
+            'HHH8H88',
+            'III9I99',
+            'JJJ0J00',
         ];
 
         $index = fake()->numberBetween(0, 9);
@@ -129,16 +130,16 @@ class VehicleControllerTest extends TestCase
     private function chassi(): string
     {
         $chassi = [
-            "1HGCM82633A003569",
-            "5NPEB4ACXCH462566",
-            "JTEBU14R290153061",
-            "WAUZZZ8K3CA090190",
-            "1FTFW1CF5EFA02085",
-            "JTJBT20X440065783",
-            "WDDNG7DB7BA372992",
-            "5TFEY5F10BX108057",
-            "1GYS3BEF5DR210485",
-            "3FA6P0HDXGR288553"
+            '1HGCM82633A003569',
+            '5NPEB4ACXCH462566',
+            'JTEBU14R290153061',
+            'WAUZZZ8K3CA090190',
+            '1FTFW1CF5EFA02085',
+            'JTJBT20X440065783',
+            'WDDNG7DB7BA372992',
+            '5TFEY5F10BX108057',
+            '1GYS3BEF5DR210485',
+            '3FA6P0HDXGR288553',
         ];
 
         $index = fake()->numberBetween(0, 9);
@@ -149,16 +150,16 @@ class VehicleControllerTest extends TestCase
     public function renavam(): string
     {
         $renavam = [
-            "12345678901",
-            "23456789012",
-            "34567890123",
-            "45678901234",
-            "56789012345",
-            "67890123456",
-            "78901234567",
-            "89012345678",
-            "90123456789",
-            "01234567890"
+            '12345678901',
+            '23456789012',
+            '34567890123',
+            '45678901234',
+            '56789012345',
+            '67890123456',
+            '78901234567',
+            '89012345678',
+            '90123456789',
+            '01234567890',
         ];
 
         $index = fake()->numberBetween(0, 9);

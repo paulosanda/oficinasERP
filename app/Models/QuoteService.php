@@ -16,6 +16,6 @@ class QuoteService extends Model
         'quantity',
         'value',
         'discount',
-        'subtotal'
+        'subtotal',
     ];
 }

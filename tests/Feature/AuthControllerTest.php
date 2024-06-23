@@ -6,62 +6,63 @@ use App\Models\User;
 use App\Models\UserRole;
 use Database\Seeders\RoleSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Artisan;
 use Tests\TestCase;
 
 class AuthControllerTest extends TestCase
 {
-   use RefreshDatabase;
+    use RefreshDatabase;
 
-   private User $user;
-   private string $password = '123';
-   public function setUp(): void
-   {
-       parent::setUp();
+    private User $user;
 
-       $this->user = User::factory()->create([
-           'password' => $this->password
-       ]);
+    private string $password = '123';
 
-       Artisan::call('db:seed' ,[RoleSeeder::class]);
+    public function setUp(): void
+    {
+        parent::setUp();
 
-       UserRole::factory()->create([
-           'user_id' => $this->user->id,
-           'role_id' => 1
-       ]);
+        $this->user = User::factory()->create([
+            'password' => $this->password,
+        ]);
 
-   }
+        Artisan::call('db:seed', [RoleSeeder::class]);
 
-   public function testLogin(): void
-   {
-       $response = $this->postJson(route('login'), [
-           'email' => $this->user->email,
-           'password' => $this->password
-           ]);
+        UserRole::factory()->create([
+            'user_id' => $this->user->id,
+            'role_id' => 1,
+        ]);
 
-       $response->assertStatus(200);
+    }
 
-       $response->assertJsonStructure([
-           'token'
-       ]);
-   }
+    public function testLogin(): void
+    {
+        $response = $this->postJson(route('login'), [
+            'email' => $this->user->email,
+            'password' => $this->password,
+        ]);
 
-   public function testLoginErrorWrongPassword(): void
-   {
-       $password = 'anotherOne';
+        $response->assertStatus(200);
 
-       $response = $this->postJson(route('login'), [
-           'email' => $this->user->email,
-           'password' => $password
-       ]);
+        $response->assertJsonStructure([
+            'token',
+        ]);
+    }
 
-       $response->assertStatus(422);
+    public function testLoginErrorWrongPassword(): void
+    {
+        $password = 'anotherOne';
 
-       $response->assertJson([
-           'error'=> 'credenciais inválidas'
-       ]);
-   }
+        $response = $this->postJson(route('login'), [
+            'email' => $this->user->email,
+            'password' => $password,
+        ]);
+
+        $response->assertStatus(422);
+
+        $response->assertJson([
+            'error' => 'credenciais inválidas',
+        ]);
+    }
 
     public function testLoginErrorWrongEmail(): void
     {
@@ -69,13 +70,13 @@ class AuthControllerTest extends TestCase
 
         $response = $this->postJson(route('login'), [
             'email' => $email,
-            'password' => $this->password
+            'password' => $this->password,
         ]);
 
         $response->assertStatus(422);
 
         $response->assertJson([
-            'error'=> 'credenciais inválidas'
+            'error' => 'credenciais inválidas',
         ]);
     }
 
@@ -85,7 +86,7 @@ class AuthControllerTest extends TestCase
 
         $response = $this->postJson(route('login'), [
             'email' => $this->user->email,
-            'password' => $this->password
+            'password' => $this->password,
         ]);
 
         $response->assertStatus(403);

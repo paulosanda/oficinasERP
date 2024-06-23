@@ -3,7 +3,6 @@
 namespace Tests\Feature;
 
 use App\Models\Company;
-use App\Models\CompanyUser;
 use App\Models\QuoteNumbering;
 use App\Models\Role;
 use App\Models\User;
@@ -20,24 +19,26 @@ class CompanyAdminControllerTest extends TestCase
     use RefreshDatabase;
 
     private User $user;
-    private  Company|Model|Collection $company;
+
+    private Company|Model|Collection $company;
+
     public function setUp(): void
     {
         parent::setUp();
 
         $this->company = Company::factory()->count(10)->create();
 
-        Artisan::call('db:seed' ,[RoleSeeder::class]);
+        Artisan::call('db:seed', [RoleSeeder::class]);
 
         $this->user = User::factory()->create([
-            'company_id' => 2
+            'company_id' => 2,
         ]);
 
         $role = Role::findOrFail(1);
 
         UserRole::factory()->create([
             'user_id' => $this->user->id,
-            'role_id' => $role->id
+            'role_id' => $role->id,
         ]);
 
     }
@@ -51,8 +52,8 @@ class CompanyAdminControllerTest extends TestCase
         $quoteNumberingQtity = QuoteNumbering::all()->count();
 
         $response = $this->withHeaders([
-            'Authorization' => 'Bearer '. $token,
-        ])->postJson(route('admin.create.company'),[
+            'Authorization' => 'Bearer '.$token,
+        ])->postJson(route('admin.create.company'), [
             'company_name' => fake()->company,
             'cnpj' => fake()->numerify('###.###.###/0001-##'),
             'inscricao_estadual' => fake()->numerify('###.###.###-##'),
@@ -64,7 +65,7 @@ class CompanyAdminControllerTest extends TestCase
             'city' => fake()->city,
             'estate' => 'SP',
             'cellphone' => fake()->phoneNumber,
-            'email' => fake()->email
+            'email' => fake()->email,
         ]);
 
         $response->assertStatus(200);
@@ -81,12 +82,12 @@ class CompanyAdminControllerTest extends TestCase
             'city',
             'estate',
             'cellphone',
-            'email'
+            'email',
         ]);
 
-        $this->assertDatabaseCount('companies', $companiesQtity+1);
+        $this->assertDatabaseCount('companies', $companiesQtity + 1);
 
-        $this->assertDatabaseCount('quote_numberings', $quoteNumberingQtity+1);
+        $this->assertDatabaseCount('quote_numberings', $quoteNumberingQtity + 1);
     }
 
     public function testCreateCompanyError422()
@@ -94,26 +95,26 @@ class CompanyAdminControllerTest extends TestCase
         $token = $this->user->createToken('test', ['company'])->plainTextToken;
 
         $response = $this->withHeaders([
-            'Authorization' => 'Bearer '. $token,
-                ])->postJson(route('admin.create.company'),[
-                    'company_name' => fake()->company,
-                    'cnpj' => fake()->numerify('###.###.###/0001-##'),
-                    'inscricao_estadual' => fake()->numerify('###.###.###-##'),
-                    'inscricao_municipal' => fake()->numerify('###.###.###'),
-                    'address' => fake()->streetName,
-                    'number' => fake()->numberBetween(1, 1000),
-                    'neighborhood' => fake()->name,
-                    'postal_code' => fake()->postcode,
-                    'city' => fake()->city,
-                    'estate' => 'SP',
-                    'cellphone' => fake()->phoneNumber,
-                    'email' => fake()->email
-            ]);
+            'Authorization' => 'Bearer '.$token,
+        ])->postJson(route('admin.create.company'), [
+            'company_name' => fake()->company,
+            'cnpj' => fake()->numerify('###.###.###/0001-##'),
+            'inscricao_estadual' => fake()->numerify('###.###.###-##'),
+            'inscricao_municipal' => fake()->numerify('###.###.###'),
+            'address' => fake()->streetName,
+            'number' => fake()->numberBetween(1, 1000),
+            'neighborhood' => fake()->name,
+            'postal_code' => fake()->postcode,
+            'city' => fake()->city,
+            'estate' => 'SP',
+            'cellphone' => fake()->phoneNumber,
+            'email' => fake()->email,
+        ]);
 
         $response->assertStatus(403);
 
         $response->assertJson([
-            "message" => "Invalid ability provided."
+            'message' => 'Invalid ability provided.',
         ]);
     }
 
@@ -122,20 +123,20 @@ class CompanyAdminControllerTest extends TestCase
         $token = $this->user->createToken('teste', ['root'])->plainTextToken;
 
         $response = $this->withHeaders([
-            'Authorization' => 'Bearer '. $token,
-                ])->postJson(route('admin.create.company'),[
-                    'cnpj' => fake()->numerify('###.###.###/0001-##'),
-                    'inscricao_estadual' => fake()->numerify('###.###.###-##'),
-                    'inscricao_municipal' => fake()->numerify('###.###.###'),
-                    'address' => fake()->streetName,
-                    'number' => '50',
-                    'neighborhood' => fake()->name,
-                    'postal_code' => fake()->postcode,
-                    'city' => fake()->city,
-                    'estate' => 'SP',
-                    'cellphone' => fake()->phoneNumber,
-                    'email' => fake()->email
-             ]);
+            'Authorization' => 'Bearer '.$token,
+        ])->postJson(route('admin.create.company'), [
+            'cnpj' => fake()->numerify('###.###.###/0001-##'),
+            'inscricao_estadual' => fake()->numerify('###.###.###-##'),
+            'inscricao_municipal' => fake()->numerify('###.###.###'),
+            'address' => fake()->streetName,
+            'number' => '50',
+            'neighborhood' => fake()->name,
+            'postal_code' => fake()->postcode,
+            'city' => fake()->city,
+            'estate' => 'SP',
+            'cellphone' => fake()->phoneNumber,
+            'email' => fake()->email,
+        ]);
 
         $response->assertStatus(422);
 
@@ -154,8 +155,8 @@ class CompanyAdminControllerTest extends TestCase
         $token = $this->user->createToken('teste', ['root'])->plainTextToken;
 
         $response = $this->withHeaders([
-            'Authorization' => 'Bearer '. $token,
-        ])->postJson(route('admin.create.company'),[
+            'Authorization' => 'Bearer '.$token,
+        ])->postJson(route('admin.create.company'), [
             'company_name' => fake()->company,
             'cnpj' => fake()->numerify('###.###.###/0001-##'),
             'inscricao_municipal' => fake()->numerify('###.###.###'),
@@ -166,7 +167,7 @@ class CompanyAdminControllerTest extends TestCase
             'city' => fake()->city,
             'estate' => 'SP',
             'cellphone' => fake()->phoneNumber,
-            'email' => fake()->email
+            'email' => fake()->email,
         ]);
 
         $response->assertStatus(200);
@@ -182,7 +183,7 @@ class CompanyAdminControllerTest extends TestCase
             'city',
             'estate',
             'cellphone',
-            'email'
+            'email',
         ]);
 
         $this->assertDatabaseCount('companies', 14);
@@ -194,7 +195,7 @@ class CompanyAdminControllerTest extends TestCase
         $token = $this->user->createToken('token', ['admin'])->plainTextToken;
 
         $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
         ])->getJson(route('admin.index.company'));
 
         $response->assertStatus(200);
@@ -211,7 +212,7 @@ class CompanyAdminControllerTest extends TestCase
             'city',
             'estate',
             'cellphone',
-            'email'
+            'email',
         ]]);
     }
 
@@ -224,13 +225,13 @@ class CompanyAdminControllerTest extends TestCase
         $company['company_name'] = 'updated';
 
         $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
         ])->putJson(route('admin.company.update'), $company);
 
         $response->assertStatus(200);
 
         $this->assertDatabaseHas('companies', [
-            'company_name' => 'updated'
+            'company_name' => 'updated',
         ]);
     }
 
@@ -248,8 +249,7 @@ class CompanyAdminControllerTest extends TestCase
             'city' => fake()->city,
             'estate' => 'SP',
             'cellphone' => fake()->phoneNumber,
-            'email' => fake()->email
+            'email' => fake()->email,
         ];
     }
-
 }

@@ -11,6 +11,7 @@ class Customer extends Model
     use HasFactory;
 
     protected $with = ['vehicle'];
+
     protected $fillable = [
         'company_id',
         'type',
@@ -30,7 +31,7 @@ class Customer extends Model
         'postal_code',
         'neighborhood',
         'city',
-        'estate'
+        'estate',
     ];
 
     public function vehicle(): HasMany

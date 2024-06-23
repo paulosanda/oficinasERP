@@ -8,6 +8,7 @@ namespace App\OpenApiSchemas;
  *     title="QuotePart",
  *     description="peças do orçamento",
  *     required={"part_code","description","quantity","value","subtotal"},
+ *
  *     @OA\Property(property="part_code", type="string", description="código da peça ou do produto" ,example="549"),
  *     @OA\Property(property="description", type="string", description="descrição" ,example="Rolamento do cambio"),
  *     @OA\Property(property="quantity", type="integer", description="quantidade", example="1"),
@@ -16,5 +17,4 @@ namespace App\OpenApiSchemas;
  *     @OA\Property(property="subtotal", type="string", description="sub total" , example="230")
  * )
  */
-class QuotePartSchema
-{}
+class QuotePartSchema {}

@@ -8,7 +8,6 @@ use App\Models\QuoteNumbering;
 use App\Models\User;
 use App\Models\Vehicle;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class QuoteControllerTest extends TestCase
@@ -16,28 +15,32 @@ class QuoteControllerTest extends TestCase
     use RefreshDatabase;
 
     private Company $company;
+
     private User $user;
+
     private Customer $customer;
+
     private Vehicle $vehicle;
+
     public function setUp(): void
     {
         parent::setUp();
 
         $this->company = Company::factory()->create();
         $this->user = User::factory()->create([
-            'company_id' => $this->company->id
+            'company_id' => $this->company->id,
         ]);
         $this->customer = Customer::factory()->create([
-           'company_id' => $this->company->id
+            'company_id' => $this->company->id,
         ]);
 
         QuoteNumbering::factory()->create([
             'company_id' => $this->company->id,
-            'numbering' => 0
+            'numbering' => 0,
         ]);
 
         $this->vehicle = Vehicle::factory()->create([
-            'customer_id' => $this->customer->id
+            'customer_id' => $this->customer->id,
         ]);
     }
 
@@ -50,8 +53,8 @@ class QuoteControllerTest extends TestCase
         $payload = $this->quoteData();
 
         $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $token,
-        ])->postJson(route('quote.store'),$payload);
+            'Authorization' => 'Bearer '.$token,
+        ])->postJson(route('quote.store'), $payload);
 
         $response->assertStatus(200);
 
@@ -71,13 +74,13 @@ class QuoteControllerTest extends TestCase
             'subtotal_part' => $payload['subtotal_part'],
             'gross_total' => $payload['gross_total'],
             'discount' => $payload['discount'],
-            'net_total'=> $payload['net_total'],
+            'net_total' => $payload['net_total'],
             'total' => $payload['total'],
         ]);
 
-        $this->assertDatabaseHas('quote_numberings',[
-           'company_id' => $this->company->id,
-           'numbering' => $lastNumbering->numbering + 1
+        $this->assertDatabaseHas('quote_numberings', [
+            'company_id' => $this->company->id,
+            'numbering' => $lastNumbering->numbering + 1,
         ]);
 
         $this->assertDatabaseHas('quote_services', [
@@ -86,7 +89,7 @@ class QuoteControllerTest extends TestCase
             'quantity' => $payload['quote_service'][0]['quantity'],
             'value' => $payload['quote_service'][0]['value'],
             'discount' => $payload['quote_service'][0]['discount'],
-            'subtotal' => $payload['quote_service'][0]['subtotal']
+            'subtotal' => $payload['quote_service'][0]['subtotal'],
         ]);
 
         $this->assertDatabaseHas('quote_services', [
@@ -95,7 +98,7 @@ class QuoteControllerTest extends TestCase
             'quantity' => $payload['quote_service'][1]['quantity'],
             'value' => $payload['quote_service'][1]['value'],
             'discount' => $payload['quote_service'][1]['discount'],
-            'subtotal' => $payload['quote_service'][1]['subtotal']
+            'subtotal' => $payload['quote_service'][1]['subtotal'],
         ]);
 
         $this->assertDatabaseHas('quote_services', [
@@ -104,34 +107,34 @@ class QuoteControllerTest extends TestCase
             'quantity' => $payload['quote_service'][2]['quantity'],
             'value' => $payload['quote_service'][2]['value'],
             'discount' => $payload['quote_service'][2]['discount'],
-            'subtotal' => $payload['quote_service'][2]['subtotal']
+            'subtotal' => $payload['quote_service'][2]['subtotal'],
         ]);
 
-        $this->assertDatabaseHas('quote_parts',[
+        $this->assertDatabaseHas('quote_parts', [
             'part_code' => $payload['quote_part'][0]['part_code'],
             'description' => $payload['quote_part'][0]['description'],
             'quantity' => $payload['quote_part'][0]['quantity'],
             'value' => $payload['quote_part'][0]['value'],
             'discount' => $payload['quote_part'][0]['discount'],
-            'subtotal' => $payload['quote_part'][0]['subtotal']
+            'subtotal' => $payload['quote_part'][0]['subtotal'],
         ]);
 
-        $this->assertDatabaseHas('quote_parts',[
+        $this->assertDatabaseHas('quote_parts', [
             'part_code' => $payload['quote_part'][1]['part_code'],
             'description' => $payload['quote_part'][1]['description'],
             'quantity' => $payload['quote_part'][1]['quantity'],
             'value' => $payload['quote_part'][1]['value'],
             'discount' => $payload['quote_part'][1]['discount'],
-            'subtotal' => $payload['quote_part'][1]['subtotal']
+            'subtotal' => $payload['quote_part'][1]['subtotal'],
         ]);
 
-        $this->assertDatabaseHas('quote_parts',[
+        $this->assertDatabaseHas('quote_parts', [
             'part_code' => $payload['quote_part'][2]['part_code'],
             'description' => $payload['quote_part'][2]['description'],
             'quantity' => $payload['quote_part'][2]['quantity'],
             'value' => $payload['quote_part'][2]['value'],
             'discount' => $payload['quote_part'][2]['discount'],
-            'subtotal' => $payload['quote_part'][2]['subtotal']
+            'subtotal' => $payload['quote_part'][2]['subtotal'],
         ]);
     }
 
@@ -140,13 +143,13 @@ class QuoteControllerTest extends TestCase
         $token = $this->user->createToken('teste', ['invalido'])->plainTextToken;
 
         $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
         ])->postJson(route('quote.store'), $this->quoteData());
 
         $response->assertStatus(403);
 
         $response->assertJson([
-            'message' => 'Invalid ability provided.'
+            'message' => 'Invalid ability provided.',
         ]);
     }
 
@@ -180,7 +183,7 @@ class QuoteControllerTest extends TestCase
                     'quantity' => '1',
                     'value' => '50',
                     'discount' => '0',
-                    'subtotal' => '50'
+                    'subtotal' => '50',
                 ],
                 [
                     'service_code' => fake()->numerify('###'),
@@ -188,7 +191,7 @@ class QuoteControllerTest extends TestCase
                     'quantity' => '4',
                     'value' => '50',
                     'discount' => '0',
-                    'subtotal' => '200'
+                    'subtotal' => '200',
                 ],
                 [
                     'service_code' => fake()->numerify('###'),
@@ -196,7 +199,7 @@ class QuoteControllerTest extends TestCase
                     'quantity' => '1',
                     'value' => '300',
                     'discount' => '50',
-                    'subtotal' => '250'
+                    'subtotal' => '250',
                 ],
             ],
             'quote_part' => [
@@ -206,7 +209,7 @@ class QuoteControllerTest extends TestCase
                     'quantity' => '1',
                     'value' => '150',
                     'discount' => '0',
-                    'subtotal' => '150'
+                    'subtotal' => '150',
                 ],
                 [
                     'part_code' => fake()->numerify('#####'),
@@ -214,7 +217,7 @@ class QuoteControllerTest extends TestCase
                     'quantity' => '2',
                     'value' => '200',
                     'discount' => '0',
-                    'subtotal' => '400'
+                    'subtotal' => '400',
                 ],
                 [
                     'part_code' => fake()->numerify('#####'),
@@ -222,9 +225,9 @@ class QuoteControllerTest extends TestCase
                     'quantity' => '3',
                     'value' => '46,91',
                     'discount' => '0',
-                    'subtotal' => '187,64'
-                ]
-            ]
+                    'subtotal' => '187,64',
+                ],
+            ],
         ];
     }
 }
