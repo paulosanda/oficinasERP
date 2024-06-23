@@ -41,7 +41,7 @@ class AuthControllerTest extends TestCase
             'password' => $this->password,
         ]);
 
-        $response->assertStatus(400);
+        $response->assertStatus(200);
 
         $response->assertJsonStructure([
             'token',
