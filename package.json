@@ -4,7 +4,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "prepare": "husky"
+    "prepare": "husky",
+      "postinstall": "husky"
   },
   "devDependencies": {
     "axios": "^1.6.4",
