@@ -24,7 +24,7 @@ class MessageTypeFactory extends Factory
             'schedulable_service_id' => $schedulableService->id,
             'model_name' => fake()->word(),
             'title' => fake()->title(),
-            'message' => fake()->text
+            'message' => fake()->text,
         ];
     }
 }

@@ -5,7 +5,6 @@ namespace Tests\Feature;
 use App\Models\User;
 use Database\Seeders\SchedulableServiceSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Artisan;
 use Tests\TestCase;
 
@@ -14,11 +13,12 @@ class SchedulableServiceAdminControllerTest extends TestCase
     use RefreshDatabase;
 
     private User $user;
+
     public function setUp(): void
     {
         parent::setUp();
 
-        Artisan::call('db:seed',[SchedulableServiceSeeder::class]);
+        Artisan::call('db:seed', [SchedulableServiceSeeder::class]);
 
         $this->user = User::factory()->create();
     }
@@ -28,7 +28,7 @@ class SchedulableServiceAdminControllerTest extends TestCase
         $token = $this->user->createToken('teste', ['admin'])->plainTextToken;
 
         $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
         ])->getJson(route('schedulable_services.index'));
 
         $response->assertStatus(200);
@@ -41,7 +41,7 @@ class SchedulableServiceAdminControllerTest extends TestCase
         $token = $this->user->createToken('teste', ['master'])->plainTextToken;
 
         $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
         ])->getJson(route('schedulable_services.index'));
 
         $response->assertStatus(403);
@@ -52,15 +52,15 @@ class SchedulableServiceAdminControllerTest extends TestCase
         $token = $this->user->createToken('teste', ['admin'])->plainTextToken;
 
         $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $token,
-        ])->postJson(route('schedulable_services.store'),['service test']);
+            'Authorization' => 'Bearer '.$token,
+        ])->postJson(route('schedulable_services.store'), ['service test']);
 
         $response->assertStatus(200);
 
         $response->assertJson(['message' => 'success']);
 
-        $this->assertDatabaseHas('schedulable_services',[
-            'service' => 'service test'
+        $this->assertDatabaseHas('schedulable_services', [
+            'service' => 'service test',
         ]);
     }
 
@@ -69,15 +69,15 @@ class SchedulableServiceAdminControllerTest extends TestCase
         $token = $this->user->createToken('teste', ['admin'])->plainTextToken;
 
         $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $token,
-        ])->patchJson(route('schedulable_services.update', 1), ['service' =>'updated']);
+            'Authorization' => 'Bearer '.$token,
+        ])->patchJson(route('schedulable_services.update', 1), ['service' => 'updated']);
 
         $response->assertStatus(200);
 
         $response->assertJson(['message' => 'success']);
 
         $this->assertDatabaseHas('schedulable_services', [
-            'service' => 'updated'
+            'service' => 'updated',
         ]);
     }
 }

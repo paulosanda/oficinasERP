@@ -18,7 +18,7 @@ class SystemServiceFactory extends Factory
     {
         return [
             'service_name' => fake()->word,
-            'service_price' => fake()->numerify('###')
+            'service_price' => fake()->numerify('###'),
         ];
     }
 }

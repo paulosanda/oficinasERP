@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-
 /**
  * @OA\Info(
  *     title="ERP para oficinas e afins",

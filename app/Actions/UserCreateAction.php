@@ -19,7 +19,7 @@ class UserCreateAction
             'user.email' => 'string|required',
             'user.password' => 'string|required',
             'roles' => 'required|array',
-            'roles.*' => 'integer'
+            'roles.*' => 'integer',
         ];
     }
 
@@ -46,7 +46,7 @@ class UserCreateAction
 
             UserRole::create([
                 'user_id' => $userId,
-                'role_id' => $role
+                'role_id' => $role,
             ]);
         }
     }

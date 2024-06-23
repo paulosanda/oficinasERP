@@ -14,9 +14,9 @@ class VehicleCreateAction
         return [
             'customer_id' => 'integer|required',
             'brand' => 'string',
-            'model'=> 'string',
+            'model' => 'string',
             'color' => 'string',
-            'year' => 'string',
+            'year'  => 'string',
             'plate' => 'string|required',
             'identification_number' => 'string',
             'renavam' => 'string',

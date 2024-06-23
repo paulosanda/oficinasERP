@@ -2,12 +2,12 @@
 
 namespace App\OpenApiSchemas;
 
-
 /**
  * @OA\Schema(
  *     schema="ScheduleService",
  *     title="ScheduleService",
  *     description="dados do serviço agendado",
+ *
  *     @OA\Property(property="id", type="integer", description="id", example="1"),
  *     @OA\Property(property="vehicle_id", type="integer", description="vehicle_id", example="1"),
  *     @OA\Property(property="company_id", type="integer", description="company_id", example="1"),
@@ -23,8 +23,7 @@ namespace App\OpenApiSchemas;
  *     @OA\Property(property="schedulable_service", ref="#/components/schemas/SchedulableService"))
  * )
  */
-class ScheduleServiceSchema
-{}
+class ScheduleServiceSchema {}
 
 /**
  * @OA\Schema(
@@ -32,6 +31,7 @@ class ScheduleServiceSchema
  *     title="BodyRequestScheduleService",
  *     required={"customer_id","schedulable_service_id","vehicle_id","scheduled_date","reminder_active"},
  *     description="serviços agendados",
+ *
  *     @OA\Property(property="vehicle_id", type="integer", description="vehicle_id", example="1"),
  *     @OA\Property(property="customer_id", type="integer", description="id do consumidor" ,example="1"),
  *     @OA\Property(property="schedulable_service_id", type="integer", description="serviço", example="1"),
@@ -42,5 +42,4 @@ class ScheduleServiceSchema
  *     @OA\Property(property="customer_answer", type="string", nullable=true, description="resposta do cliente"),
  * )
  */
-class BodyRequestScheduleServiceSchema
-{}
+class BodyRequestScheduleServiceSchema {}

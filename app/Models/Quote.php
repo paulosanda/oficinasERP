@@ -27,7 +27,7 @@ class Quote extends Model
         'gross_total',
         'discount',
         'net_total',
-        'total'
+        'total',
     ];
 
     public function customer(): BelongsTo

@@ -19,6 +19,7 @@ class CustomerPjFactory extends Factory
     public function definition(): array
     {
         $company = Company::factory()->create();
+
         return [
             'company_id' => $company->id,
             'tipo' => 'pj',
@@ -32,7 +33,7 @@ class CustomerPjFactory extends Factory
             'nascimento' => fake()->date(),
             'profissao' => 'ocupação',
             'endereco' => fake()->streetAddress,
-            'numero' => fake()->numberBetween(1,100),
+            'numero' => fake()->numberBetween(1, 100),
             'cep' => fake()->postcode,
             'bairro' => fake()->name,
             'cidade' => fake()->city,

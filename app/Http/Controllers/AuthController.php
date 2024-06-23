@@ -20,47 +20,65 @@ class AuthController extends Controller
      *     tags={"Auth"},
      *     summary="Login de usuário",
      *     description="Autentica usuário e retorna token",
+     *
      *     @OA\RequestBody(
      *         required=true,
      *         description="Dados de login do usuário",
+     *
      *         @OA\JsonContent(
      *             required={"email","password"},
+     *
      *             @OA\Property(property="email", type="string", format="email", example="usuario@gmm.com.br"),
      *             @OA\Property(property="password", type="string", format="password", example="password123")
      *         ),
      *     ),
+     *
      *     @OA\Response(
      *         response=200,
      *         description="Usuário autenticado com sucesso",
+     *
      *         @OA\JsonContent(
+     *
      *              @OA\Property(property="token", type="string", description="Token de acesso")
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=401,
      *         description="Credenciais inválidas",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="error", type="string", description="Mensagem de erro", example="Credenciais invalidas")
      *         ),
      *     ),
+     *
      *     @OA\Response(
      *         response=403,
      *         description="UserDisable",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="error", type="string", example="seu acesso está bloqueado")
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=422,
      *         description="Erro de validação",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="error", type="string", description="Mensagem de error", example="Credenciais invalidas")
      *         )
      *     ),
+     *
      *     @OA\Response(
      *            response=500,
      *            description="Erro",
+     *
      *            @OA\JsonContent(
+     *
      *                @OA\Property(property="error", type="string", example="Internal server error")
      *            )
      *        )
@@ -70,7 +88,7 @@ class AuthController extends Controller
     public function login(Request $request): JsonResponse
     {
         $validator = Validator::make($request->all(), [
-            'email' => 'required|email',
+            'email'    => 'required|email',
             'password' => 'required',
         ]);
 
@@ -78,12 +96,12 @@ class AuthController extends Controller
             return response()->json(['error' => 'Credenciais invalidas.'], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
-        $credentials = $request->only("email", "password");
+        $credentials = $request->only('email', 'password');
 
-        if(Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials)) {
             $user = Auth::user();
 
-            if(!$user->enable) {
+            if (! $user->enable) {
                 return response()->json(['error' => 'seu acesso está bloqueado'], 403);
             }
 
@@ -98,7 +116,6 @@ class AuthController extends Controller
             return response()->json(['error' => 'credenciais inválidas'], 422);
         }
 
-
     }
 
     /**
@@ -109,34 +126,45 @@ class AuthController extends Controller
      *     summary="Logout de usuário",
      *     description="Revoga o token de acesso do usuário e realiza o logout.",
      *     security={{ "bearerAuth": {} }},
+     *
      *     @OA\Parameter(
      *          name="Authorization",
      *          in="header",
      *          required=true,
+     *
      *          @OA\Schema(
      *              type="string",
      *              format="Bearer {token}"
      *          ),
      *          description="Token de acesso do usuário"
      *      ),
+     *
      *     @OA\Response(
      *         response=200,
      *         description="Logout realizado com sucesso",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="message", type="string", example="Logout realizado com sucesso.")
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=401,
      *         description="Unauthorized",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="message", type="string", example="Unauthenticated")
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=500,
      *         description="Erro ao fazer logout",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="message", type="string", example="Ocorreu um erro ao fazer logout.")
      *         )
      *     )

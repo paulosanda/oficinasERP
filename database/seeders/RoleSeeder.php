@@ -16,22 +16,22 @@ class RoleSeeder extends Seeder
             0 => [
                 'role' => 'root',
                 'type' => 'admin',
-                'description' => 'super usuário'
+                'description' => 'super usuário',
             ],
             1 => [
                 'role' => 'admin',
                 'type' => 'admin',
-                'description' => 'administrador'
+                'description' => 'administrador',
             ],
             2 => [
                 'role' => 'master',
                 'type' => 'company',
-                'description' => 'master do company'
+                'description' => 'master do company',
             ],
             3 => [
                 'role' => 'operator',
                 'type' => 'company',
-                'description' => 'operador do company'
+                'description' => 'operador do company',
             ],
         ];
 
@@ -39,7 +39,7 @@ class RoleSeeder extends Seeder
             Role::create([
                 'role' => $role['role'],
                 'type' => $role['type'],
-                'role_description' => $role['description']
+                'role_description' => $role['description'],
             ]);
         }
     }

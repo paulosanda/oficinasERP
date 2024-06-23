@@ -11,6 +11,6 @@ class QuoteNumbering extends Model
 
     protected $fillable = [
         'company_id',
-        'numbering'
+        'numbering',
     ];
 }

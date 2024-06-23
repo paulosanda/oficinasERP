@@ -15,29 +15,39 @@ class CustomerController extends Controller
      *     tags={"Company"},
      *     summary="cria customer (consumidor)",
      *     security={{ "bearerAuth": {} }},
+     *
      *     @OA\Parameter(
      *         name="Authorization",
      *         in="header",
      *         required=true,
+     *
      *         @OA\Schema(type="string", format="Bearer {token}")
      *     ),
+     *
      *     @OA\RequestBody(
      *         request="dadosDoCustomer",
      *         description="dados do customer",
+     *
      *         @OA\JsonContent(
      *              ref="#/components/schemas/BodyRequestCustomer")
      *     ),
+     *
      *     @OA\Response(
      *          response=200,
      *          description="success",
+     *
      *          @OA\JsonContent(
+     *
      *            @OA\Property(property="message", type="string", example="success")
      *          )
      *      ),
+     *
      *      @OA\Response(
      *          response=403,
      *          description="Unauthorized",
+     *
      *          @OA\JsonContent(
+     *
      *              @OA\Property(property="error", type="string", example="Unauthorizes")
      *          )
      *      ),
@@ -56,27 +66,37 @@ class CustomerController extends Controller
      *     tags={"Company"},
      *     summary="altera customer",
      *     security={{ "bearerAuth" : {} }},
+     *
      *     @OA\Parameter(
      *         name="Authorization",
      *         in="header",
      *         required=true,
+     *
      *         @OA\Schema(type="string", format="Bearer {token}")
      *     ),
+     *
      *     @OA\RequestBody(
      *         request="dadosdoCustomer",
+     *
      *         @OA\JsonContent(ref="#/components/schemas/Customer")
      *     ),
+     *
      *          @OA\Response(
      *           response=200,
      *           description="success",
+     *
      *           @OA\JsonContent(
+     *
      *             @OA\Property(property="message", type="string", example="success")
      *           )
      *       ),
+     *
      *     @OA\Response(
      *           response=403,
      *           description="Unauthorized",
+     *
      *           @OA\JsonContent(
+     *
      *               @OA\Property(property="message", type="string", example="Invalid ability provided")
      *           )
      *       ),

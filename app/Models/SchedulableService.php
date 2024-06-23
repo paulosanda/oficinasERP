@@ -10,6 +10,6 @@ class SchedulableService extends Model
     use HasFactory;
 
     protected $fillable = [
-        'service'
+        'service',
     ];
 }

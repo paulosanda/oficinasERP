@@ -19,6 +19,7 @@ class CustomerFactory extends Factory
     public function definition(): array
     {
         $company = Company::factory()->create();
+
         return [
             'company_id' => $company->id,
             'type' => 'pf',
@@ -30,7 +31,7 @@ class CustomerFactory extends Factory
             'birthday' => fake()->date(),
             'profession' => 'ocupação',
             'address' => fake()->streetAddress,
-            'number' => fake()->numberBetween(1,100),
+            'number' => fake()->numberBetween(1, 100),
             'postal_code' => fake()->postcode,
             'neighborhood' => fake()->name,
             'city' => fake()->city,

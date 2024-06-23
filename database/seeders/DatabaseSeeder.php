@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\CheckupObservationType;
 use App\Models\Company;
 use App\Models\Role;
 use App\Models\User;
@@ -18,7 +17,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $company = Company::factory()->create([
-            'company_name' => 'PS Tech'
+            'company_name' => 'PS Tech',
         ]);
 
         $user = User::factory()->create([
@@ -26,7 +25,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Paulo Sanda',
             'email' => 'paulosanda@gmail.com',
             'password' => '123',
-            'enable' => true
+            'enable' => true,
         ]);
 
         $this->call(RoleSeeder::class);
@@ -35,7 +34,7 @@ class DatabaseSeeder extends Seeder
 
         UserRole::create([
             'user_id' => $user->id,
-            'role_id' => $rootRole->id
+            'role_id' => $rootRole->id,
         ]);
 
         $this->call(CheckupObservationTypeSeeder::class);

@@ -5,7 +5,6 @@ namespace Database\Factories;
 use App\Models\Checkup;
 use App\Models\Vehicle;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Faker\Generator as Faker;
 
 /**
  * @extends Factory<Checkup>
@@ -21,7 +20,7 @@ class CheckupFactory extends Factory
     {
         $vehicle = Vehicle::factory()->create();
 
-        $fuel = ['vazio', '1/4','1/2','3/4', 'cheio'];
+        $fuel = ['vazio', '1/4', '1/2', '3/4', 'cheio'];
 
         $evaluation = ['aprovado para uso', 'manutenção recomendada'];
 
@@ -39,7 +38,7 @@ class CheckupFactory extends Factory
             'roof_photo' => fake()->url,
             'fuel_gauge' => fake()->randomElement($fuel),
             'fuel_gauge_photo' => fake()->url,
-            'evaluation' => fake()->randomElement($evaluation)
+            'evaluation' => fake()->randomElement($evaluation),
         ];
     }
 }

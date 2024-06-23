@@ -8,6 +8,7 @@ namespace App\OpenApiSchemas;
  *     title="BodyRequestCustomer",
  *     required={"name", "type"},
  *     description="dados do customer",
+ *
  *     @OA\Property(property="type", type="string", description="tipo de pessoa se pf ou pj", example="pf"),
  *     @OA\Property(property="name", type="string", description="nome do customer"),
  *     @OA\Property(property="email", type="string", nullable=true,description="email do customer"),
@@ -26,11 +27,7 @@ namespace App\OpenApiSchemas;
  *     @OA\Property(property="estate", type="string",nullable=true, description="estado do customer"),
  * )
  */
-
-class CustomerSchemas
-{}
-
-
+class CustomerSchemas {}
 
 /**
  * @OA\Schema(
@@ -38,6 +35,7 @@ class CustomerSchemas
  *     title="Customer",
  *     required={"id"},
  *     description="dados do customer",
+ *
  *     @OA\Property(property="id", type="integer", description="id do customer"),
  *     @OA\Property(property="type", type="string",nullable=true, description="tipo de pessoa se pf ou pj"),
  *     @OA\Property(property="name", type="string", nullable=true, description="nome do customer"),
@@ -56,5 +54,4 @@ class CustomerSchemas
  *     @OA\Property(property="estate", type="string",nullable=true, description="estado do customer"),
  * )
  */
-class UpdateCustomerSchemas
-{}
+class UpdateCustomerSchemas {}

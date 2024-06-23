@@ -12,13 +12,13 @@ class InjectCompanyId
     /**
      * Handle an incoming request.
      *
-     * @param Closure(Request): (Response) $next
+     * @param  Closure(Request): (Response)  $next
      */
     public function handle(Request $request, Closure $next): Response
     {
         $user = Auth::user();
 
-        if($user) {
+        if ($user) {
             $companyId = $user->company_id;
             $request->merge(['company_id' => $companyId]);
         }
