@@ -44,7 +44,7 @@ Route::middleware(['auth:sanctum', 'ability:root,admin'])->group(function () {
         });
 
         Route::get('/schedulable-services', [SchedulableServiceAdminController::class, 'index'])->name('schedulable_services.index');
-        Route::post('/schedulable-services', [SchedulableServiceAdminController::class, 'store'])->name('scheculable_services.store');
+        Route::post('/schedulable-services', [SchedulableServiceAdminController::class, 'store'])->name('schedulable_services.store');
         Route::patch('/schedulable-services/{schedulableServiceId}', [SchedulableServiceAdminController::class, 'update'])->name('schedulable_services.update');
 
         Route::prefix('messages')->group(function () {

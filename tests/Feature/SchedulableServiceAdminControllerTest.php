@@ -47,20 +47,20 @@ class SchedulableServiceAdminControllerTest extends TestCase
         $response->assertStatus(403);
     }
 
-    public function store(): void
+    public function testStore(): void
     {
         $token = $this->user->createToken('teste', ['admin'])->plainTextToken;
 
         $response = $this->withHeaders([
             'Authorization' => 'Bearer '.$token,
-        ])->postJson(route('schedulable_services.store'), ['service test']);
+        ])->postJson(route('schedulable_services.store'), ['service' => 'test']);
 
         $response->assertStatus(200);
 
         $response->assertJson(['message' => 'success']);
 
         $this->assertDatabaseHas('schedulable_services', [
-            'service' => 'service test',
+            'service' => 'test',
         ]);
     }
 
