@@ -1,10 +1,14 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
+# Formatar cada arquivo alterado usando o Laravel Pint
+STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep ".php\{0,1\}$") || true
 
-test "" = "$(grep '^Signed-off-by: ' "$1" |
-         sort | uniq -c | sed -e '/^[   ]*1[    ]/d')" || {
-        echo >&2 Duplicate Signed-off-by lines.
-        exit 1
-}
-
+for FILE in $STAGED_FILES
+do
+    #Para ocultar as informações do pint use a linha comentada abaixo
+#    ./vendor/bin/pint "${FILE}" > /dev/null >&1;
+#   e comente esta abaixo
+    ./vendor/bin/pint "${FILE}"
+    git add "${FILE}";
+done;
