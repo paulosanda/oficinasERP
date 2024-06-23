@@ -107,7 +107,7 @@ class SchedulableServiceAdminController extends Controller
 
         $data = $request->validate($rules);
 
-        $newService = SchedulableService::create([$data['service']]);
+        $newService = SchedulableService::create($data);
 
         return response()->json(['message' => 'success']);
     }
