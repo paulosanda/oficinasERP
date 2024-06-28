@@ -15,15 +15,6 @@ class CheckupController extends Controller
      *     summary="cria checkup veicular",
      *     security={{ "bearerAuth" : {} }},
      *
-     *     @OA\Parameter(
-     *         name="Authorization",
-     *         in="header",
-     *         required=true,
-     *         description="token de usuário company",
-     *
-     *         @OA\Schema(type="string", format="Bearer {token}")
-     *     ),
-     *
      *     @OA\RequestBody(
      *         request="dadosDoCheckup",
      *         description="dados para registro de checkup veicular",

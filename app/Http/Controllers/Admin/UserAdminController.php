@@ -21,18 +21,6 @@ class UserAdminController extends Controller
      *     description="lista todos os usários de user for admin do sistema, se for company apenas os da company",
      *     security={{ "bearerAuth": {} }},
      *
-     *     @OA\Parameter(
-     *         name="Authorization",
-     *         in="header",
-     *         required=true,
-     *         description="token de acesso do usuário",
-     *
-     *         @OA\Schema(
-     *             type="string",
-     *             format="Bearer {token}"
-     *         )
-     *     ),
-     *
      *     @OA\Response(
      *         response=200,
      *         description="success",
@@ -68,18 +56,7 @@ class UserAdminController extends Controller
      *     summary="cria novo usuário para company",
      *     description="cria novo usuário para um company, e registra a(s) role(s)",
      *     security={{ "bearerAuth": {} }},
-     *
-     *     @OA\Parameter(
-     *           name="Authorization",
-     *           in="header",
-     *           required=true,
-     *           description="Token de acesso do usuário",
-     *
-     *           @OA\Schema(
-     *               type="string",
-     *               format="Bearer {token}"
-     *           ),
-     *       ),
+
      *
      *     @OA\Parameter(
      *          name="company_id",
@@ -145,7 +122,7 @@ class UserAdminController extends Controller
 
     /**
      * @OA\Put(
-     *     path="/api/user/{user_id/}",
+     *     path="/api/user/{user_id}",
      *     operationId="UserUpdate",
      *     tags={"Admin,Company"},
      *     summary="alteração de dados de usuário",
@@ -163,18 +140,7 @@ class UserAdminController extends Controller
      *         ),
      *     ),
      *     security={{ "bearerAuth": {} }},
-     *
-     *      @OA\Parameter(
-     *            name="Authorization",
-     *            in="header",
-     *            required=true,
-     *            description="Token de acesso do usuário",
-     *
-     *            @OA\Schema(
-     *                type="string",
-     *                format="Bearer {token}"
-     *            ),
-     *        ),
+
      *
      *     @OA\RequestBody(
      *         required=true,

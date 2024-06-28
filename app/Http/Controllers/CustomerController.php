@@ -16,14 +16,6 @@ class CustomerController extends Controller
      *     summary="cria customer (consumidor)",
      *     security={{ "bearerAuth": {} }},
      *
-     *     @OA\Parameter(
-     *         name="Authorization",
-     *         in="header",
-     *         required=true,
-     *
-     *         @OA\Schema(type="string", format="Bearer {token}")
-     *     ),
-     *
      *     @OA\RequestBody(
      *         request="dadosDoCustomer",
      *         description="dados do customer",
@@ -66,14 +58,7 @@ class CustomerController extends Controller
      *     tags={"Company"},
      *     summary="altera customer",
      *     security={{ "bearerAuth" : {} }},
-     *
-     *     @OA\Parameter(
-     *         name="Authorization",
-     *         in="header",
-     *         required=true,
-     *
-     *         @OA\Schema(type="string", format="Bearer {token}")
-     *     ),
+
      *
      *     @OA\RequestBody(
      *         request="dadosdoCustomer",

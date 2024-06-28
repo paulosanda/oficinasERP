@@ -15,14 +15,6 @@ class VehicleController extends Controller
      *     summary="cria vehicle",
      *     security={{ "bearerAuth" : {} }},
      *
-     *     @OA\Parameter(
-     *         name="Authoriztion",
-     *         in="header",
-     *         required=true,
-     *
-     *         @OA\Schema(type="string", format="Bearer {token}")
-     *     ),
-     *
      *     @OA\RequestBody(
      *         request="dadosDoVehicle",
      *         description="dados de vehicle",

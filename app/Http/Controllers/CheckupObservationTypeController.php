@@ -16,15 +16,6 @@ class CheckupObservationTypeController extends Controller
      *     description="lista de observações para checkup veicular",
      *     security={{ "bearerAuth" : {} }},
      *
-     *     @OA\Parameter(
-     *         name="Authorization",
-     *         in="header",
-     *         required=true,
-     *         description="token de acesso do usuário company",
-     *
-     *         @OA\Schema(type="string", format="Bearer {token}")
-     *     ),
-     *
      *     @OA\Response(
      *         response=200,
      *         description="success",

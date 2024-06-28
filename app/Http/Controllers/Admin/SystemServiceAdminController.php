@@ -17,17 +17,7 @@ class SystemServiceAdminController extends Controller
      *     summary="serviços do sistema",
      *     description="serviços do sistema",
      *     security={{ "bearerAuth": {} }},
-     *
-     *     @OA\Parameter(
-     *         name="Authorization",
-     *         in="header",
-     *         required=true,
-     *
-     *         @OA\Schema(
-     *             type="string",
-     *             format="Bearer {token}"
-     *         )
-     *     ),
+
      *
      *     @OA\Response(
      *         response=200,

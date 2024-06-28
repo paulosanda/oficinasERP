@@ -17,17 +17,7 @@ class ScheduledServiceController extends Controller
      *     tags={"Company"},
      *     summary="lista de serviços agendaveis",
      *     security={{ "bearerAuth":{} }},
-     *
-     *     @OA\Parameter(
-     *         name="Authorization",
-     *         in="header",
-     *         required=true,
-     *
-     *         @OA\Schema(
-     *              type="string",
-     *              format="Bearer {token}"
-     *          )
-     *     ),
+
      *
      * @OA\Response(
      *     response=200,
@@ -70,17 +60,7 @@ class ScheduledServiceController extends Controller
      *     tags={"Company"},
      *     summary="lista serviços agendados",
      *     security={{ "bearerAuth" : {} }},
-     *
-     *     @OA\Parameter(
-     *         name="Authorization",
-     *          in="header",
-     *          required=true,
-     *
-     *          @OA\Schema(
-     *              type="string",
-     *              format="Bearer {token}"
-     *          ),
-     *     ),
+
      *
      *     @OA\Response(
      *          response=200,
@@ -119,14 +99,6 @@ class ScheduledServiceController extends Controller
      *     tags={"Company"},
      *     summary="cria agendamento de serviço",
      *     security={{ "bearerAuth":{} }},
-     *
-     *     @OA\Parameter(
-     *         name="Authorization",
-     *         in="header",
-     *         required=true,
-     *
-     *         @OA\Schema(type="string", format="Bearer {token}")
-     *     ),
      *
      *     @OA\RequestBody(
      *         request="dadosScheduleService",

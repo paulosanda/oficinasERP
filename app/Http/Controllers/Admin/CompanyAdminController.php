@@ -19,17 +19,6 @@ class CompanyAdminController extends Controller
      *     summary="lista todos os company",
      *     security={{ "bearerAuth": {} }},
      *
-     *     @OA\Parameter(
-     *         name="Authorization",
-     *         in="header",
-     *         required=true,
-     *
-     *         @OA\Schema(
-     *             type="string",
-     *             format="Bearer {token}"
-     *         ),
-     *     ),
-     *
      *     @OA\Response(
      *         response=200,
      *         description="succes",
@@ -67,15 +56,6 @@ class CompanyAdminController extends Controller
      *     tags={"Admin"},
      *     summary="cria novo cadastro de company",
      *     security={{ "bearerAuth": {} }},
-     *
-     *     @OA\Parameter(
-     *           name="Authorization",
-     *           in="header",
-     *           required=true,
-     *
-     *           @OA\Schema(type="string",format="Bearer {token}"),
-     *           description="Token de acesso do usuário"
-     *       ),
      *
      *     @OA\RequestBody(
      *         request="CreateCompany",
@@ -120,15 +100,7 @@ class CompanyAdminController extends Controller
      *     tags={"Admin"},
      *     summary="atualiza cadastro de company",
      *     security={{ "bearerAuth": {} }},
-     *
-     *     @OA\Parameter(
-     *         name="Authorization",
-     *         in="header",
-     *         required=true,
-     *
-     *         @OA\Schema(type="string", format="Bearer {token}"),
-     *         description="token de acesso do usuário administrativo ou root"
-     *     ),
+
      *
      *     @OA\RequestBody(
      *         request="updateCompany",
