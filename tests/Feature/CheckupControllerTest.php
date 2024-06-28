@@ -129,6 +129,12 @@ class CheckupControllerTest extends TestCase
         $response->assertJson(['message' => 'Unauthenticated.']);
     }
 
+    //    public function testGetCheckup(): void
+    //    {
+    //        $token = $this->user->createToken('teste', ['master','operator'])->plainTextToken;
+    //
+    //    }
+
     public function checkUpData(): array
     {
         $fuel_gauge = ['vazio', '1/4', '1/2', '3/4', 'cheio'];

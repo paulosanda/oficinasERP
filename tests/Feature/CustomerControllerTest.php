@@ -107,6 +107,20 @@ class CustomerControllerTest extends TestCase
 
     }
 
+    public function testIndexCustomer(): void
+    {
+        $token = $this->user->createToken('test', ['master'])->plainTextToken;
+
+        Customer::factory()->count(10)->create(['company_id' => $this->user->company_id]);
+
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer '.$token,
+        ])->getJson(route('customer.index'));
+
+        $response->assertStatus(200);
+
+    }
+
     public function testUpdateCustomerErrorCompany(): void
     {
         $anotherCompany = Company::factory()->create();

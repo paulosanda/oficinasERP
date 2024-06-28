@@ -49,4 +49,7 @@ class QuoteController extends Controller
     {
         return app(QuoteCreateAction::class)->execute($request);
     }
+
+    //    fazer retorno de orçamentos em aberto
+
 }
