@@ -61,15 +61,6 @@ class SchedulableServiceAdminController extends Controller
      *     summary="criar novos serviços agendáveis",
      *     security={{ "bearerAuth": {} }},
      *
-     *     @OA\Parameter(
-     *         name="Authorization",
-     *         in="header",
-     *         required=true,
-     *
-     *         @OA\Schema(type="string", format="Bearer {token)"),
-     *         description="tokem de acesso de usuário admin"
-     *     ),
-     *
      *     @OA\RequestBody(
      *         request="createSchedulableService",
      *         description="token de acesso do usuário",
@@ -119,15 +110,7 @@ class SchedulableServiceAdminController extends Controller
      *     tags={"Admin"},
      *     summary="altera tipo de serviços agendáveis",
      *     security={{ "bearerAuth": {} }},
-     *
-     *     @OA\Parameter(
-     *         name="Authorization",
-     *         in="header",
-     *         required=true,
-     *
-     *         @OA\Schema(type="string", format="Bearer {token}"),
-     *         description="token de acesso"
-     *     ),
+
      *
      *     @OA\RequestBody(
      *         request="SchedulableServiceUpdate",

@@ -14,15 +14,7 @@ class QuoteController extends Controller
      *      tags={"Company"},
      *      summary="cria orçamento",
      *      security={{ "bearerAuth" : {} }},
-     *
-     *      @OA\Parameter(
-     *          name="Authorization",
-     *          in="header",
-     *          required=true,
-     *          description="token de usuário company",
-     *
-     *          @OA\Schema(type="string", format="Bearer {token}")
-     *      ),
+
      *
      *      @OA\RequestBody(
      *          request="dadosDoCheckup",

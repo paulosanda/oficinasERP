@@ -15,18 +15,7 @@ class RoleController extends Controller
      *     summary="lista roles de company",
      *     description="lista roles de company",
      *     security={{ "bearerAuth": {} }},
-     *
-     *     @OA\Parameter(
-     *         name="Authorization",
-     *         in="header",
-     *         required=true,
-     *         description="Token de acesso do usuário administrativo ou root",
-     *
-     *         @OA\Schema(
-     *             type="string",
-     *             format="Bearer {token}"
-     *         )
-     *     ),
+
      *
      *     @OA\Response(
      *         response=200,

@@ -19,18 +19,7 @@ class UserController extends Controller
      *     summary="cria novo usuário para company",
      *     description="cria novo usuário para um company, e registra a(s) role(s)",
      *     security={{ "bearerAuth": {} }},
-     *
-     *     @OA\Parameter(
-     *           name="Authorization",
-     *           in="header",
-     *           required=true,
-     *           description="Token de acesso do usuário",
-     *
-     *           @OA\Schema(
-     *               type="string",
-     *               format="Bearer {token}"
-     *           ),
-     *       ),
+
      *
      *     @OA\RequestBody(
      *      required=true,
@@ -105,18 +94,6 @@ class UserController extends Controller
      *
      *     ),
      *     security={{ "bearerAuth": {} }},
-     *
-     *     @OA\Parameter(
-     *         name="Authorization",
-     *            in="header",
-     *            required=true,
-     *            description="Token de acesso do usuário",
-     *
-     *            @OA\Schema(
-     *                type="string",
-     *                format="Bearer {token}"
-     *            ),
-     *     ),
      *
      *     @OA\Response(
      *     response=200,

@@ -20,15 +20,7 @@ class MessageTypeAdminController extends Controller
      *      summary="MessagesList",
      *      description="lista de tipos de mensagens para serem enviadas aos clientes em serviços agendados",
      *      security={{ "bearerAuth" : {} }},
-     *
-     *      @OA\Parameter(
-     *          name="Authorization",
-     *          in="header",
-     *          required=true,
-     *          description="token de acesso do usuário admin",
-     *
-     *          @OA\Schema(type="string", format="Bearer {token}")
-     *      ),
+
      *
      *      @OA\Response(
      *          response=200,
@@ -67,15 +59,6 @@ class MessageTypeAdminController extends Controller
      *     summary="newMessage",
      *     description="criar nova message",
      *     security={{ "bearerAuth": {} }},
-     *
-     *     @OA\Parameter(
-     *         name="Authorization",
-     *         in="header",
-     *         required=true,
-     *         description="token de acesso do usuário admin",
-     *
-     *         @OA\Schema(type="string", format="Bearer {token}")
-     *     ),
      *
      *     @OA\RequestBody(
      *         request="dadosNewMessage",
@@ -121,6 +104,7 @@ class MessageTypeAdminController extends Controller
         return response()->json(['message' => 'success']);
     }
 
+    //todo fazer documentação
     public function update($messageTypeId, Request $request): JsonResponse
     {
         $rules = [
