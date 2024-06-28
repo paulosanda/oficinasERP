@@ -47,4 +47,7 @@ class CheckupController extends Controller
     {
         return app(CheckupCreateAction::class)->execute($request);
     }
+
+    //todo fazer consulta de checkups
+
 }

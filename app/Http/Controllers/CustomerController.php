@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Actions\CustomerCreateAction;
 use App\Actions\CustomerUpdateAction;
+use App\Models\Customer;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
@@ -90,5 +92,14 @@ class CustomerController extends Controller
     public function update(Request $request)
     {
         return app(CustomerUpdateAction::class)->execute($request);
+    }
+
+    //    todo fazer get de customers
+    public function index(Request $request): JsonResponse
+    {
+        //sem query parameter
+        $customers = Customer::where('company_id', $request->company_id)->orderBy('name')->get();
+
+        return response()->json($customers, 200);
     }
 }

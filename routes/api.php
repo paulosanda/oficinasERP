@@ -98,7 +98,15 @@ Route::middleware(['auth:sanctum', 'ability:master,operator', InjectCompanyId::c
 
         });
     });
+});
 
+/**
+ * Rotas de Companies acessíveis somente por master
+ */
+Route::middleware(['auth:sanctum', 'ability:master', InjectCompanyId::class])->group(function () {
+    Route::prefix('customer')->group(function () {
+        Route::get('/', [CustomerController::class, 'index'])->name('customer.index');
+    });
 });
 
 /**
