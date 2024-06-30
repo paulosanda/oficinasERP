@@ -100,13 +100,23 @@ class CompanyAdminController extends Controller
      *     tags={"Admin"},
      *     summary="atualiza cadastro de company",
      *     security={{ "bearerAuth": {} }},
-
+     *
+     *     @OA\Parameter(
+     *         name="company_id",
+     *         in="query",
+     *         required=true,
+     *
+     *         @OA\Schema(
+     *             type="integer"
+     *         ),
+     *         description="ID da ecompany a ser atualizada"
+     *     ),
      *
      *     @OA\RequestBody(
      *         request="updateCompany",
      *         description="Request body to update a company",
      *
-     *         @OA\JsonContent(ref="#/components/schemas/Company")
+     *         @OA\JsonContent(ref="#/components/schemas/BodyRequestCompany")
      *     ),
      *
      *     @OA\Response(
@@ -116,7 +126,7 @@ class CompanyAdminController extends Controller
      *     @OA\JsonContent(
      *        type="array",
      *
-     *        @OA\Items(ref="#/components/schemas/Company")
+     *        @OA\Items(ref="#/components/schemas/BodyRequestCompany")
      *       )
      *     ),
      *
@@ -131,8 +141,8 @@ class CompanyAdminController extends Controller
      *     ),
      * )
      */
-    public function update(Request $request): JsonResponse
+    public function update(Request $request, $company_id): JsonResponse
     {
-        return app(CompanyUpdateAction::class)->execute($request);
+        return app(CompanyUpdateAction::class)->execute($request, $company_id);
     }
 }

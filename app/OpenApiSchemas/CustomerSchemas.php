@@ -24,7 +24,7 @@ namespace App\OpenApiSchemas;
  *     @OA\Property(property="number", type="string", nullable=true,description="numero do endereço do customer"),
  *     @OA\Property(property="neighborhood", type="string",nullable=true, description="bairro do customer"),
  *     @OA\Property(property="city", type="string", nullable=true,description="cidade do customer"),
- *     @OA\Property(property="estate", type="string",nullable=true, description="estado do customer"),
+ *     @OA\Property(property="state", type="string",nullable=true, description="estado do customer"),
  * )
  */
 class CustomerSchemas {}
@@ -51,7 +51,7 @@ class CustomerSchemas {}
  *     @OA\Property(property="number", type="string", nullable=true,description="numero do endereço do customer"),
  *     @OA\Property(property="neighborhood", type="string",nullable=true, description="bairro do customer"),
  *     @OA\Property(property="city", type="string", nullable=true,description="cidade do customer"),
- *     @OA\Property(property="estate", type="string",nullable=true, description="estado do customer"),
+ *     @OA\Property(property="state", type="string",nullable=true, description="estado do customer"),
  * )
  */
 class UpdateCustomerSchemas {}

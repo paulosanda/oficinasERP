@@ -22,7 +22,7 @@ class CompanyCreateAction
             'neighborhood' => 'string|required',
             'postal_code' => 'string|required',
             'city' => 'string|required',
-            'estate' => 'string|required',
+            'state' => 'string|required',
             'cellphone' => 'string|required',
             'email' => 'email|required',
         ];

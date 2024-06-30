@@ -38,7 +38,7 @@ Route::middleware(['auth:sanctum', 'ability:root,admin'])->group(function () {
         Route::prefix('/company')->group(function () {
             Route::post('/', [CompanyAdminController::class, 'store'])->name('admin.create.company');
             Route::get('/', [CompanyAdminController::class, 'index'])->name('admin.index.company');
-            Route::put('/', [CompanyAdminController::class, 'update'])->name('admin.company.update');
+            Route::put('/{company_id}', [CompanyAdminController::class, 'update'])->name('admin.company.update');
 
             Route::post('/user/{companyId}', [UserAdminController::class, 'store'])->name('admin.user.create');
         });
@@ -104,8 +104,10 @@ Route::middleware(['auth:sanctum', 'ability:master,operator', InjectCompanyId::c
  * Rotas de Companies acessíveis somente por master
  */
 Route::middleware(['auth:sanctum', 'ability:master', InjectCompanyId::class])->group(function () {
-    Route::prefix('customer')->group(function () {
-        Route::get('/', [CustomerController::class, 'index'])->name('customer.index');
+    Route::prefix('company')->group(function () {
+        Route::prefix('customer')->group(function () {
+            Route::get('/', [CustomerController::class, 'index'])->name('customer.index');
+        });
     });
 });
 
@@ -118,5 +120,5 @@ Route::middleware(['auth:sanctum', 'ability:root,admin,master',  InjectCompanyId
         Route::put('/{user_id}', [UserAdminController::class, 'update'])->name('user.update');
     });
 
-    Route::get('/roles', [RoleController::class, 'companyIndex'])->name('admin.company.rules.index');
+    Route::get('/company/roles', [RoleController::class, 'companyIndex'])->name('admin.company.rules.index');
 });

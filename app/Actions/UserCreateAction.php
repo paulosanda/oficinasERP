@@ -18,7 +18,6 @@ class UserCreateAction
             'user.name' => 'string|required',
             'user.email' => 'string|required',
             'user.password' => 'string|required',
-            'roles' => 'required|array',
             'roles.*' => 'integer',
         ];
     }
@@ -27,6 +26,7 @@ class UserCreateAction
     {
         Log::info('creating company user by user: ', [Auth::user()->toArray()]);
         $data = $request->validate($this->rules());
+
         $data['user']['company_id'] = $companyId;
 
         try {

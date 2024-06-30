@@ -31,7 +31,7 @@ return new class extends Migration
             $table->string('postal_code')->nullable();
             $table->string('neighborhood')->nullable();
             $table->string('city')->nullable();
-            $table->string('estate')->nullable();
+            $table->string('state')->nullable();
             $table->timestamps();
         });
     }

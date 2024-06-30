@@ -16,7 +16,6 @@ class CompanyUpdateAction
     protected function rules(): array
     {
         return [
-            'id' => 'integer|required',
             'company_name' => 'string',
             'cnpj' => 'string',
             'inscricao_estadual' => 'string',
@@ -26,19 +25,18 @@ class CompanyUpdateAction
             'neighborhood' => 'string',
             'postal_code' => 'string',
             'city' => 'string',
-            'estate' => 'string',
+            'state' => 'string',
             'cellphone' => 'string',
             'email' => 'email',
         ];
     }
 
-    public function execute(Request $request): JsonResponse
+    public function execute(Request $request, $company_id): JsonResponse
     {
         $data = $request->validate($this->rules());
 
         try {
-            $company = Company::findOrFail($data['id']);
-            unset($data['id']);
+            $company = Company::findOrFail($company_id);
 
             $company->update($data);
 

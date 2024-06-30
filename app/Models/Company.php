@@ -28,7 +28,7 @@ class Company extends Model
         'neighborhood',
         'postal_code',
         'city',
-        'estate',
+        'state',
         'cellphone',
         'email',
     ];
