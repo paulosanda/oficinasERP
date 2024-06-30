@@ -56,12 +56,23 @@
                 ],
                 "summary": "atualiza cadastro de company",
                 "operationId": "updateCompany",
+                "parameters": [
+                    {
+                        "name": "company_id",
+                        "in": "query",
+                        "description": "ID da ecompany a ser atualizada",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
                 "requestBody": {
                     "description": "Request body to update a company",
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Company"
+                                "$ref": "#/components/schemas/BodyRequestCompany"
                             }
                         }
                     }
@@ -74,7 +85,7 @@
                                 "schema": {
                                     "type": "array",
                                     "items": {
-                                        "$ref": "#/components/schemas/Company"
+                                        "$ref": "#/components/schemas/BodyRequestCompany"
                                     }
                                 }
                             }
@@ -1072,6 +1083,70 @@
             }
         },
         "/api/company/customer": {
+            "get": {
+                "tags": [
+                    "Company"
+                ],
+                "summary": "Listar clientes",
+                "description": "Retorna uma lista de clientes, podendo filtrar por nome ou ID do cliente",
+                "operationId": "indexCustomer",
+                "parameters": [
+                    {
+                        "name": "customer_name",
+                        "in": "query",
+                        "description": "Nome do cliente para filtro",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "customer_id",
+                        "in": "query",
+                        "description": "ID do cliente para filtro",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lista de clientes",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Customer"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro no servidor",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Erro ao buscar clientes"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
             "put": {
                 "tags": [
                     "Company"
@@ -1242,7 +1317,7 @@
                 ]
             }
         },
-        "/admin/company/roles": {
+        "/api/company/roles": {
             "get": {
                 "tags": [
                     "Admin,Company"
@@ -1323,18 +1398,6 @@
                 "summary": "roles administrativas do sistema",
                 "description": "roles para usuários administrativos do sistema",
                 "operationId": "adminRoles",
-                "parameters": [
-                    {
-                        "name": "Authorization",
-                        "in": "header",
-                        "description": "token de usuário administrativo ou super usuário",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "format": "Bearer {token}"
-                        }
-                    }
-                ],
                 "responses": {
                     "200": {
                         "description": "success",
@@ -1914,7 +1977,7 @@
                     "neighborhood",
                     "postal_code",
                     "city",
-                    "estate",
+                    "state",
                     "cellphone",
                     "email"
                 ],
@@ -1957,8 +2020,8 @@
                         "description": "city",
                         "type": "string"
                     },
-                    "estate": {
-                        "description": "estate",
+                    "state": {
+                        "description": "state",
                         "type": "string"
                     },
                     "cellphone": {
@@ -1968,12 +2031,6 @@
                     "email": {
                         "description": "email",
                         "type": "string"
-                    },
-                    "users": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/User"
-                        }
                     }
                 },
                 "type": "object"
@@ -2028,8 +2085,8 @@
                         "description": "city",
                         "type": "string"
                     },
-                    "estate": {
-                        "description": "estate",
+                    "state": {
+                        "description": "state",
                         "type": "string"
                     },
                     "cellphone": {
@@ -2039,6 +2096,12 @@
                     "email": {
                         "description": "email",
                         "type": "string"
+                    },
+                    "users": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/User"
+                        }
                     }
                 },
                 "type": "object"
@@ -2125,7 +2188,7 @@
                         "type": "string",
                         "nullable": true
                     },
-                    "estate": {
+                    "state": {
                         "description": "estado do customer",
                         "type": "string",
                         "nullable": true
@@ -2214,7 +2277,7 @@
                         "type": "string",
                         "nullable": true
                     },
-                    "estate": {
+                    "state": {
                         "description": "estado do customer",
                         "type": "string",
                         "nullable": true

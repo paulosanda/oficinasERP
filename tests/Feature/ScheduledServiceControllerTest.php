@@ -125,7 +125,7 @@ class ScheduledServiceControllerTest extends TestCase
                 'neighborhood',
                 'postal_code',
                 'city',
-                'estate',
+                'state',
                 'cellphone',
                 'email',
             ],
@@ -149,7 +149,7 @@ class ScheduledServiceControllerTest extends TestCase
                 'postal_code',
                 'neighborhood',
                 'city',
-                'estate',
+                'state',
             ],
             'schedulable_service' => [
                 'id',

@@ -27,7 +27,7 @@ class CompanyFactory extends Factory
             'neighborhood' => fake()->name,
             'postal_code' => fake()->postcode,
             'city' => fake()->city,
-            'estate' => 'SP',
+            'state' => 'SP',
             'cellphone' => fake()->numerify('##-##### ###'),
             'email' => fake()->email,
         ];
