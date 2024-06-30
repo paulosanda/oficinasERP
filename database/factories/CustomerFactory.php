@@ -35,7 +35,7 @@ class CustomerFactory extends Factory
             'postal_code' => fake()->postcode,
             'neighborhood' => fake()->name,
             'city' => fake()->city,
-            'estate' => 'TO',
+            'state' => 'TO',
         ];
     }
 }

@@ -35,7 +35,7 @@ class CustomerUpdateAction
             'postal_code' => 'string',
             'neighborhood' => 'string',
             'city' => 'string',
-            'estate' => 'string',
+            'state' => 'string',
         ];
     }
 

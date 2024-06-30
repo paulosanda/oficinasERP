@@ -111,6 +111,9 @@ class CustomerControllerTest extends TestCase
     {
         $token = $this->user->createToken('test', ['master'])->plainTextToken;
 
+        $anotherCompany = Company::factory()->create();
+        Customer::factory()->count(20)->create(['company_id' => $anotherCompany->id]);
+
         Customer::factory()->count(10)->create(['company_id' => $this->user->company_id]);
 
         $response = $this->withHeaders([
@@ -119,6 +122,83 @@ class CustomerControllerTest extends TestCase
 
         $response->assertStatus(200);
 
+        $response->assertJsonCount(10);
+
+        $response->assertJsonStructure([
+            '*' => [
+                'id',
+                'company_id',
+                'type',
+                'name',
+                'email',
+                'cellphone',
+                'telephone',
+                'cpf',
+                'rg',
+                'cnpj',
+                'inscricao_estadual',
+                'inscricao_municipal',
+                'birthday',
+                'profession',
+                'address',
+                'number',
+                'postal_code',
+                'neighborhood',
+                'city',
+                'state',
+                'created_at',
+                'updated_at',
+                'vehicle',
+            ],
+        ]);
+
+        $data = $response->json();
+        foreach ($data as $customer) {
+            $this->assertEquals($this->user->company_id, $customer['company_id']);
+        }
+    }
+
+    public function testSearchCustomerByName(): void
+    {
+        $token = $this->user->createToken('test', ['master'])->plainTextToken;
+
+        $anotherCompany = Company::factory()->create();
+        Customer::factory()->count(20)->create(['company_id' => $anotherCompany->id]);
+
+        Customer::factory()->count(10)->create(['company_id' => $this->user->company_id]);
+
+        Customer::factory()->create([
+            'company_id' => $this->user->company_id,
+            'name' => 'unique_name']);
+
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer '.$token,
+        ])->getJson(route('customer.index').'?customer_name=unique_name');
+
+        $response->assertStatus(200);
+
+        $response->assertJsonCount(1);
+    }
+
+    public function testGetCustomerById(): void
+    {
+        $token = $this->user->createToken('test', ['master'])->plainTextToken;
+
+        $anotherCompany = Company::factory()->create();
+        Customer::factory()->count(20)->create(['company_id' => $anotherCompany->id]);
+
+        Customer::factory()->count(10)->create(['company_id' => $this->user->company_id]);
+
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer '.$token,
+        ])->getJson(route('customer.index').'?customer_id=25');
+
+        $response->assertStatus(200);
+
+        $response->assertJson([
+            'id' => 25,
+            'company_id' => 1,
+        ]);
     }
 
     public function testUpdateCustomerErrorCompany(): void
@@ -170,7 +250,7 @@ class CustomerControllerTest extends TestCase
             'postal_code' => fake()->postcode,
             'neighborhood' => fake()->name,
             'city' => fake()->city,
-            'estate' => 'CE',
+            'state' => 'CE',
         ];
     }
 
@@ -191,7 +271,7 @@ class CustomerControllerTest extends TestCase
             'postal_code' => fake()->postcode,
             'neighborhood' => fake()->name,
             'city' => fake()->city,
-            'estate' => 'CE',
+            'state' => 'CE',
         ];
     }
 }

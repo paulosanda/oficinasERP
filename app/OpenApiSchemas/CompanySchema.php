@@ -7,7 +7,7 @@ namespace App\OpenApiSchemas;
  *     schema="BodyRequestCompany",
  *     title="BodyRequestCompany",
  *     description="dados do company",
- *     required={"company_name", "cnpj","address","number","neighborhood","postal_code","city","estate","cellphone","email"},
+ *     required={"company_name", "cnpj","address","number","neighborhood","postal_code","city","state","cellphone","email"},
  *
  *     @OA\Property(property="company_name", type="string", description="razão social"),
  *     @OA\Property(property="cnpj", type="string", description="cnpj do company"),
@@ -18,10 +18,9 @@ namespace App\OpenApiSchemas;
  *     @OA\Property(property="neighborhood",type="string", description="neighborhood"),
  *     @OA\Property(property="postal_code",type="string",description="postal_code"),
  *     @OA\Property(property="city",type="string",description="city"),
- *     @OA\Property(property="estate",type="string",description="estate"),
+ *     @OA\Property(property="state",type="string",description="state"),
  *     @OA\Property(property="cellphone",type="string",description="cellphone"),
  *     @OA\Property(property="email", type="string", description="email"),
- *     @OA\Property(property="users", type="array", @OA\Items(ref="#/components/schemas/User"))
  * )
  */
 class CompanySchema {}
@@ -43,9 +42,10 @@ class CompanySchema {}
  *     @OA\Property(property="neighborhood",type="string", description="neighborhood"),
  *     @OA\Property(property="postal_code",type="string",description="postal_code"),
  *     @OA\Property(property="city",type="string",description="city"),
- *     @OA\Property(property="estate",type="string",description="estate"),
+ *     @OA\Property(property="state",type="string",description="state"),
  *     @OA\Property(property="cellphone",type="string",description="cellphone"),
  *     @OA\Property(property="email", type="string", description="email"),
+ *     @OA\Property(property="users", type="array", @OA\Items(ref="#/components/schemas/User"))
  * )
  */
 class CompanyUpdateSchema {}

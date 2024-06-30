@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Crypt;
 
 class Customer extends Model
 {
@@ -31,7 +32,7 @@ class Customer extends Model
         'postal_code',
         'neighborhood',
         'city',
-        'estate',
+        'state',
     ];
 
     public function vehicle(): HasMany
@@ -39,93 +40,83 @@ class Customer extends Model
         return $this->hasMany(Vehicle::class);
     }
 
-    public function setNameAttribute(string $value): void
+    public function setEmailAttribute(?string $value): void
     {
-        $this->attributes['name'] = encrypt($value);
+        $this->attributes['email'] = $value !== null ? Crypt::encryptString($value) : null;
     }
 
-    public function getNameAttribute(string $value): string
+    public function getEmailAttribute(?string $value): ?string
     {
-        return decrypt($value);
+        return $value !== null ? Crypt::decryptString($value) : null;
     }
 
-    public function setEmailAttribute(string $value): void
+    public function setCellphoneAttribute(?string $value): void
     {
-        $this->attributes['email'] = encrypt($value);
+        $this->attributes['cellphone'] = $value !== null ? Crypt::encryptString($value) : null;
     }
 
-    public function getEmailAttribute(string $value): string
+    public function getCellphoneAttribute(?string $value): ?string
     {
-        return decrypt($value);
+        return $value !== null ? Crypt::decryptString($value) : null;
     }
 
-    public function setCellphoneAttribute(string $value): void
+    public function setTelephoneAttribute(?string $value): void
     {
-        $this->attributes['cellphone'] = encrypt($value);
+        $this->attributes['telephone'] = $value !== null ? Crypt::encryptString($value) : null;
     }
 
-    public function getCellphoneAttribute(string $value): string
+    public function getTelephoneAttribute(?string $value): ?string
     {
-        return decrypt($value);
+        return $value !== null ? Crypt::decryptString($value) : null;
     }
 
-    public function setTelephoneAttribute(string $value): void
+    public function setCpfAttribute(?string $value): void
     {
-        $this->attributes['telephone'] = encrypt($value);
+        $this->attributes['cpf'] = $value !== null ? Crypt::encryptString($value) : null;
     }
 
-    public function getTelephoneAttribute(string $value): string
+    public function getCpfAttribute(?string $value): ?string
     {
-        return decrypt($value);
+        return $value !== null ? Crypt::decryptString($value) : null;
     }
 
-    public function setCpfAttribute(string $value): void
+    public function setAddressAttribute(?string $value): void
     {
-        $this->attributes['cpf'] = encrypt($value);
+        $this->attributes['address'] = $value !== null ? Crypt::encryptString($value) : null;
     }
 
-    public function getCpfAttribute(string $value): string
+    public function getAddressAttribute(?string $value): ?string
     {
-        return decrypt($value);
+        return $value !== null ? Crypt::decryptString($value) : null;
     }
 
-    public function setAddressAttribute(string $value): void
+    public function setPostalCodeAttribute(?string $value): void
     {
-        $this->attributes['address'] = encrypt($value);
+        $this->attributes['postal_code'] = $value !== null ? Crypt::encryptString($value) : null;
     }
 
-    public function getAddressAttribute(string $value): string
+    public function getPostalCodeAttribute(?string $value): ?string
     {
-        return decrypt($value);
+        return $value !== null ? Crypt::decryptString($value) : null;
     }
 
-    public function setPostalCodeAttribute(string $value): void
+    public function setNeighborhoodAttribute(?string $value): void
     {
-        $this->attributes['postal_code'] = encrypt($value);
+        $this->attributes['neighborhood'] = $value !== null ? Crypt::encryptString($value) : null;
     }
 
-    public function getPostalCodeAttribute(string $value): string
+    public function getNeighborhoodAttribute(?string $value): ?string
     {
-        return decrypt($value);
+        return $value !== null ? Crypt::decryptString($value) : null;
     }
 
-    public function setNeighborhoodAttribute(string $value): void
+    public function setCityAttribute(?string $value): void
     {
-        $this->attributes['neighborhood'] = encrypt($value);
+        $this->attributes['city'] = $value !== null ? Crypt::encryptString($value) : null;
     }
 
-    public function getNeighborhoodAttribute(string $value): string
+    public function getCityAttribute(?string $value): ?string
     {
-        return decrypt($value);
-    }
-
-    public function setCityAttribute(string $value): void
-    {
-        $this->attributes['city'] = encrypt($value);
-    }
-
-    public function getCityAttribute(string $value): string
-    {
-        return decrypt($value);
+        return $value !== null ? Crypt::decryptString($value) : null;
     }
 }

@@ -63,7 +63,7 @@ class CompanyAdminControllerTest extends TestCase
             'neighborhood' => fake()->name,
             'postal_code' => fake()->postcode,
             'city' => fake()->city,
-            'estate' => 'SP',
+            'state' => 'SP',
             'cellphone' => fake()->phoneNumber,
             'email' => fake()->email,
         ]);
@@ -80,7 +80,7 @@ class CompanyAdminControllerTest extends TestCase
             'neighborhood',
             'postal_code',
             'city',
-            'estate',
+            'state',
             'cellphone',
             'email',
         ]);
@@ -106,7 +106,7 @@ class CompanyAdminControllerTest extends TestCase
             'neighborhood' => fake()->name,
             'postal_code' => fake()->postcode,
             'city' => fake()->city,
-            'estate' => 'SP',
+            'state' => 'SP',
             'cellphone' => fake()->phoneNumber,
             'email' => fake()->email,
         ]);
@@ -133,7 +133,7 @@ class CompanyAdminControllerTest extends TestCase
             'neighborhood' => fake()->name,
             'postal_code' => fake()->postcode,
             'city' => fake()->city,
-            'estate' => 'SP',
+            'state' => 'SP',
             'cellphone' => fake()->phoneNumber,
             'email' => fake()->email,
         ]);
@@ -165,7 +165,7 @@ class CompanyAdminControllerTest extends TestCase
             'neighborhood' => fake()->name,
             'postal_code' => fake()->postcode,
             'city' => fake()->city,
-            'estate' => 'SP',
+            'state' => 'SP',
             'cellphone' => fake()->phoneNumber,
             'email' => fake()->email,
         ]);
@@ -181,7 +181,7 @@ class CompanyAdminControllerTest extends TestCase
             'neighborhood',
             'postal_code',
             'city',
-            'estate',
+            'state',
             'cellphone',
             'email',
         ]);
@@ -210,7 +210,7 @@ class CompanyAdminControllerTest extends TestCase
             'neighborhood',
             'postal_code',
             'city',
-            'estate',
+            'state',
             'cellphone',
             'email',
         ]]);
@@ -226,7 +226,7 @@ class CompanyAdminControllerTest extends TestCase
 
         $response = $this->withHeaders([
             'Authorization' => 'Bearer '.$token,
-        ])->putJson(route('admin.company.update'), $company);
+        ])->putJson(route('admin.company.update', $company['id']), $company);
 
         $response->assertStatus(200);
 
@@ -247,7 +247,7 @@ class CompanyAdminControllerTest extends TestCase
             'neighborhood' => fake()->name,
             'postal_code' => fake()->postcode,
             'city' => fake()->city,
-            'estate' => 'SP',
+            'state' => 'SP',
             'cellphone' => fake()->phoneNumber,
             'email' => fake()->email,
         ];

@@ -9,7 +9,7 @@ class RoleController extends Controller
 {
     /**
      *@OA\Get(
-     *     path="/admin/company/roles",
+     *     path="/api/company/roles",
      *     operationId="companyRoles",
      *     tags={"Admin,Company"},
      *     summary="lista roles de company",
@@ -66,18 +66,6 @@ class RoleController extends Controller
      *     summary="roles administrativas do sistema",
      *     description="roles para usuários administrativos do sistema",
      *     security={{ "bearerAuth": {} }},
-     *
-     *     @OA\Parameter(
-     *         name="Authorization",
-     *         in="header",
-     *         required=true,
-     *         description="token de usuário administrativo ou super usuário",
-     *
-     *         @OA\Schema(
-     *             type="string",
-     *             format="Bearer {token}"
-     *         )
-     *     ),
      *
      *     @OA\Response(
      *         response=200,
