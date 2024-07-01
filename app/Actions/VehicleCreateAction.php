@@ -13,15 +13,15 @@ class VehicleCreateAction
     {
         return [
             'customer_id' => 'integer|required',
-            'brand' => 'string',
-            'model' => 'string',
-            'color' => 'string',
-            'year' => 'string',
+            'brand' => 'string|nullable',
+            'model' => 'string|nullable',
+            'color' => 'string|nullable',
+            'year' => 'string|nullable',
             'plate' => 'string|required',
-            'identification_number' => 'string',
-            'renavam' => 'string',
-            'monthly_mileage' => 'string',
-            'observation' => 'string',
+            'identification_number' => 'string|nullable',
+            'renavam' => 'string|nullable',
+            'monthly_mileage' => 'string|nullable',
+            'observation' => 'string|nullable',
         ];
     }
 
