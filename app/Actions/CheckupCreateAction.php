@@ -13,20 +13,22 @@ class CheckupCreateAction
     public function rules(): array
     {
         $rules = [
+            'company_id' => 'integer|required',
+            'customer_id' => 'integer|required',
             'vehicle_id' => 'integer|required',
-            'front_damage' => 'string',
-            'front_photo' => 'string',
-            'back_damage' => 'string',
-            'back_photo' => 'string',
-            'right_side_damage' => 'string',
-            'right_side_photo' => 'string',
-            'left_side_damage' => 'string',
-            'left_side_photo' => 'string',
-            'roof_damage' => 'string',
-            'roof_photo' => 'string',
-            'fuel_gauge' => 'string',
-            'fuel_gauge_photo' => 'string',
-            'evaluation' => 'string',
+            'front_damage' => 'string|nullable',
+            'front_photo' => 'string|nullable',
+            'back_damage' => 'string|nullable',
+            'back_photo' => 'string|nullable',
+            'right_side_damage' => 'string|nullable',
+            'right_side_photo' => 'string|nullable',
+            'left_side_damage' => 'string|nullable',
+            'left_side_photo' => 'string|nullable',
+            'roof_damage' => 'string|nullable',
+            'roof_photo' => 'string|nullable',
+            'fuel_gauge' => 'string|nullable',
+            'fuel_gauge_photo' => 'string|nullable',
+            'evaluation' => 'string|nullable',
         ];
 
         if (request()->has('checkup_observation') && is_array(request('checkup_observation'))) {

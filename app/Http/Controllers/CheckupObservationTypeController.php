@@ -49,4 +49,7 @@ class CheckupObservationTypeController extends Controller
 
         return response()->json($checkupObservationType, 200);
     }
+
+    //    todo fazer criação de tipos de observações para checkup post
+    // todo fazer alteração de tipos e observações para checkup pacth
 }

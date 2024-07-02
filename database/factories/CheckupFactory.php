@@ -3,6 +3,8 @@
 namespace Database\Factories;
 
 use App\Models\Checkup;
+use App\Models\Company;
+use App\Models\Customer;
 use App\Models\Vehicle;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -18,13 +20,19 @@ class CheckupFactory extends Factory
      */
     public function definition(): array
     {
-        $vehicle = Vehicle::factory()->create();
+        $company = Company::factory()->create();
+
+        $customer = Customer::factory()->create(['company_id' => $company->id]);
+
+        $vehicle = Vehicle::factory()->create(['customer_id' => $customer->id]);
 
         $fuel = ['vazio', '1/4', '1/2', '3/4', 'cheio'];
 
         $evaluation = ['aprovado para uso', 'manutenção recomendada'];
 
         return [
+            'company_id' => $company->id,
+            'customer_id' => $customer->id,
             'vehicle_id' => $vehicle->id,
             'front_damage' => fake()->text,
             'front_photo' => fake()->url,
