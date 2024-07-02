@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('checkups', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('company_id')->constrained('companies');
+            $table->foreignId('customer_id')->constrained('customers');
             $table->foreignId('vehicle_id')->constrained('vehicles');
             $table->string('front_damage')->nullable();
             $table->string('front_photo')->nullable();
