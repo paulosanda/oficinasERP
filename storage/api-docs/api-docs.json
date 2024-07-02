@@ -1083,10 +1083,10 @@
                 ]
             }
         },
-        "/api/company/checkup-observation-types": {
+        "/api/checkup-observation-types": {
             "get": {
                 "tags": [
-                    "Company"
+                    "Admin,Company"
                 ],
                 "summary": "lista de observações",
                 "description": "lista de observações para checkup veicular",

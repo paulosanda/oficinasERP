@@ -83,7 +83,6 @@ Route::middleware(['auth:sanctum', 'ability:master,operator', InjectCompanyId::c
             Route::put('/', [CustomerController::class, 'update'])->name('customer.update');
             Route::post('/vehicle', [VehicleController::class, 'store'])->name('customer.vehicle.store');
             Route::post('/checkup', [CheckupController::class, 'store'])->name('customer.checkup.store');
-            Route::get('/checkup-observation-types', [CheckupObservationTypeController::class, 'index'])->name('checkup_observation.index');
 
             Route::prefix('quote')->group(function () {
                 Route::post('/', [QuoteController::class, 'store'])->name('quote.store');
@@ -122,4 +121,6 @@ Route::middleware(['auth:sanctum', 'ability:root,admin,master',  InjectCompanyId
     });
 
     Route::get('/company/roles', [RoleController::class, 'companyIndex'])->name('admin.company.rules.index');
+
+    Route::get('/checkup-observation-types', [CheckupObservationTypeController::class, 'index'])->name('checkup_observation.index');
 });
