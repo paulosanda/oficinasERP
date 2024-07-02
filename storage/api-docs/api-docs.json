@@ -1928,10 +1928,6 @@
                     "vehicle_id"
                 ],
                 "properties": {
-                    "company_id": {
-                        "type": "integer",
-                        "example": "1"
-                    },
                     "customer_id": {
                         "type": "integer",
                         "example": "2"
