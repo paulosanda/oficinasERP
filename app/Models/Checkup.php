@@ -10,6 +10,8 @@ class Checkup extends Model
     use HasFactory;
 
     protected $fillable = [
+        'company_id',
+        'customer_id',
         'vehicle_id',
         'front_damage',
         'front_photo',

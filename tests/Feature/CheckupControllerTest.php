@@ -49,10 +49,67 @@ class CheckupControllerTest extends TestCase
         ]);
 
         $this->checkup = Checkup::factory()->create([
+            'company_id' => $this->company->id,
+            'customer_id' => $this->customer->id,
             'vehicle_id' => $this->vehicle->id,
         ]);
 
         $this->checkupObservationType = CheckupObservationType::all();
+
+    }
+
+    public function testIndex(): void
+    {
+        $token = $this->user->createToken('teste', ['operator'])->plainTextToken;
+
+        $response = $this->withHeader('Authorization', 'Bearer '.$token)
+            ->get(route('company.checkups.index'));
+
+        $response->assertStatus(200);
+
+        $response->assertJsonStructure([
+            'current_page',
+            'data' => [
+                '*' => [
+                    'id',
+                    'company_id',
+                    'customer_id',
+                    'vehicle_id',
+                    'front_damage',
+                    'front_photo',
+                    'back_damage',
+                    'back_photo',
+                    'right_side_damage',
+                    'right_side_photo',
+                    'left_side_damage',
+                    'left_side_photo',
+                    'roof_damage',
+                    'roof_photo',
+                    'fuel_gauge',
+                    'fuel_gauge_photo',
+                    'evaluation',
+                    'created_at',
+                    'updated_at',
+                ],
+            ],
+            'first_page_url',
+            'from',
+            'last_page',
+            'last_page_url',
+            'links' => [
+                '*' => [
+                    'url',
+                    'label',
+                    'active',
+                ],
+            ],
+            'next_page_url',
+            'path',
+            'per_page',
+            'prev_page_url',
+            'to',
+            'total',
+        ]);
 
     }
 
@@ -61,6 +118,7 @@ class CheckupControllerTest extends TestCase
         $token = $this->user->createToken('teste', ['operator'])->plainTextToken;
 
         $payload = $this->checkUpData();
+
         $response = $this->withHeaders([
             'Authorization' => 'Bearer '.$token,
         ])->postJson(route('customer.checkup.store'),
@@ -74,6 +132,7 @@ class CheckupControllerTest extends TestCase
         $this->assertDatabaseCount('checkups', 2);
 
         $this->assertDatabaseHas('checkups', [
+            'company_id' => $this->company->id,
             'vehicle_id' => $this->vehicle->id,
             'front_damage' => $payload['front_damage'],
             'front_photo' => $payload['front_photo'],
@@ -142,6 +201,8 @@ class CheckupControllerTest extends TestCase
         $evaluation = ['aprovado para uso', 'manutenção recomendada'];
 
         return [
+            'company_id' => $this->company->id,
+            'customer_id' => $this->customer->id,
             'vehicle_id' => $this->vehicle->id,
             'front_damage' => fake()->text,
             'front_photo' => fake()->url,

@@ -77,6 +77,7 @@ Route::middleware(['auth:sanctum', 'ability:master', InjectCompanyId::class])->g
  */
 Route::middleware(['auth:sanctum', 'ability:master,operator', InjectCompanyId::class])->group(function () {
     Route::prefix('company')->group(function () {
+        Route::get('/checkups', [CheckupController::class, 'index'])->name('company.checkups.index');
         Route::prefix('customer')->group(function () {
             Route::post('/', [CustomerController::class, 'store'])->name('customer.create');
             Route::put('/', [CustomerController::class, 'update'])->name('customer.update');

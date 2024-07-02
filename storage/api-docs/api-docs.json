@@ -968,12 +968,69 @@
                 ]
             }
         },
+        "/api/company/checkups": {
+            "get": {
+                "tags": [
+                    "Company"
+                ],
+                "summary": "lista todas checkups da company",
+                "operationId": "CheckupVeicularIndex",
+                "parameters": [
+                    {
+                        "name": "paginate",
+                        "in": "query",
+                        "description": "Número de itens por página",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "example": 10
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/PaginatedCheckups"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/api/company/customer/checkup": {
             "post": {
                 "tags": [
                     "Company"
                 ],
-                "summary": "cria checkup veicular",
+                "summary": "cria checkup veicular pode ser acessado tanto por master como operator",
                 "operationId": "createCheckupVeicular",
                 "requestBody": {
                     "description": "dados para registro de checkup veicular",
@@ -1010,7 +1067,7 @@
                                     "properties": {
                                         "error": {
                                             "type": "string",
-                                            "example": "Unauthorizes"
+                                            "example": "Unauthorized"
                                         }
                                     },
                                     "type": "object"
@@ -1871,6 +1928,14 @@
                     "vehicle_id"
                 ],
                 "properties": {
+                    "company_id": {
+                        "type": "integer",
+                        "example": "1"
+                    },
+                    "customer_id": {
+                        "type": "integer",
+                        "example": "2"
+                    },
                     "vehicle_id": {
                         "type": "integer",
                         "example": "1"
@@ -1883,8 +1948,8 @@
                     },
                     "front_photo": {
                         "type": "string",
-                        "format": "binary",
-                        "example": "este deverá ser o upload de uma imagem",
+                        "format": "string",
+                        "example": "este deverá ser o upload de uma imagem - ainda não deve ser implementado",
                         "nullable": true
                     },
                     "back_damage": {
@@ -1896,8 +1961,8 @@
                     "back_photo": {
                         "description": "foto traseira",
                         "type": "string",
-                        "format": "binary",
-                        "example": "este deverá ser o upload de uma imagem",
+                        "format": "string",
+                        "example": "este deverá ser o upload de uma imagem - ainda não deve ser implementado",
                         "nullable": true
                     },
                     "right_side_damage": {
@@ -1909,8 +1974,8 @@
                     "right_side_photo": {
                         "description": "foto do lado direito",
                         "type": "string",
-                        "format": "binary",
-                        "example": "este deverá ser o upload de uma imagem",
+                        "format": "string",
+                        "example": "este deverá ser o upload de uma imagem - ainda não deve ser implementado",
                         "nullable": true
                     },
                     "left_side_damage": {
@@ -1922,8 +1987,8 @@
                     "left_side_photo": {
                         "description": "foto do lado esquerdo",
                         "type": "string",
-                        "format": "binary",
-                        "example": "este deverá ser o upload de uma imagem",
+                        "format": "string",
+                        "example": "este deverá ser o upload de uma imagem - ainda não deve ser implementado",
                         "nullable": true
                     },
                     "roof_damage": {
@@ -1935,25 +2000,25 @@
                     "roof_photo": {
                         "description": "foto do teto",
                         "type": "string",
-                        "format": "binary",
-                        "example": "este deverá ser o upload de uma imagem",
+                        "format": "string",
+                        "example": "este deverá ser o upload de uma imagem - ainda não deve ser implementado",
                         "nullable": true
                     },
                     "fuel_gauge": {
                         "description": "medidor do combustível marcando",
                         "type": "string",
-                        "example": "vazio,1/4, 1/2, 3/4 ou cheio",
+                        "example": "vazio ou 1/4 ou 1/2 ou 3/4 ou cheio",
                         "nullable": true
                     },
                     "fuel_gauge_photo": {
                         "description": "foto do marcador de combustível",
                         "type": "string",
-                        "format": "binary",
-                        "example": "este deverá ser o upload de uma imagem",
+                        "format": "string",
+                        "example": "este deverá ser o upload de uma imagem - ainda não deve ser implementado",
                         "nullable": true
                     },
                     "evaluation": {
-                        "description": "avaliação",
+                        "description": "campo enum deve ser - aprovado para uso ou manutenção recomendada",
                         "type": "string"
                     },
                     "checkup_observation": {
@@ -1962,6 +2027,86 @@
                             "$ref": "#/components/schemas/CheckupObservation"
                         },
                         "nullable": true
+                    }
+                },
+                "type": "object"
+            },
+            "PaginatedCheckups": {
+                "title": "Paginated Checkups",
+                "description": "Resposta paginada de checkups",
+                "properties": {
+                    "current_page": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Checkup"
+                        }
+                    },
+                    "first_page_url": {
+                        "type": "string",
+                        "example": "http://localhost/api/company/checkups?page=1"
+                    },
+                    "from": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "last_page": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "last_page_url": {
+                        "type": "string",
+                        "example": "http://localhost/api/company/checkups?page=1"
+                    },
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "properties": {
+                                "url": {
+                                    "type": "string",
+                                    "example": "http://localhost/api/company/checkups?page=1",
+                                    "nullable": true
+                                },
+                                "label": {
+                                    "type": "string",
+                                    "example": "1"
+                                },
+                                "active": {
+                                    "type": "boolean",
+                                    "example": true
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    "next_page_url": {
+                        "type": "string",
+                        "example": null,
+                        "nullable": true
+                    },
+                    "path": {
+                        "type": "string",
+                        "example": "http://localhost/api/company/checkups"
+                    },
+                    "per_page": {
+                        "type": "integer",
+                        "example": 10
+                    },
+                    "prev_page_url": {
+                        "type": "string",
+                        "example": null,
+                        "nullable": true
+                    },
+                    "to": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "total": {
+                        "type": "integer",
+                        "example": 1
                     }
                 },
                 "type": "object"
