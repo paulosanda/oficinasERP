@@ -9,9 +9,9 @@ class CheckupObservationTypeController extends Controller
 {
     /**
      * @OA\Get(
-     *     path="/api/company/checkup-observation-types",
+     *     path="/api/checkup-observation-types",
      *     operationId="checkupObservationTypes",
-     *     tags={"Company"},
+     *     tags={"Admin,Company"},
      *     summary="lista de observações",
      *     description="lista de observações para checkup veicular",
      *     security={{ "bearerAuth" : {} }},
