@@ -37,7 +37,7 @@ class QuoteCreateAction
             'quote_service.*.subtotal' => 'string|nullable',
             'quote_part.*.part_code' => 'string|nullable',
             'quote_part.*.description' => 'string|nullable',
-            'quote_part.*.quantity' => 'string|nullable',
+            'quote_part.*.quantity' => 'integer|nullable',
             'quote_part.*.value' => 'string|nullable',
             'quote_part.*.discount' => 'string|nullable',
             'quote_part.*.subtotal' => 'string|nullable',
@@ -87,7 +87,14 @@ class QuoteCreateAction
     private function getCompanyNumbering($data): int
     {
         $numbering = QuoteNumbering::where('company_id', $data['company_id'])->first();
-        $numbering->numbering += 1;
+        if (! $numbering) {
+            $numbering = QuoteNumbering::create([
+                'company_id' => $data['company_id'],
+                'numbering' => 1,
+            ]);
+        } else {
+            $numbering->numbering += 1;
+        }
 
         $numbering->save();
 

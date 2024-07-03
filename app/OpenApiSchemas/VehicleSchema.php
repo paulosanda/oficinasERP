@@ -22,3 +22,26 @@ namespace App\OpenApiSchemas;
  *)
  */
 class VehicleSchema {}
+
+/**
+ * @OA\Schema(
+ *     schema="vehicleResponse",
+ *    title="VehicleResponse",
+ *     description="Vehicle object",
+ *
+ *     @OA\Property(property="id", type="integer"),
+ *     @OA\Property(property="customer_id", type="integer"),
+ *     @OA\Property(property="brand", type="string"),
+ *     @OA\Property(property="model", type="string"),
+ *     @OA\Property(property="color", type="string"),
+ *     @OA\Property(property="year", type="string"),
+ *     @OA\Property(property="plate", type="string"),
+ *     @OA\Property(property="identification_number", type="string"),
+ *     @OA\Property(property="renavam", type="string"),
+ *     @OA\Property(property="monthly_mileage", type="string"),
+ *     @OA\Property(property="observation", type="string"),
+ *     @OA\Property(property="created_at", type="string"),
+ *     @OA\Property(property="updated_at", type="string")
+ * )
+ */
+class VehicleResponseSchema {}
