@@ -147,7 +147,7 @@ class CompanyAdminControllerTest extends TestCase
             ],
         ]);
 
-        $this->assertDatabaseCount('companies', 13);
+        $this->assertDatabaseCount('companies', 12);
     }
 
     public function testCreateCompanyWithoutInscricaoEstadual(): void
@@ -186,7 +186,7 @@ class CompanyAdminControllerTest extends TestCase
             'email',
         ]);
 
-        $this->assertDatabaseCount('companies', 14);
+        $this->assertDatabaseCount('companies', 13);
     }
 
     public function testIndex(): void

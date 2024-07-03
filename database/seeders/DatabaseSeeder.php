@@ -16,12 +16,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $company = Company::factory()->create([
+        Company::factory()->create([
             'company_name' => 'PS Tech',
         ]);
 
-        $user = User::factory()->create([
-            'company_id' => $company->id,
+        $pstech = Company::find(1);
+
+        $user = User::create([
+            'company_id' => $pstech->id,
             'name' => 'Paulo Sanda',
             'email' => 'paulosanda@gmail.com',
             'password' => '123',
@@ -40,5 +42,51 @@ class DatabaseSeeder extends Seeder
         $this->call(CheckupObservationTypeSeeder::class);
 
         $this->call(SchedulableServiceSeeder::class);
+
+        if (app()->environment('local')) {
+            Company::factory()->count(10)->create();
+
+            $companies = Company::where('id', '!=', 1)->get();
+
+            foreach ($companies as $company) {
+                $company_user = User::create([
+                    'company_id' => $company->id,
+                    'name' => fake()->name,
+                    'email' => fake()->email,
+                    'password' => fake()->password,
+                    'enable' => true,
+                ]);
+            }
+
+            $users = User::where('company_id', '!=', 1)->get();
+
+            foreach ($users as $user) {
+                UserRole::create([
+                    'user_id' => $user->id,
+                    'role_id' => 3,
+                ]);
+            }
+
+            foreach ($companies as $company) {
+                $i = 0;
+                while ($i < 10) {
+                    $company_user = User::create([
+                        'company_id' => $company->id,
+                        'name' => fake()->name,
+                        'email' => fake()->email,
+                        'password' => fake()->password,
+                        'enable' => true,
+                    ]);
+                    UserRole::create([
+                        'user_id' => $company_user->id,
+                        'role_id' => 4,
+                    ]);
+                    $i++;
+                }
+
+            }
+
+        }
+
     }
 }

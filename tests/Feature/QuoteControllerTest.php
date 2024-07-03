@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\Company;
 use App\Models\Customer;
+use App\Models\Quote;
 use App\Models\QuoteNumbering;
 use App\Models\User;
 use App\Models\Vehicle;
@@ -42,6 +43,155 @@ class QuoteControllerTest extends TestCase
         $this->vehicle = Vehicle::factory()->create([
             'customer_id' => $this->customer->id,
         ]);
+    }
+
+    public function testIndex(): void
+    {
+        $customer = Customer::factory()->count(10)->create(['company_id' => $this->company->id]);
+
+        $quoteData = $this->quoteData();
+
+        foreach ($customer as $customer) {
+            $vehicle = Vehicle::factory()->create([
+                'customer_id' => $customer->id,
+            ]);
+
+            $number = QuoteNumbering::where('company_id', $this->company->id)->first();
+
+            $quoteData['customer_id'] = $customer->id;
+            $quoteData['vehicle_id'] = $vehicle->id;
+            $quoteData['company_id'] = $this->company->id;
+            $quoteData['company_numbering'] = $number->numbering + 1;
+
+            Quote::create($quoteData);
+
+        }
+
+        $token = $this->user->createToken('teste', ['master'])->plainTextToken;
+
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer '.$token,
+        ])->getJson(route('quote.index').'?status=pending');
+
+        $response->assertStatus(200);
+
+        $response->assertJsonStructure([
+            'current_page',
+            'data' => [
+                [
+                    'id',
+                    'company_id',
+                    'company_numbering',
+                    'customer_id',
+                    'vehicle_id',
+                    'status',
+                    'entry_date',
+                    'exit_date',
+                    'problem_description',
+                    'report',
+                    'observation',
+                    'subtotal_service',
+                    'subtotal_part',
+                    'gross_total',
+                    'discount',
+                    'net_total',
+                    'total',
+                    'created_at',
+                    'updated_at',
+                    'customer' => [
+                        'id',
+                        'company_id',
+                        'type',
+                        'name',
+                        'email',
+                        'cellphone',
+                        'telephone',
+                        'cpf',
+                        'rg',
+                        'cnpj',
+                        'inscricao_estadual',
+                        'inscricao_municipal',
+                        'birthday',
+                        'profession',
+                        'address',
+                        'number',
+                        'postal_code',
+                        'neighborhood',
+                        'city',
+                        'state',
+                        'created_at',
+                        'updated_at',
+                        'vehicle' => [
+                            [
+                                'id',
+                                'customer_id',
+                                'brand',
+                                'model',
+                                'color',
+                                'year',
+                                'plate',
+                                'identification_number',
+                                'renavam',
+                                'monthly_mileage',
+                                'observation',
+                                'created_at',
+                                'updated_at',
+                            ],
+                        ],
+                    ],
+                    'vehicle' => [
+                        'id',
+                        'customer_id',
+                        'brand',
+                        'model',
+                        'color',
+                        'year',
+                        'plate',
+                        'identification_number',
+                        'renavam',
+                        'monthly_mileage',
+                        'observation',
+                        'created_at',
+                        'updated_at',
+                    ],
+                    'quote_service' => [],
+                    'quote_parts' => [],
+                ],
+            ],
+            'first_page_url',
+            'first_page_url',
+            'from',
+            'last_page',
+            'last_page_url',
+            'links' => [
+                [
+                    'url',
+                    'label',
+                    'active',
+                ],
+            ],
+            'next_page_url',
+            'path',
+            'per_page',
+            'prev_page_url',
+            'to',
+            'total',
+
+        ]);
+
+    }
+
+    public function testIndexStatusError(): void
+    {
+        $token = $this->user->createToken('teste', ['master'])->plainTextToken;
+
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer '.$token,
+        ])->getJson(route('quote.index').'?status=something');
+
+        $response->assertStatus(400);
+
+        $response->assertJson(['error' => 'Invalid status']);
     }
 
     public function testStore(): void

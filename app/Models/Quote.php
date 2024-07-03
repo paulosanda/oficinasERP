@@ -5,12 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Quote extends Model
 {
     use HasFactory;
 
-    protected $with = ['customer'];
+    protected $with = ['customer', 'vehicle', 'quoteService', 'quoteParts'];
 
     protected $fillable = [
         'company_id',
@@ -38,5 +39,15 @@ class Quote extends Model
     public function vehicle(): BelongsTo
     {
         return $this->belongsTo(Vehicle::class);
+    }
+
+    public function quoteService(): HasMany
+    {
+        return $this->hasMany(QuoteService::class);
+    }
+
+    public function quoteParts(): HasMany
+    {
+        return $this->hasMany(QuotePart::class);
     }
 }
