@@ -13,6 +13,7 @@ class Checkup extends Model
         'company_id',
         'customer_id',
         'vehicle_id',
+        'status',
         'front_damage',
         'front_photo',
         'back_damage',

@@ -9,7 +9,6 @@ namespace App\OpenApiSchemas;
  *     required={"vehicle_id"},
  *     description="Checkup veicular",
  *
- *     @OA\Property(property="company_id", type="integer", example="1"),
  *     @OA\Property(property="customer_id", type="integer", example="2"),
  *     @OA\Property(property="vehicle_id", type="integer", example="1"),
  *     @OA\Property(property="front_damage", type="string", nullable=true, description="avarias frontais", example="farol quebrado"),

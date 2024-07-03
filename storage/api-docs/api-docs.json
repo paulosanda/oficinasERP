@@ -1317,6 +1317,81 @@
             }
         },
         "/api/company/quote": {
+            "get": {
+                "tags": [
+                    "Company"
+                ],
+                "summary": "get orçamentos",
+                "description": "Retorna os orçamentos de acordo com o status solicitado em paginação conforme o paginate",
+                "operationId": "627541d92dacfef1472981fb052d55c9",
+                "parameters": [
+                    {
+                        "name": "paginate",
+                        "in": "query",
+                        "description": "Number of items per page",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "description": "Quote status (pending, accepted, rejected)",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of quotes",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/QuoteList"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
             "post": {
                 "tags": [
                     "Company"
@@ -1328,7 +1403,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Quote"
+                                "$ref": "#/components/schemas/QuoteCreate"
                             }
                         }
                     }
@@ -1928,10 +2003,6 @@
                     "vehicle_id"
                 ],
                 "properties": {
-                    "company_id": {
-                        "type": "integer",
-                        "example": "1"
-                    },
                     "customer_id": {
                         "type": "integer",
                         "example": "2"
@@ -2507,6 +2578,76 @@
             },
             "Quote": {
                 "title": "Quote",
+                "description": "Quote object",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "company_id": {
+                        "type": "integer"
+                    },
+                    "company_numbering": {
+                        "type": "integer"
+                    },
+                    "customer_id": {
+                        "type": "integer"
+                    },
+                    "vehicle_id": {
+                        "type": "integer"
+                    },
+                    "status": {
+                        "type": "string"
+                    },
+                    "entry_date": {
+                        "type": "string"
+                    },
+                    "exit_date": {
+                        "type": "string"
+                    },
+                    "problem_description": {
+                        "type": "string"
+                    },
+                    "report": {
+                        "type": "string"
+                    },
+                    "observation": {
+                        "type": "string"
+                    },
+                    "subtotal_service": {
+                        "type": "string"
+                    },
+                    "subtotal_part": {
+                        "type": "string"
+                    },
+                    "gross_total": {
+                        "type": "string"
+                    },
+                    "discount": {
+                        "type": "string"
+                    },
+                    "net_total": {
+                        "type": "string"
+                    },
+                    "total": {
+                        "type": "string"
+                    },
+                    "created_at": {
+                        "type": "string"
+                    },
+                    "updated_at": {
+                        "type": "string"
+                    },
+                    "customer": {
+                        "$ref": "#/components/schemas/Customer"
+                    },
+                    "vehicle": {
+                        "$ref": "#/components/schemas/vehicleResponse"
+                    }
+                },
+                "type": "object"
+            },
+            "QuoteCreate": {
+                "title": "QuoteCreate",
                 "description": "dados para orçamento",
                 "required": [
                     "customer_id",
@@ -2596,6 +2737,174 @@
                         "items": {
                             "$ref": "#/components/schemas/QuotePart"
                         }
+                    }
+                },
+                "type": "object"
+            },
+            "QuoteResponse": {
+                "title": "QuoteResponse",
+                "description": "dados para orçamento",
+                "required": [
+                    "customer_id",
+                    "vehicle_id",
+                    "entry_date",
+                    "problem_description",
+                    "subtotal_service",
+                    "subtotal_part",
+                    "gross_total",
+                    "net_total",
+                    "total"
+                ],
+                "properties": {
+                    "customer_id": {
+                        "description": "id do consumidor",
+                        "type": "integer",
+                        "example": "1009"
+                    },
+                    "vehicle_id": {
+                        "description": "id do veículo",
+                        "type": "integer",
+                        "example": "243"
+                    },
+                    "status": {
+                        "description": "status do orçamento",
+                        "type": "string",
+                        "enum": [
+                            "pending",
+                            "accepted",
+                            "rejected"
+                        ],
+                        "example": "pending"
+                    },
+                    "entry_date": {
+                        "description": "data de entrada do veículo",
+                        "type": "string",
+                        "example": "2024-03-15"
+                    },
+                    "exit_date": {
+                        "description": "data de saída do veículo",
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "problem_description": {
+                        "description": "descrição do problema",
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "report": {
+                        "description": "laudo",
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "observation": {
+                        "description": "observação",
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "subtotal_service": {
+                        "description": "sub total de serviço",
+                        "type": "string",
+                        "example": "300"
+                    },
+                    "subtotal_part": {
+                        "description": "sub total de peças e produtos",
+                        "type": "string",
+                        "example": "899,80"
+                    },
+                    "gross_total": {
+                        "description": "total bruto",
+                        "type": "string",
+                        "example": "1199,80"
+                    },
+                    "discount": {
+                        "description": "desconto",
+                        "type": "string",
+                        "example": "0"
+                    },
+                    "net_total": {
+                        "description": "total líquido",
+                        "type": "string",
+                        "example": "1199,80"
+                    },
+                    "total": {
+                        "description": "total",
+                        "type": "string",
+                        "example": "1199,80"
+                    },
+                    "quote_service": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/QuoteService"
+                        }
+                    },
+                    "quote_part": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/QuotePart"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "QuoteList": {
+                "title": "Quote List",
+                "description": "List of quotes",
+                "properties": {
+                    "current_page": {
+                        "type": "integer"
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Quote"
+                        }
+                    },
+                    "first_page_url": {
+                        "type": "string"
+                    },
+                    "from": {
+                        "type": "integer"
+                    },
+                    "last_page": {
+                        "type": "integer"
+                    },
+                    "last_page_url": {
+                        "type": "string"
+                    },
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "properties": {
+                                "url": {
+                                    "type": "string"
+                                },
+                                "label": {
+                                    "type": "string"
+                                },
+                                "active": {
+                                    "type": "boolean"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    "next_page_url": {
+                        "type": "string"
+                    },
+                    "path": {
+                        "type": "string"
+                    },
+                    "per_page": {
+                        "type": "integer"
+                    },
+                    "prev_page_url": {
+                        "type": "string"
+                    },
+                    "to": {
+                        "type": "integer"
+                    },
+                    "total": {
+                        "type": "integer"
                     }
                 },
                 "type": "object"
@@ -2971,6 +3280,52 @@
                         "description": "observações para o cadastro do veículo",
                         "type": "string",
                         "nullable": true
+                    }
+                },
+                "type": "object"
+            },
+            "vehicleResponse": {
+                "title": "VehicleResponse",
+                "description": "Vehicle object",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "customer_id": {
+                        "type": "integer"
+                    },
+                    "brand": {
+                        "type": "string"
+                    },
+                    "model": {
+                        "type": "string"
+                    },
+                    "color": {
+                        "type": "string"
+                    },
+                    "year": {
+                        "type": "string"
+                    },
+                    "plate": {
+                        "type": "string"
+                    },
+                    "identification_number": {
+                        "type": "string"
+                    },
+                    "renavam": {
+                        "type": "string"
+                    },
+                    "monthly_mileage": {
+                        "type": "string"
+                    },
+                    "observation": {
+                        "type": "string"
+                    },
+                    "created_at": {
+                        "type": "string"
+                    },
+                    "updated_at": {
+                        "type": "string"
                     }
                 },
                 "type": "object"

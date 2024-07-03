@@ -84,9 +84,6 @@ Route::middleware(['auth:sanctum', 'ability:master,operator', InjectCompanyId::c
             Route::post('/vehicle', [VehicleController::class, 'store'])->name('customer.vehicle.store');
             Route::post('/checkup', [CheckupController::class, 'store'])->name('customer.checkup.store');
 
-            Route::prefix('quote')->group(function () {
-                Route::post('/', [QuoteController::class, 'store'])->name('quote.store');
-            });
             Route::prefix('schedulable')->group(function () {
                 Route::get('/services', [ScheduledServiceController::class, 'listService'])->name('schedulable_services.list');
 
@@ -96,6 +93,10 @@ Route::middleware(['auth:sanctum', 'ability:master,operator', InjectCompanyId::c
                 Route::get('/', [ScheduledServiceController::class, 'index'])->name('schedule_service.index');
             });
 
+        });
+        Route::prefix('quote')->group(function () {
+            Route::post('/', [QuoteController::class, 'store'])->name('quote.store');
+            Route::get('/', [QuoteController::class, 'index'])->name('quote.index');
         });
     });
 });
