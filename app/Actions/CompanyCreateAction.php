@@ -7,6 +7,7 @@ use App\Models\QuoteNumbering;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CompanyCreateAction
 {
@@ -33,6 +34,8 @@ class CompanyCreateAction
     {
         $data = $request->validate($this->rules());
 
+        DB::beginTransaction();
+
         try {
             if ($request->hasFile('logo') && $request->file('logo')->isValid()) {
                 $logo = $request->file('logo');
@@ -47,8 +50,12 @@ class CompanyCreateAction
                 'numbering' => 0,
             ]);
 
+            DB::commit();
+
             return response()->json($newCompany, 200);
         } catch (Exception $e) {
+            DB::rollBack();
+
             return response()->json(['error' => $e->getMessage()]);
         }
     }
