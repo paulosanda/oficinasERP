@@ -19,6 +19,7 @@ class Company extends Model
     protected $table = 'companies';
 
     protected $fillable = [
+        'logo',
         'company_name',
         'cnpj',
         'inscricao_estadual',

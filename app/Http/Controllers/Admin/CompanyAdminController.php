@@ -57,14 +57,15 @@ class CompanyAdminController extends Controller
      *     summary="cria novo cadastro de company",
      *     security={{ "bearerAuth": {} }},
      *
-     *     @OA\RequestBody(
-     *         request="CreateCompany",
-     *         description="Request body to create company",
+     *          @OA\RequestBody(
+     *          required=true,
      *
-     *         @OA\JsonContent(
-     *             ref="#/components/schemas/BodyRequestCompany"
-     *         )
-     *     ),
+     *          @OA\MediaType(
+     *              mediaType="multipart/form-data",
+     *
+     *              @OA\Schema(ref="#/components/schemas/BodyRequestCompany")
+     *          )
+     *      ),
      *
      *     @OA\Response(
      *         response=200,
