@@ -7,6 +7,7 @@ use App\Models\CheckupObservation;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CheckupCreateAction
 {
@@ -43,13 +44,19 @@ class CheckupCreateAction
     {
         $data = $request->validate($this->rules());
 
+        DB::beginTransaction();
+
         try {
             $checkUpId = $this->createCheckUp($data);
 
             $this->createCheckUpObservation($checkUpId, $data);
 
+            DB::commit();
+
             return response()->json(['message' => 'success'], 200);
         } catch (Exception $e) {
+            DB::rollBack();
+
             return response()->json(['error' => $e->getMessage()], 422);
         }
     }
