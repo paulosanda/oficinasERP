@@ -8,6 +8,7 @@ use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class UserCreateAction
@@ -29,13 +30,19 @@ class UserCreateAction
 
         $data['user']['company_id'] = $companyId;
 
+        DB::beginTransaction();
+
         try {
             $user = User::create($data['user']);
 
             $this->createUserRoles($data['roles'], $user->id);
 
+            DB::commit();
+
             return response()->json(['message' => 'success']);
         } catch (Exception $e) {
+            DB::rollBack();
+
             return response()->json(['error' => $e->getMessage()]);
         }
     }
