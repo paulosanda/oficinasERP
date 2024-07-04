@@ -25,6 +25,7 @@ class CompanyCreateAction
             'state' => 'string|required',
             'cellphone' => 'string|required',
             'email' => 'email|required',
+            'logo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|nullable',
         ];
     }
 
@@ -33,6 +34,12 @@ class CompanyCreateAction
         $data = $request->validate($this->rules());
 
         try {
+            if ($request->hasFile('logo') && $request->file('logo')->isValid()) {
+                $logo = $request->file('logo');
+                $logoName = time().'_'.$logo->getClientOriginalName();
+                $path = $logo->storeAs('public/logos', $logoName, 'public');
+                $data['logo'] = basename($path);
+            }
             $newCompany = Company::create($data);
 
             QuoteNumbering::create([
