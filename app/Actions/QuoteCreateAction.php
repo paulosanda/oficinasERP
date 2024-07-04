@@ -8,6 +8,7 @@ use App\Models\QuotePart;
 use App\Models\QuoteService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use PHPUnit\Exception;
 
 class QuoteCreateAction
@@ -52,6 +53,8 @@ class QuoteCreateAction
         $numbering = $this->getCompanyNumbering($data);
         $data['company_numbering'] = $numbering;
 
+        DB::beginTransaction();
+
         try {
             $quote = Quote::create($data);
 
@@ -59,11 +62,17 @@ class QuoteCreateAction
 
             $this->createParts($data, $quote->id);
 
+            DB::commit();
+
             return response()->json(['message' => 'success']);
 
         } catch (Exception $e) {
+            DB::rollBack();
+
             return response()->json(['error' => $e->getMessage()]);
         } catch (\Exception $e) {
+            DB::rollBack();
+
             return response()->json(['error' => $e->getMessage()]);
         }
     }
