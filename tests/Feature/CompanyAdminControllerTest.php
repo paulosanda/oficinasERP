@@ -11,6 +11,7 @@ use Database\Seeders\RoleSeeder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Artisan;
 use Tests\TestCase;
 
@@ -48,12 +49,13 @@ class CompanyAdminControllerTest extends TestCase
         $token = $this->user->createToken('teste', ['root'])->plainTextToken;
 
         $companiesQtity = Company::all()->count();
-
         $quoteNumberingQtity = QuoteNumbering::all()->count();
+
+        $file = UploadedFile::fake()->image('logo.png', 100, 100);
 
         $response = $this->withHeaders([
             'Authorization' => 'Bearer '.$token,
-        ])->postJson(route('admin.create.company'), [
+        ])->post(route('admin.create.company'), [
             'company_name' => fake()->company,
             'cnpj' => fake()->numerify('###.###.###/0001-##'),
             'inscricao_estadual' => fake()->numerify('###.###.###-##'),
@@ -66,6 +68,7 @@ class CompanyAdminControllerTest extends TestCase
             'state' => 'SP',
             'cellphone' => fake()->phoneNumber,
             'email' => fake()->email,
+            'logo' => $file,
         ]);
 
         $response->assertStatus(200);
@@ -83,6 +86,7 @@ class CompanyAdminControllerTest extends TestCase
             'state',
             'cellphone',
             'email',
+            'logo',
         ]);
 
         $this->assertDatabaseCount('companies', $companiesQtity + 1);

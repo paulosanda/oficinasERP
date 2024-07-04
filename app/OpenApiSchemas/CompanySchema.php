@@ -21,6 +21,7 @@ namespace App\OpenApiSchemas;
  *     @OA\Property(property="state",type="string",description="state"),
  *     @OA\Property(property="cellphone",type="string",description="cellphone"),
  *     @OA\Property(property="email", type="string", description="email"),
+ *     @OA\Property(property="logo", type="string", description="logo.png", format="binary"),
  * )
  */
 class CompanySchema {}
@@ -33,6 +34,7 @@ class CompanySchema {}
  *     required={"id"},
  *
  *     @OA\Property(property="id", type="integer", format="int64", description="id do company"),
+ *     @OA\Property(property="logo", type="string", description="logo.png"),
  *     @OA\Property(property="company_name", type="string", description="razão social"),
  *     @OA\Property(property="cnpj", type="string", description="cnpj do company"),
  *     @OA\Property(property="inscricao_estadual",type="string",nullable=true,description="inscrição estadual do company"),

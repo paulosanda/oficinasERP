@@ -121,9 +121,9 @@
                 "summary": "cria novo cadastro de company",
                 "operationId": "createCompany",
                 "requestBody": {
-                    "description": "Request body to create company",
+                    "required": true,
                     "content": {
-                        "application/json": {
+                        "multipart/form-data": {
                             "schema": {
                                 "$ref": "#/components/schemas/BodyRequestCompany"
                             }
@@ -2247,6 +2247,11 @@
                     "email": {
                         "description": "email",
                         "type": "string"
+                    },
+                    "logo": {
+                        "description": "logo.png",
+                        "type": "string",
+                        "format": "binary"
                     }
                 },
                 "type": "object"
@@ -2262,6 +2267,10 @@
                         "description": "id do company",
                         "type": "integer",
                         "format": "int64"
+                    },
+                    "logo": {
+                        "description": "logo.png",
+                        "type": "string"
                     },
                     "company_name": {
                         "description": "razão social",
