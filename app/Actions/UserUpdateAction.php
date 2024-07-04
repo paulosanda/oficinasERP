@@ -7,6 +7,7 @@ use App\Models\UserRole;
 use App\Trait\RemoveNullElementsFromArray;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Mockery\Exception;
 
 class UserUpdateAction
@@ -28,6 +29,8 @@ class UserUpdateAction
 
     public function execute($userId, Request $request): JsonResponse
     {
+        DB::beginTransaction();
+
         try {
             $data = $request->validate($this->rules());
 
@@ -42,9 +45,13 @@ class UserUpdateAction
 
             }
 
+            DB::commit();
+
             return response()->json(['message' => 'success']);
 
         } catch (Exception $e) {
+            DB::rollBack();
+
             return response()->json(['error' => $e->getMessage()], 500);
         }
 
