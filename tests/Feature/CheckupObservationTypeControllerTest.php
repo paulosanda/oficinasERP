@@ -42,4 +42,32 @@ class CheckupObservationTypeControllerTest extends TestCase
                 'type'],
         ]);
     }
+
+    public function testStore(): void
+    {
+        $token = $this->user->createToken('teste', ['root', 'admin'])->plainTextToken;
+
+        $newObservationType = ['type' => 'teste de cadastro de nova observação'];
+
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer '.$token,
+        ])->postJson(route('checkup_observation_type.store'), $newObservationType);
+
+        $response->assertStatus(201);
+
+        $this->assertDatabaseHas('checkup_observation_types', $newObservationType);
+    }
+
+    public function testStoreErrorInvalidAbility(): void
+    {
+        $token = $this->user->createToken('teste', ['master', 'operator'])->plainTextToken;
+
+        $newObservationType = ['type' => 'teste de cadastro de nova observação'];
+
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer '.$token,
+        ])->postJson(route('checkup_observation_type.store'), $newObservationType);
+
+        $response->assertStatus(403);
+    }
 }
