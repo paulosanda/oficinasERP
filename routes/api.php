@@ -59,6 +59,8 @@ Route::middleware(['auth:sanctum', 'ability:root,admin'])->group(function () {
             Route::post('/', [SystemServiceAdminController::class, 'store'])->name('system_service.store');
             Route::put('/{systemServiceID}', [SystemServiceAdminController::class, 'update'])->name('system_service.update');
         });
+
+        Route::post('checkup-observation-type', [CheckupObservationTypeController::class, 'store'])->name('checkup_observation_type.store');
     });
 });
 
