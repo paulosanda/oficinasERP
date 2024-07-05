@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('quote_parts', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('quote_id')->constrained('quotes');
+            $table->foreignId('quote_id')->constrained('quotes')->cascadeOnDelete();
             $table->string('part_code')->nullable();
             $table->string('description');
             $table->tinyInteger('quantity');

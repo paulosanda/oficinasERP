@@ -1139,6 +1139,71 @@
                 ]
             }
         },
+        "/api/admin/checkout-observation": {
+            "post": {
+                "tags": [
+                    "Admin"
+                ],
+                "summary": "newCheckupObservationType",
+                "description": "cria tipo de observação para checkup veicular",
+                "operationId": "checkupObservationTypeCreate",
+                "requestBody": {
+                    "description": "novo tipo de observação para checkup veicular",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "type": {
+                                        "type": "string",
+                                        "example": "troca filtro do ar condicionado"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Checkup Observation Type Created"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Não autorizado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Invalid ability provided."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/api/company/customer": {
             "get": {
                 "tags": [
