@@ -26,7 +26,7 @@ class CompanyCreateAction
             'state' => 'string|required',
             'cellphone' => 'string|required',
             'email' => 'email|required',
-            'logo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|nullable',
+            'logo' => 'image|mimes:jpeg,png,jpg,gif,svg|nullable',
         ];
     }
 
@@ -37,11 +37,10 @@ class CompanyCreateAction
         DB::beginTransaction();
 
         try {
-            if ($request->hasFile('logo') && $request->file('logo')->isValid()) {
-                $logo = $request->file('logo');
-                $logoName = time().'_'.$logo->getClientOriginalName();
-                $path = $logo->storeAs('public/logos', $logoName, 'public');
-                $data['logo'] = basename($path);
+            if (isset($data['logo'])) {
+                $logoName = time().'_'.$data['logo']->getClientOriginalName();
+                $path = $data['logo']->storeAs('public/logos', $logoName, 'public');
+                $data['logo'] = $logoName;
             }
             $newCompany = Company::create($data);
 

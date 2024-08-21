@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('service_order_parts', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('service_order_id')->constrained('service_order')->cascadeOnDelete();
+            $table->foreignId('service_order_id')->constrained('service_orders')->cascadeOnDelete();
             $table->string('part_code')->nullable();
             $table->string('description');
             $table->tinyInteger('quantity');

@@ -27,7 +27,7 @@ class UserUpdateAction
         ];
     }
 
-    public function execute($userId, Request $request): JsonResponse
+    public function execute(int $userId, Request $request): JsonResponse
     {
         DB::beginTransaction();
 
@@ -36,9 +36,15 @@ class UserUpdateAction
 
             $dataNullRemoved = $this->removeNull($data);
 
+            if (empty($data['roles'])) {
+                unset($data['roles']);
+            }
+
             $user = User::findOrFail($userId);
 
-            $user->update($dataNullRemoved);
+            if ($dataNullRemoved['email'] != $user->email) {
+                $user->update($dataNullRemoved);
+            }
 
             if (isset($data['roles'])) {
                 $this->updateRoles($userId, $data);
@@ -68,6 +74,5 @@ class UserUpdateAction
                 'role_id' => $role['id'],
             ]);
         }
-
     }
 }
