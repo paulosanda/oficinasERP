@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\Company\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Web\Admin\CompanyController;
+use App\Http\Middleware\IsUserEnable;
 use App\Http\Middleware\SystemAdmin;
 use Illuminate\Support\Facades\Route;
 
@@ -25,6 +27,16 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::middleware(IsUserEnable::class)->group(function () {
+        Route::middleware(\App\Http\Middleware\CompanyMaster::class)->group(function () {
+            Route::prefix('user')->group(function () {
+                Route::get('/', [UserController::class, 'index'])->name('company.user.index');
+                Route::get('/create', [UserController::class, 'create'])->name('web.company.user.create');
+            });
+        });
+
+    });
 });
 
 require __DIR__.'/auth.php';
