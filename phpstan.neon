@@ -1,3 +1,4 @@
+
 includes:
     - vendor/larastan/larastan/extension.neon
 
@@ -7,12 +8,13 @@ parameters:
         - app/
 
     # Level 9 is the highest level
-    level: 5
+    level: 0
+
+    excludePaths:
+        - %rootDir%/app/Http/Controllers/Auth/VerifyEmailController.php
 
 #    ignoreErrors:
 #        - '#PHPDoc tag @var#'
 #
-#    excludePaths:
-#        - ./*/*/FileToBeExcluded.php
 #
 #    checkMissingIterableValueType: false

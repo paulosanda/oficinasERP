@@ -42,9 +42,11 @@ class UserUpdateAction
 
             $user = User::findOrFail($userId);
 
-            if ($dataNullRemoved['email'] != $user->email) {
-                $user->update($dataNullRemoved);
+            if ($dataNullRemoved['email'] == $user->email) {
+                unset($dataNullRemoved['email']);
             }
+
+            $user->update($dataNullRemoved);
 
             if (isset($data['roles'])) {
                 $this->updateRoles($userId, $data);
