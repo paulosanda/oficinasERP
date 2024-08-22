@@ -133,7 +133,7 @@ class UserAdminControllerTest extends TestCase
         ])->putJson(route('user.update', $payload['id']), $payload);
 
         $response->assertStatus(200);
-
+        //        dd(User::all()->toArray());
         $this->assertDatabaseHas('users', [
             'enable' => false,
         ]);

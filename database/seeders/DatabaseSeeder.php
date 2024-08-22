@@ -53,7 +53,7 @@ class DatabaseSeeder extends Seeder
                     'company_id' => $company->id,
                     'name' => fake()->name,
                     'email' => fake()->email,
-                    'password' => fake()->password,
+                    'password' => '123',
                     'enable' => true,
                 ]);
             }

@@ -97,7 +97,17 @@ class MessageTypeAdminController extends Controller
             'message' => 'string',
         ];
 
-        $data = $request->validate($rules);
+        $messages = [
+            'schedulable_service_id.integer' => 'O ID do serviço agendável deve ser um número inteiro.',
+            'schedulable_service_id.required' => 'O ID do serviço agendável é obrigatório.',
+            'model_name.required' => 'O nome do modelo é obrigatório.',
+            'model_name.string' => 'O nome do modelo deve ser um texto.',
+            'title.required' => 'O título é obrigatório.',
+            'title.string' => 'O título deve ser um texto.',
+            'message.string' => 'A mensagem deve ser um texto.',
+        ];
+
+        $data = $request->validate($rules, $messages);
 
         MessageType::create($data);
 

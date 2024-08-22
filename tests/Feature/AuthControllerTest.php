@@ -36,7 +36,7 @@ class AuthControllerTest extends TestCase
 
     public function testLogin(): void
     {
-        $response = $this->postJson(route('login'), [
+        $response = $this->postJson(route('api.login'), [
             'email' => $this->user->email,
             'password' => $this->password,
         ]);
@@ -52,7 +52,7 @@ class AuthControllerTest extends TestCase
     {
         $password = 'anotherOne';
 
-        $response = $this->postJson(route('login'), [
+        $response = $this->postJson(route('api.login'), [
             'email' => $this->user->email,
             'password' => $password,
         ]);
@@ -68,7 +68,7 @@ class AuthControllerTest extends TestCase
     {
         $email = 'another@mis.c';
 
-        $response = $this->postJson(route('login'), [
+        $response = $this->postJson(route('api.login'), [
             'email' => $email,
             'password' => $this->password,
         ]);
@@ -84,7 +84,7 @@ class AuthControllerTest extends TestCase
     {
         $this->user->update(['enable' => 0]);
 
-        $response = $this->postJson(route('login'), [
+        $response = $this->postJson(route('api.login'), [
             'email' => $this->user->email,
             'password' => $this->password,
         ]);
