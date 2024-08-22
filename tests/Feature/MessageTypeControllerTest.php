@@ -122,10 +122,10 @@ class MessageTypeControllerTest extends TestCase
         $response->assertStatus(422);
 
         $response->assertJson([
-            'message' => 'validation.required',
+            'message' => 'O nome do modelo é obrigatório.',
             'errors' => [
                 'model_name' => [
-                    'validation.required',
+                    'O nome do modelo é obrigatório.',
                 ],
             ],
         ]);

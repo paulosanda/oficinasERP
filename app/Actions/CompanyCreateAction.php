@@ -30,9 +30,28 @@ class CompanyCreateAction
         ];
     }
 
+    protected function messages(): array
+    {
+        return [
+            'company_name.required' => 'O nome da empresa é obrigatório.',
+            'cnpj.required' => 'O CNPJ é obrigatório.',
+            'address.required' => 'O endereço é obrigatório.',
+            'number.required' => 'O número é obrigatório.',
+            'neighborhood.required' => 'O bairro é obrigatório.',
+            'postal_code.required' => 'O CEP é obrigatório.',
+            'city.required' => 'A cidade é obrigatória.',
+            'state.required' => 'O estado é obrigatório.',
+            'cellphone.required' => 'O celular é obrigatório.',
+            'email.required' => 'O e-mail é obrigatório.',
+            'email.email' => 'O e-mail deve ser um endereço de e-mail válido.',
+            'logo.image' => 'O arquivo de logo deve ser uma imagem.',
+            'logo.mimes' => 'A logo deve ser um arquivo do tipo: jpeg, png, jpg, gif, svg.',
+        ];
+    }
+
     public function execute(Request $request): JsonResponse
     {
-        $data = $request->validate($this->rules());
+        $data = $request->validate($this->rules(), $this->messages());
 
         DB::beginTransaction();
 
