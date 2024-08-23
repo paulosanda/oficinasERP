@@ -3,6 +3,8 @@
 use App\Http\Controllers\Company\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Web\Admin\CompanyController;
+use App\Http\Controllers\Web\Company\CustomerController;
+use App\Http\Middleware\CompanyMaster;
 use App\Http\Middleware\IsUserEnable;
 use App\Http\Middleware\SystemAdmin;
 use Illuminate\Support\Facades\Route;
@@ -29,13 +31,16 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::middleware(IsUserEnable::class)->group(function () {
-        Route::middleware(\App\Http\Middleware\CompanyMaster::class)->group(function () {
+        Route::middleware(CompanyMaster::class)->group(function () {
             Route::prefix('user')->group(function () {
                 Route::get('/', [UserController::class, 'index'])->name('company.user.index');
                 Route::get('/create', [UserController::class, 'create'])->name('web.company.user.create');
             });
         });
-
+        Route::prefix('customer')->group(function () {
+            Route::get('/', [CustomerController::class, 'index'])->name('web.company.customer.index');
+            Route::get('/create', [CustomerController::class, 'create'])->name('web.customer.create');
+        });
     });
 });
 

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('company_id')->constrained('companies');
             $table->enum('type', ['pf', 'pj']);
             $table->string('name');
-            $table->string('email')->nullable();
+            $table->text('email')->nullable();
             $table->string('cellphone')->nullable();
             $table->string('telephone')->nullable();
             $table->string('cpf')->nullable();
@@ -26,11 +26,11 @@ return new class extends Migration
             $table->string('inscricao_municipal')->nullable();
             $table->date('birthday')->nullable();
             $table->string('profession')->nullable();
-            $table->string('address')->nullable();
+            $table->text('address')->nullable();
             $table->string('number')->nullable();
             $table->string('postal_code')->nullable();
-            $table->string('neighborhood')->nullable();
-            $table->string('city')->nullable();
+            $table->text('neighborhood')->nullable();
+            $table->text('city')->nullable();
             $table->string('state')->nullable();
             $table->timestamps();
         });

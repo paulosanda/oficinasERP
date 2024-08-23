@@ -13,7 +13,7 @@
                     <div id="dropdownNavbar" class="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44">
                         <ul class="py-2 text-sm text-gray-700" aria-labelledby="dropdownLargeButton">
                             <li>
-                                <a href="{{ route('company.user.index') }}" class="block px-4 py-2 hover:bg-gray-100">Todos</a>
+                                <a href="{{ route('company.user.index') }}" class="block px-4 py-2 hover:bg-gray-100">Listar</a>
                             </li>
                             <li>
                                 <a href="{{ route('web.company.user.create') }}" class="block px-4 py-2 hover:bg-gray-100">Cadastrar</a>
@@ -22,6 +22,24 @@
                         <div class="py-1">
                             <a href="#" class="block px-4 py-2 hover:bg-gray-100">Para usar</a>
                         </div>
+                    </div>
+                </li>
+                <li>
+                    <button id="customer-dropdownNavbarLink" data-dropdown-toggle="customer-dropdownNavbar" class="flex items-center text-gray-800 hover:text-gray-200">
+                        Clientes
+                        <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                        </svg>
+                    </button>
+                    <div id="customer-dropdownNavbar" class="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44">
+                        <ul class="py-2 text-sm text-gray-700" aria-labelledby="dropdownLargeButton">
+                            <li>
+                                <a href="{{ route('web.company.customer.index') }}" class="block px-4 py-2 hover:bg-gray-100">Listar</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('web.customer.create') }}" class="block px-4 py-2 hover:bg-gray-100">Cadastrar</a>
+                            </li>
+                        </ul>
                     </div>
                 </li>
                 <li>
@@ -34,7 +52,6 @@
                         <button type="submit" class="text-red-600 hover:text-red-800">Sair</button>
                     </form>
                 </li>
-
             </ul>
         </div>
     </div>
