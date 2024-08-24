@@ -54,9 +54,9 @@ class CustomerUpdateAction
 
             return response()->json(['message' => 'success']);
         } catch (Exception $e) {
-            return response()->json(['error' => $e->getMessage()]);
+            return response()->json(['error' => $e->getMessage()], 500);
         } catch (Throwable $e) {
-            return response()->json(['error' => $e->getMessage()]);
+            return response()->json(['error' => $e->getMessage()], 500);
         }
     }
 }

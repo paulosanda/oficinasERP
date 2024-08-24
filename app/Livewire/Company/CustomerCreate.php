@@ -134,14 +134,19 @@ class CustomerCreate extends Component
             ]);
         } elseif ($this->type == 'pj') {
             $request->merge([
+                'cnpj' => $this->cnpj,
                 'inscricao_estadual' => $this->inscricao_estadual,
                 'inscricao_municipal' => $this->inscricao_municipal,
             ]);
         }
 
-        $customer = app(CustomerCreateAction::class)->execute($request);
-        if ($customer->getStatusCode() === 200) {
+        try {
+            $customer = app(CustomerCreateAction::class)->execute($request);
+
             $this->modalSuccess = true;
+        } catch (\Exception $exception) {
+            $this->errorMessage = $exception->getMessage();
+            $this->modalError = true;
         }
 
     }
