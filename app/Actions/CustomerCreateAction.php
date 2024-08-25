@@ -40,9 +40,12 @@ class CustomerCreateAction
         try {
             $newCustomer = Customer::create($data);
 
-            return response()->json(['message' => 'success']);
+            return response()->json([
+                'message' => 'success',
+                'customer_id' => $newCustomer->id,
+            ], 200);
         } catch (Exception $e) {
-            return response()->json(['error' => $e->getMessage()]);
+            return response()->json(['error' => $e->getMessage()], 500);
         }
     }
 }

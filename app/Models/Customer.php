@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Crypt;
 
+/**
+ * @method static create(array $data)
+ */
 class Customer extends Model
 {
     use HasFactory;

@@ -28,7 +28,7 @@
             <input type="text" id="inscricao_municipal" wire:model="inscricao_municipal" class="block w-full p-2 text-gray-900 border border-gray-300
                 rounded-lg bg-gray- text-sm focus:ring-blue-500 focus:border-blue-500" required>
         </div>
-        <div>@error('inscricao_estadual')<span class="error">{{ $message }}</span> @enderror</div>
+        <div>@error('inscricao_municipal')<span class="error">{{ $message }}</span> @enderror</div>
         <div class="grid grid-cols-3 gap-3 py-1 px-1">
             <div class="col-span-1">
                 <label for="postal_code" class="block mb- text-sm font-medium text-gray-900 py-1">CEP</label>

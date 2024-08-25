@@ -224,7 +224,7 @@ class CustomerControllerTest extends TestCase
             'Authorization' => 'Bearer '.$token,
         ])->putJson(route('customer.update'), $customerUpdate);
 
-        $response->assertStatus(200);
+        $response->assertStatus(500);
 
         $response->assertJson(['error' => 'Attempt to read property "id" on null']);
 
