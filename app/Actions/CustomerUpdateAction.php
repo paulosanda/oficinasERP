@@ -23,7 +23,7 @@ class CustomerUpdateAction
             'name' => 'string|required',
             'email' => 'email',
             'cellphone' => 'string',
-            'telephone' => 'string',
+            'telephone' => 'string|nullable',
             'cpf' => 'cpf',
             'rg' => 'string',
             'cnpj' => 'string',
@@ -39,10 +39,24 @@ class CustomerUpdateAction
         ];
     }
 
+    protected function messages(): array
+    {
+        return [
+            'company_id.integer|required' => 'Algo errado ocorreu, o identificador de sua empresa não foi carregado para este cadastro.',
+            'id.integer|required' => 'O cliente não pode ser identificado para alteração do cadastro',
+            'name.string' => 'O nome do cliente não foi compreendido para alteração do cadastro',
+            'email' => 'O email do cliente não foi compreendido para alteração do cadastro',
+            'cellphone' => 'O celular do cliente não foi compreendido para alteração do cadastro',
+            '',
+        ];
+    }
+
     public function execute(Request $request): JsonResponse
     {
-        $data = $request->validate($this->rules());
+
+        $data = $request->validate($this->rules(), $this->messages());
         try {
+
             $this->isEmpty(Customer::class, Company::COMPANY_INDEX, $data['company_id']);
 
             $customer = Customer::where('id', $data['id'])->where('company_id', $data['company_id'])->first();
