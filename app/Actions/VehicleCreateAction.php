@@ -32,7 +32,10 @@ class VehicleCreateAction
         try {
             $vehicle = Vehicle::create($data);
 
-            return response()->json(['message' => 'success'], 200);
+            return response()->json([
+                'message' => 'success',
+                'vehicle_id' => $vehicle->id,
+            ], 200);
 
         } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()]);

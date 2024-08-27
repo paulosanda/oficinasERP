@@ -97,6 +97,7 @@ class CheckupController extends Controller
      */
     public function store(Request $request)
     {
+        //        todo inserir do company_id na documentação swagger
         return app(CheckupCreateAction::class)->execute($request);
 
     }

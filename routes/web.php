@@ -3,6 +3,7 @@
 use App\Http\Controllers\Company\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Web\Admin\CompanyController;
+use App\Http\Controllers\Web\Company\CheckupController;
 use App\Http\Controllers\Web\Company\CustomerController;
 use App\Http\Middleware\CompanyMaster;
 use App\Http\Middleware\IsUserEnable;
@@ -40,6 +41,11 @@ Route::middleware('auth')->group(function () {
         Route::prefix('customer')->group(function () {
             Route::get('/', [CustomerController::class, 'index'])->name('web.company.customer.index');
             Route::get('/create', [CustomerController::class, 'create'])->name('web.customer.create');
+        });
+        Route::prefix('checkup')->group(function () {
+            Route::get('/create', [CheckupController::class, 'create'])->name('web.checkup.create');
+            Route::get('/', [CheckupController::class, 'index'])->name('web.checkup.index');
+            Route::get('/{checkupId}', [CheckupController::class, 'show'])->name('web.checkup.show');
         });
     });
 });

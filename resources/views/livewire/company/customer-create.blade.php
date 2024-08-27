@@ -108,7 +108,7 @@
                     </svg>
                     <span class="sr-only">Icon description</span>
                 </button>
-              </div>
+            </div>
         </form>
     </div>
 

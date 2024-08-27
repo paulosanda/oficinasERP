@@ -27,15 +27,18 @@ class CheckupCreateAction
             'left_side_photo' => 'string|nullable',
             'roof_damage' => 'string|nullable',
             'roof_photo' => 'string|nullable',
-            'fuel_gauge' => 'string|nullable',
+            'fuel_gauge' => 'string|required',
             'fuel_gauge_photo' => 'string|nullable',
             'evaluation' => 'string|nullable',
+            'checkup_observation' => 'array|nullable',
+            'checkup_observation.*.checkup_observation_type_id' => 'nullable|integer',
+            'checkup_observation.*.observation' => 'nullable|string',
         ];
 
-        if (request()->has('checkup_observation') && is_array(request('checkup_observation'))) {
-            $rules['checkup_observation.*.checkup_observation_type_id'] = 'required|integer';
-            $rules['checkup_observation.*.observation'] = 'string';
-        }
+        //        if (request()->has('checkup_observation')) {
+        //            $rules['checkup_observation.*.checkup_observation_type_id'] = 'required|integer';
+        //            $rules['checkup_observation.*.observation'] = 'string';
+        //        }
 
         return $rules;
     }
@@ -53,7 +56,10 @@ class CheckupCreateAction
 
             DB::commit();
 
-            return response()->json(['message' => 'success'], 200);
+            return response()->json([
+                'message' => 'success',
+                'checkupId' => $checkUpId,
+            ], 200);
         } catch (Exception $e) {
             DB::rollBack();
 
