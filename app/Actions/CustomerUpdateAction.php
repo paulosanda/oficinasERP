@@ -47,7 +47,6 @@ class CustomerUpdateAction
             'name.string' => 'O nome do cliente não foi compreendido para alteração do cadastro',
             'email' => 'O email do cliente não foi compreendido para alteração do cadastro',
             'cellphone' => 'O celular do cliente não foi compreendido para alteração do cadastro',
-            '',
         ];
     }
 

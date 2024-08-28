@@ -25,6 +25,13 @@ class VehicleCreateAction
         ];
     }
 
+    public function messages(): array
+    {
+        return [
+            'customer_id.integer|required' => 'Algo deu errado, o cliente para este cadastro não foi encontrado',
+        ];
+    }
+
     public function execute(Request $request): JsonResponse
     {
         $data = $request->validate($this->rules());
@@ -32,7 +39,10 @@ class VehicleCreateAction
         try {
             $vehicle = Vehicle::create($data);
 
-            return response()->json(['message' => 'success'], 200);
+            return response()->json([
+                'message' => 'success',
+                'vehicle_id' => $vehicle->id,
+            ], 200);
 
         } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()]);

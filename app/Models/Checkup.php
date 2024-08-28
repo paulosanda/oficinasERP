@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Checkup extends Model
 {
@@ -29,8 +31,18 @@ class Checkup extends Model
         'evaluation',
     ];
 
-    public function vehicle()
+    public function vehicle(): BelongsTo
     {
         return $this->belongsTo(Vehicle::class);
+    }
+
+    public function customer(): BelongsTo
+    {
+        return $this->belongsTo(Customer::class);
+    }
+
+    public function checkupObservation(): HasMany
+    {
+        return $this->hasMany(CheckupObservation::class);
     }
 }
