@@ -71,7 +71,16 @@ class CheckupCreate extends Component
 
     public int $vehicle_id;
 
+    public int $checkup_id;
+
     public string $vehicleObservation = '';
+
+    public string $successMessage = '';
+
+    public function mount($customerId): void
+    {
+        $this->customer_id = $customerId;
+    }
 
     public function render(): Factory|Application|View|\Illuminate\Contracts\Foundation\Application
     {
@@ -158,6 +167,17 @@ class CheckupCreate extends Component
 
     }
 
+    public function hideModalError(): void
+    {
+        $this->errorModal = false;
+    }
+
+    public function hideModalSuccess(): void
+    {
+        $this->successModal = false;
+        $this->modalConfirm = false;
+    }
+
     public function save(): void
     {
         $request = new Request();
@@ -187,7 +207,11 @@ class CheckupCreate extends Component
 
         try {
             $response = app(CheckupCreateAction::class)->execute($request);
-            dd($response->original);
+
+            $this->checkup_id = $response->getData()->checkupId;
+
+            $this->successMessage = 'Checkup registrado com sucesso.';
+
             $this->successModal = true;
 
         } catch (\Exception $exception) {

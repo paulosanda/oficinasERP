@@ -25,6 +25,13 @@ class VehicleCreateAction
         ];
     }
 
+    public function messages(): array
+    {
+        return [
+            'customer_id.integer|required' => 'Algo deu errado, o cliente para este cadastro não foi encontrado',
+        ];
+    }
+
     public function execute(Request $request): JsonResponse
     {
         $data = $request->validate($this->rules());

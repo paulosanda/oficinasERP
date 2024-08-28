@@ -349,7 +349,7 @@
                         </div>
                         <div class="text-center">
                             <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4
-                        focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2" onclick="window.location.href='{{ route('dashboard') }}'">Abrir checkup veicular</button>
+                        focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2" onclick="window.location.href='{{ route('web.checkup.create', $customer_id) }}'">Abrir checkup veicular</button>
                             <button type="button" class="focus:outline-none text-white bg-green-700 hover:bg-green-800
                         focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2" onclick="window.location.href='{{ route('dashboard') }}'">Encerrar</button>
                         </div>

@@ -52,6 +52,8 @@ class CustomerCreate extends Component
 
     public $company;
 
+    public int $customer_id;
+
     public bool $modalError = false;
 
     public bool $modalConfirm = false;
@@ -143,9 +145,13 @@ class CustomerCreate extends Component
         try {
             $customer = app(CustomerCreateAction::class)->execute($request);
 
+            $this->customer_id = $customer->getData()->customer_id;
+
             $this->modalSuccess = true;
+
         } catch (\Exception $exception) {
             $this->errorMessage = $exception->getMessage();
+
             $this->modalError = true;
         }
 

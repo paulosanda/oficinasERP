@@ -43,9 +43,19 @@ class CheckupCreateAction
         return $rules;
     }
 
+    public function messages(): array
+    {
+        return [
+            'company_id.integer|required' => 'Algo deu errado, não foi possível criar o checkup para sua empresa',
+            'customer_id.integer|required' => 'Algo deu errado, não foi possível criar o checkup para este cliente',
+            'vehicle_id.integer|required' => 'Algo deu errado, não foi possivel criar o checkup para este veículo',
+            'fuel_gauge.string|required' => 'Informe a quantidade de combustível que o medidor mostra para o início do checkup.',
+        ];
+    }
+
     public function execute(Request $request): JsonResponse
     {
-        $data = $request->validate($this->rules());
+        $data = $request->validate($this->rules(), $this->messages());
 
         DB::beginTransaction();
 

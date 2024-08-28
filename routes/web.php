@@ -43,7 +43,7 @@ Route::middleware('auth')->group(function () {
             Route::get('/create', [CustomerController::class, 'create'])->name('web.customer.create');
         });
         Route::prefix('checkup')->group(function () {
-            Route::get('/create', [CheckupController::class, 'create'])->name('web.checkup.create');
+            Route::get('/create/{customerId}', [CheckupController::class, 'create'])->name('web.checkup.create');
             Route::get('/', [CheckupController::class, 'index'])->name('web.checkup.index');
             Route::get('/{checkupId}', [CheckupController::class, 'show'])->name('web.checkup.show');
         });
