@@ -28,7 +28,7 @@ class CheckupFactory extends Factory
 
         $fuel = ['vazio', '1/4', '1/2', '3/4', 'cheio'];
 
-        $evaluation = ['aprovado para uso', 'manutenção recomendada'];
+        $evaluation = ['pending', 'approved for use', 'maintenance recommended'];
 
         return [
             'company_id' => $company->id,

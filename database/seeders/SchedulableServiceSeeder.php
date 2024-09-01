@@ -13,6 +13,7 @@ class SchedulableServiceSeeder extends Seeder
     public function run(): void
     {
         $services = [
+            'Revisão preventiva',
             'Troca de óleo e filtro',
             'Troca de filtros de ar, combustível e cabine',
             'Verificação e troca de fluidos',

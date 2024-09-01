@@ -4,6 +4,7 @@ namespace App\Livewire\Company;
 
 use App\Actions\CheckupCreateAction;
 use App\Actions\VehicleCreateAction;
+use App\Models\Checkup;
 use App\Models\CheckupObservationType;
 use App\Models\Customer;
 use App\Models\Vehicle;
@@ -76,6 +77,8 @@ class CheckupCreate extends Component
     public string $vehicleObservation = '';
 
     public string $successMessage = '';
+
+    public string $pending = Checkup::EVALUATION_PENDING;
 
     public function mount($customerId): void
     {
@@ -191,6 +194,7 @@ class CheckupCreate extends Component
             'left_side_damage' => $this->left_side_damage,
             'roof_damage' => $this->roof_damage,
             'fuel_gauge' => $this->fuel_gauge,
+            'evaluation' => $this->pending,
         ]);
 
         $checkupObservationsFormatted = [];

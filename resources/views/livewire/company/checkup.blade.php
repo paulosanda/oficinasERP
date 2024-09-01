@@ -1,11 +1,22 @@
 <div>
     <table class="table w-full px-2 py-2 border-gray-900">
         <tr>
+            <td colspan="3" class="px-2 py-1">
+                <div class="w-full flex justify-end text-gray-600">
+                    <a href="{{ route('web.checkup.index') }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" class=" h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </a>
+                </div>
+            </td>
+        </tr>
+        <tr>
             <td class="px-2 py-2">
-                @if($checkup->evaluation)
-                    {{ $checkup->evaluation }}
+                @if($checkup->evaluation !== $pending)
+                    {{ __('messages.checkup-evaluation.'.$checkup->evaluation) }}
                 @else
-                    Em aberto
+                    Pendente
                 @endif
             </td>
             <td colspan="2" class="text-right px-4 py-2">{{ $checkup->created_at->format('d/m/Y') }}</td>
@@ -87,19 +98,12 @@
         </tr>
         <tr>
             <td colspan="3" class="text-center">
-                @if($evaluation != '')
-                    <button wire:click="setEvaluation" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800
-                    focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm
-                    px-5 py-2.5 text-center me-2 mb-2 ">
-                        Em aberto
-                    </button>
-                @endif
-                @if($evaluation != 'aprovado para uso')
+                @if($checkup->evaluation != $approved)
                 <button wire:click="setApproved" class="text-green-700 hover:text-white border border-green-700 hover:bg-green-800
                     focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5
                     py-2.5 text-center me-2 mb-2">Aprovado para uso</button>
                 @endif
-                @if($evaluation != 'manutenção recomendada')
+                @if($checkup->evaluation != $maintenance)
                 <button wire:click="setMaintenance" class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800
                     focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5
                     py-2.5 text-center me-2 mb-2">Manutenção recomentada</button>

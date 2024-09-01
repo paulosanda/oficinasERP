@@ -14,6 +14,10 @@ class Customer extends Model
 {
     use HasFactory;
 
+    const TYPE_PF = 'pf';
+
+    const TYPE_PJ = 'pj';
+
     protected $with = ['vehicle'];
 
     protected $fillable = [

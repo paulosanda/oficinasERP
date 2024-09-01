@@ -5,6 +5,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Web\Admin\CompanyController;
 use App\Http\Controllers\Web\Company\CheckupController;
 use App\Http\Controllers\Web\Company\CustomerController;
+use App\Http\Controllers\Web\Company\QuoteController;
+use App\Http\Controllers\Web\Company\ScheduledServicesController;
 use App\Http\Middleware\CompanyMaster;
 use App\Http\Middleware\IsUserEnable;
 use App\Http\Middleware\SystemAdmin;
@@ -46,6 +48,14 @@ Route::middleware('auth')->group(function () {
             Route::get('/create/{customerId}', [CheckupController::class, 'create'])->name('web.checkup.create');
             Route::get('/', [CheckupController::class, 'index'])->name('web.checkup.index');
             Route::get('/{checkupId}', [CheckupController::class, 'show'])->name('web.checkup.show');
+        });
+        Route::prefix('quote')->group(function () {
+            Route::get('/', [QuoteController::class, 'index'])->name('web.quote.index');
+            Route::get('/{quoteId}', [QuoteController::class, 'show'])->name('web.quote.show');
+            Route::get('/create/{checkupId}', [QuoteController::class, 'create'])->name('web.quote.create');
+        });
+        Route::prefix('schedule')->group(function () {
+            Route::get('/{customerId}', [ScheduledServicesController::class, 'create'])->name('web.schedule.create');
         });
     });
 });

@@ -13,12 +13,13 @@ return new class extends Migration
     {
         Schema::create('quotes', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('users');
             $table->foreignId('company_id')->constrained('companies');
             $table->integer('company_numbering');
             $table->foreignId('customer_id')->constrained('customers');
             $table->foreignId('vehicle_id');
             $table->enum('status', ['pending', 'accepted', 'rejected'])->default('pending');
-            $table->date('entry_date');
+            $table->date('entry_date')->nullable();
             $table->date('exit_date')->nullable();
             $table->text('problem_description')->nullable();
             $table->text('report')->nullable();
@@ -28,7 +29,6 @@ return new class extends Migration
             $table->string('gross_total');
             $table->string('discount');
             $table->string('net_total');
-            $table->string('total');
             $table->timestamps();
         });
     }

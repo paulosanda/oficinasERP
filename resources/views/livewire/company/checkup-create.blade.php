@@ -218,7 +218,7 @@
     @if($modalConfirm)
         <div class="fixed inset-0 flex items-center justify-center z-50">
             <!-- Background overlay -->
-            <div class="fixed inset-0 bg-black opacity-50" wire:click="hideConfirmVehicleModal"></div>
+            <div class="fixed inset-0 bg-black opacity-50" wire:click="hideModalConfirm"></div>
 
             <!-- Modal content -->
             <div class="bg-white p-6 rounded-lg shadow-lg w-3/4 max-h-screen overflow-y-auto relative z-10">
