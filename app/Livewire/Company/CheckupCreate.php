@@ -80,8 +80,14 @@ class CheckupCreate extends Component
 
     public string $pending = Checkup::EVALUATION_PENDING;
 
+    public string $op = '';
+
     public function mount($customerId): void
     {
+        if (request()->get('op')) {
+            $this->op = request()->get('op');
+        }
+
         $this->customer_id = $customerId;
     }
 
@@ -122,7 +128,7 @@ class CheckupCreate extends Component
         $this->confirmVehicleModal = false;
     }
 
-    public function saveVehicle(): void
+    public function saveVehicle()
     {
         $request = new Request();
         $request->merge([
@@ -146,6 +152,11 @@ class CheckupCreate extends Component
             $this->confirmVehicleModal = false;
 
             $this->newVehicle = true;
+
+            if ($this->op == 'schedule') {
+                return redirect()->route('web.schedule.create', $this->customer_id);
+            }
+
         } catch (\Exception $exception) {
             $this->errorMessage = $exception->getMessage();
 
