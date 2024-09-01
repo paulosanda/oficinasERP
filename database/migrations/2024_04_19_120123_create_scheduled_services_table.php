@@ -17,6 +17,8 @@ return new class extends Migration
             $table->foreignId('company_id')->constrained('companies');
             $table->foreignId('customer_id')->constrained('customers');
             $table->foreignId('schedulable_service_id')->constrained('schedulable_services');
+            $table->integer('current_mileage')->nullable();
+            $table->integer('completion_mileage')->nullable();
             $table->date('scheduled_date', 'Y-m-d');
             $table->date('completion_date', 'Y-m-d')->nullable();
             $table->boolean('reminder_active')->default(true);

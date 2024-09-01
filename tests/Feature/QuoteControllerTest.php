@@ -58,6 +58,7 @@ class QuoteControllerTest extends TestCase
 
             $number = QuoteNumbering::where('company_id', $this->company->id)->first();
 
+            $quoteData['user_id'] = $this->user->id;
             $quoteData['customer_id'] = $customer->id;
             $quoteData['vehicle_id'] = $vehicle->id;
             $quoteData['company_id'] = $this->company->id;
@@ -80,6 +81,7 @@ class QuoteControllerTest extends TestCase
             'data' => [
                 [
                     'id',
+                    'user_id',
                     'company_id',
                     'company_numbering',
                     'customer_id',
@@ -95,7 +97,6 @@ class QuoteControllerTest extends TestCase
                     'gross_total',
                     'discount',
                     'net_total',
-                    'total',
                     'created_at',
                     'updated_at',
                     'customer' => [
@@ -225,7 +226,6 @@ class QuoteControllerTest extends TestCase
             'gross_total' => $payload['gross_total'],
             'discount' => $payload['discount'],
             'net_total' => $payload['net_total'],
-            'total' => $payload['total'],
         ]);
 
         $this->assertDatabaseHas('quote_numberings', [
@@ -313,6 +313,7 @@ class QuoteControllerTest extends TestCase
     public function quoteData(): array
     {
         return [
+            'user_id' => 1,
             'customer_id' => $this->customer->id,
             'vehicle_id' => $this->vehicle->id,
             'entry_date' => fake()->date('Y-m-d'),
@@ -325,7 +326,6 @@ class QuoteControllerTest extends TestCase
             'gross_total' => '1237,64',
             'discount' => '0',
             'net_total' => '1237,64',
-            'total' => '1237,64',
             'quote_service' => [
                 [
                     'service_code' => fake()->numerify('###'),

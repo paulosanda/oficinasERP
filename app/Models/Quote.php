@@ -11,13 +11,21 @@ class Quote extends Model
 {
     use HasFactory;
 
+    const PENDING = 'pending';
+
+    const ACCEPTED = 'accepted';
+
+    const REJECTED = 'rejected';
+
     protected $with = ['customer', 'vehicle', 'quoteService', 'quoteParts'];
 
     protected $fillable = [
+        'user_id',
         'company_id',
         'company_numbering',
         'customer_id',
         'vehicle_id',
+        'status',
         'entry_date',
         'exit_date',
         'problem_description',
@@ -30,6 +38,11 @@ class Quote extends Model
         'net_total',
         'total',
     ];
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function customer(): BelongsTo
     {
@@ -49,5 +62,10 @@ class Quote extends Model
     public function quoteParts(): HasMany
     {
         return $this->hasMany(QuotePart::class);
+    }
+
+    public function company(): BelongsTo
+    {
+        return $this->belongsTo(Company::class);
     }
 }

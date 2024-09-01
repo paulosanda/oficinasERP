@@ -16,10 +16,12 @@ class QuoteCreateAction
     public function rules(): array
     {
         return [
+            'user_id' => 'required|integer|exists:users,id',
             'company_id' => 'integer|required',
             'customer_id' => 'integer|required',
             'vehicle_id' => 'integer|required',
-            'entry_date' => 'string|required',
+            'status' => 'string|nullable',
+            'entry_date' => 'string|nullable',
             'exit_date' => 'string|nullable',
             'problem_description' => 'string|nullable',
             'report' => 'string|nullable',
@@ -29,7 +31,6 @@ class QuoteCreateAction
             'gross_total' => 'string|required',
             'discount' => 'string|nullable',
             'net_total' => 'string|required',
-            'total' => 'string|required',
             'quote_service.*.service_code' => 'string|nullable',
             'quote_service.*.description' => 'string|nullable',
             'quote_service.*.quantity' => 'integer|nullable',
@@ -45,10 +46,24 @@ class QuoteCreateAction
         ];
     }
 
+    public function messages(): array
+    {
+        return [
+            'company_id.integer|required' => 'Não foi possível encontrar o identificador de sua empresa para abrir o orçamento',
+            'customer_id.integer|required' => 'Não foi possível encontrar o cliente para o orçamento',
+            'vehicle_id.integer|required' => 'Não foi possível encontrar o veículo para o orçamento',
+            'subtotal_service.string|required' => 'Não foi possível calcular o subtotal de serviços do orçamentio',
+            'subtotal_part.string|required' => 'Não foi possível calcular o subtotal de peças do orçamento',
+            'gross_total.string|required' => 'Não foi possível calcular o total bruto do orçamento',
+            'discount.string|nullable' => 'Não foi possível calcular o desconto',
+            'net_total.string|required' => 'não foi possível calcular o total final',
+            'total.string|required' => 'não foi possível calcular o total final',
+        ];
+    }
+
     public function execute(Request $request): JsonResponse
     {
-
-        $data = $request->validate($this->rules());
+        $data = $request->validate($this->rules(), $this->messages());
 
         $numbering = $this->getCompanyNumbering($data);
         $data['company_numbering'] = $numbering;
@@ -64,7 +79,10 @@ class QuoteCreateAction
 
             DB::commit();
 
-            return response()->json(['message' => 'success']);
+            return response()->json([
+                'message' => 'success',
+                'quote_id' => $quote->id,
+            ]);
 
         } catch (Exception $e) {
             DB::rollBack();

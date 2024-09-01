@@ -2,19 +2,30 @@
 
 namespace App\Livewire\Company;
 
+use AllowDynamicProperties;
 use App\Models\Checkup;
+use App\Models\Checkup as ModelsCheckup;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
 use Livewire\Component;
+use Livewire\WithPagination;
 
-class CheckupAdmin extends Component
+#[AllowDynamicProperties] class CheckupAdmin extends Component
 {
+    use WithPagination, WithPagination;
+
     public int $dateInterval = 7;
 
     public ?string $evaluation = null;
 
     public Checkup $checkup;
+
+    public string $pending = ModelsCheckup::EVALUATION_PENDING;
+
+    public string $approved = ModelsCheckup::EVALUATION_APPROVED;
+
+    public string $maintenance = ModelsCheckup::EVALUATION_MAINTENANCE;
 
     public function render(): Factory|Application|View|\Illuminate\Contracts\Foundation\Application
     {
@@ -22,7 +33,7 @@ class CheckupAdmin extends Component
 
         $this->checkups = Checkup::where('company_id', $user->company_id)
             ->where('evaluation', $this->evaluation)
-            ->where('created_at', '>=', now()->subDays($this->dateInterval))->get();
+            ->where('created_at', '>=', now()->subDays($this->dateInterval))->paginate(10);
 
         return view('livewire.company.checkup-admin')->with([
             'checkups' => $this->checkups,
@@ -33,16 +44,16 @@ class CheckupAdmin extends Component
 
     public function setEvaluation(): void
     {
-        $this->evaluation = null;
+        $this->evaluation = $this->pending;
     }
 
     public function setApproved(): void
     {
-        $this->evaluation = 'aprovado para uso';
+        $this->evaluation = $this->approved;
     }
 
     public function setMaintenance(): void
     {
-        $this->evaluation = 'manutenção recomendada';
+        $this->evaluation = $this->maintenance;
     }
 }

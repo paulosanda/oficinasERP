@@ -41,12 +41,9 @@
             <th scope="col" class="px-6 py-3">
                 Celular
             </th>
-            <th scope="col" class="px-6 py-3">
-
-            </th>
-            <th>
-
-            </th>
+            <th scope="col" class="px-6 py-3"></th>
+            <th></th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -74,13 +71,18 @@
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 13h3.439a.991.991 0 0 1 .908.6 3.978 3.978 0 0 0 7.306 0 .99.99 0 0 1 .908-.6H20M4 13v6a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-6M4 13l2-9h12l2 9"/>
                             </svg>
                         </a>
-
-
+                    </td>
+                    <td class="px-6 py-2">
+                        <a href="{{ route('web.schedule.create', $customer->id) }}" title="criar agendamento de serviço">
+                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                <path fill="currentColor" d="M4 9.05H3v2h1v-2Zm16 2h1v-2h-1v2ZM10 14a1 1 0 1 0 0 2v-2Zm4 2a1 1 0 1 0 0-2v2Zm-3 1a1 1 0 1 0 2 0h-2Zm2-4a1 1 0 1 0-2 0h2Zm-2-5.95a1 1 0 1 0 2 0h-2Zm2-3a1 1 0 1 0-2 0h2Zm-7 3a1 1 0 0 0 2 0H6Zm2-3a1 1 0 1 0-2 0h2Zm8 3a1 1 0 1 0 2 0h-2Zm2-3a1 1 0 1 0-2 0h2Zm-13 3h14v-2H5v2Zm14 0v12h2v-12h-2Zm0 12H5v2h14v-2Zm-14 0v-12H3v12h2Zm0 0H3a2 2 0 0 0 2 2v-2Zm14 0v2a2 2 0 0 0 2-2h-2Zm0-12h2a2 2 0 0 0-2-2v2Zm-14-2a2 2 0 0 0-2 2h2v-2Zm-1 6h16v-2H4v2ZM10 16h4v-2h-4v2Zm3 1v-4h-2v4h2Zm0-9.95v-3h-2v3h2Zm-5 0v-3H6v3h2Zm10 0v-3h-2v3h2Z"/>
+                            </svg>
+                        </a>
                     </td>
                 </tr>
             @endforeach
             <tr class="bg-gray-100 border-b">
-                <td colspan="5" class="px-6 py-2">
+                <td colspan="6" class="px-6 py-2">
                     {{ $customers->links() }}
                 </td>
             </tr>

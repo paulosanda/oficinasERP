@@ -25,6 +25,12 @@ class Checkup extends Component
 
     public string $errorMessage = '';
 
+    public string $pending = ModelsCheckup::EVALUATION_PENDING;
+
+    public string $approved = ModelsCheckup::EVALUATION_APPROVED;
+
+    public string $maintenance = ModelsCheckup::EVALUATION_MAINTENANCE;
+
     public function mount($checkupId): void
     {
         $this->checkupId = $checkupId;
@@ -42,24 +48,24 @@ class Checkup extends Component
         }
     }
 
-    public function setEvaluation()
+    public function setEvaluation(): void
     {
-        $this->evaluationMessage = 'Em aberto';
-        $this->evaluation = null;
+        $this->evaluationMessage = 'Pendente aprovação';
+        $this->evaluation = $this->pending;
         $this->confirmModal = true;
     }
 
     public function setApproved(): void
     {
         $this->evaluationMessage = 'Aprovar para uso';
-        $this->evaluation = 'aprovado para uso';
+        $this->evaluation = $this->approved;
         $this->confirmModal = true;
     }
 
     public function setMaintenance(): void
     {
         $this->evaluationMessage = 'Recomendar manutenção';
-        $this->evaluation = 'manutenção recomendada';
+        $this->evaluation = $this->maintenance;
         $this->confirmModal = true;
     }
 
@@ -76,14 +82,15 @@ class Checkup extends Component
     public function hideErrorModal(): void
     {
         $this->confirmModal = false;
+        $this->errorModal = false;
     }
 
     public function save(): void
     {
-
         try {
             $checkup = ModelsCheckup::findOrFail($this->checkupId);
 
+            $evaluation = $this->evaluation ?: null;
             $checkup->update(['evaluation' => $this->evaluation]);
 
             $this->confirmModal = false;

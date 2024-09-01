@@ -11,6 +11,12 @@ class Checkup extends Model
 {
     use HasFactory;
 
+    const EVALUATION_PENDING = 'pending';
+
+    const EVALUATION_APPROVED = 'approved for use';
+
+    const EVALUATION_MAINTENANCE = 'maintenance recommended';
+
     protected $fillable = [
         'company_id',
         'customer_id',
