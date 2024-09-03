@@ -22,6 +22,9 @@ class ScheduledService extends Model
         'reminder_active',
         'observation',
         'customer_answer',
+        'current_mileage',
+        'completed_mileage',
+        'expected_mileage',
     ];
 
     public function company(): BelongsTo

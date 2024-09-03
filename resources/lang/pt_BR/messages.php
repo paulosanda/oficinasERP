@@ -8,6 +8,7 @@ return [
         Quote::PENDING => 'Pendente',
         Quote::ACCEPTED => 'Aceito',
         Quote::REJECTED => 'Recusado',
+        Quote::FINISH => 'Finalizado',
 
     ],
 

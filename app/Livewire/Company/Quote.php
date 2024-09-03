@@ -96,6 +96,18 @@ class Quote extends Component
             $this->errorMessage = $exception->getMessage();
             $this->errorModal = true;
         }
+    }
 
+    public function setFinalized(): void
+    {
+        try {
+            $this->quote->update(['status' => ModelsQuote::FINISH]);
+
+        } catch (ElementCollectionException|\Exception $exception) {
+            $this->errorModal = true;
+
+            $this->errorMessage = $exception->getMessage();
+        }
     }
 }
+// TODO fazer confirmação para finalizar e rejeitar pois as operações não tem retorno

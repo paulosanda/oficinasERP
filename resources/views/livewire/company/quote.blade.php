@@ -218,13 +218,13 @@
             <td colspan="2" class="px-2">
                 <div class="grid grid-cols-3 gap-3 py-1 px-1">
                     <div class="col-span-1">
-                        <b>Total: </b>{{ $quote->gross_total }}
+                        <b>Total: </b>R$ {{ $quote->gross_total }}
                     </div>
                     <div class="col-span-1">
-                        <b>Descontos: </b>{{ $quote->discount }}
+                        <b>Descontos: </b>R$ {{ $quote->discount }}
                     </div>
                     <div class="col-span-1">
-                        <b>Total líquido: </b>{{ $quote->net_total }}
+                        <b>Total líquido: </b>R$ {{ $quote->net_total }}
                     </div>
                 </div>
             </td>
