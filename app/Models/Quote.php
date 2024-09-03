@@ -17,6 +17,8 @@ class Quote extends Model
 
     const REJECTED = 'rejected';
 
+    const FINISH = 'finish';
+
     protected $with = ['customer', 'vehicle', 'quoteService', 'quoteParts'];
 
     protected $fillable = [
@@ -37,6 +39,7 @@ class Quote extends Model
         'discount',
         'net_total',
         'total',
+        'mileage',
     ];
 
     public function user(): BelongsTo

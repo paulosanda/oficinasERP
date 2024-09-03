@@ -18,9 +18,10 @@ return new class extends Migration
             $table->integer('company_numbering');
             $table->foreignId('customer_id')->constrained('customers');
             $table->foreignId('vehicle_id');
-            $table->enum('status', ['pending', 'accepted', 'rejected'])->default('pending');
+            $table->enum('status', ['pending', 'accepted', 'rejected', 'finish'])->default('pending');
             $table->date('entry_date')->nullable();
             $table->date('exit_date')->nullable();
+            $table->integer('mileage')->nullable();
             $table->text('problem_description')->nullable();
             $table->text('report')->nullable();
             $table->text('observation')->nullable();
