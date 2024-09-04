@@ -71,6 +71,14 @@ class Quote extends Component
         $this->confirmModal = true;
     }
 
+    public function setFinalized(): void
+    {
+        $this->statusMessage = ModelsQuote::FINISH;
+        $this->status = ModelsQuote::FINISH;
+
+        $this->confirmModal = true;
+    }
+
     public function hideConfirmModal(): void
     {
         $this->confirmModal = false;
@@ -97,17 +105,4 @@ class Quote extends Component
             $this->errorModal = true;
         }
     }
-
-    public function setFinalized(): void
-    {
-        try {
-            $this->quote->update(['status' => ModelsQuote::FINISH]);
-
-        } catch (ElementCollectionException|\Exception $exception) {
-            $this->errorModal = true;
-
-            $this->errorMessage = $exception->getMessage();
-        }
-    }
 }
-// TODO fazer confirmação para finalizar e rejeitar pois as operações não tem retorno

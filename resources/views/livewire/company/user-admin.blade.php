@@ -15,6 +15,8 @@
                     Situação
                 </th>
                 <th>
+                </th>
+                <th>
 
                 </th>
             </tr>
@@ -42,7 +44,18 @@
 
                     </td>
                     <td>
-                        <button wire:click="showModalEditUser({{ $user->id }})" class="bg-blue-500 text-white px-4 py-2 rounded">Editar</button>
+                        <button wire:click="showModalEditUser({{ $user->id }})" class="flex items-center bg-transparent p-0 text-gray-800 dark:text-white" title="editar usuário">
+                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="square" stroke-linejoin="round" stroke-width="2" d="M7 19H5a1 1 0 0 1-1-1v-1a3 3 0 0 1 3-3h1m4-6a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm7.441 1.559a1.907 1.907 0 0 1 0 2.698l-6.069 6.069L10 19l.674-3.372 6.07-6.07a1.907 1.907 0 0 1 2.697 0Z"/>
+                            </svg>
+                        </button>
+                    </td>
+                    <td>
+                        <button wire:click="showConfirmDeleteUser({{ $user->id }})" class="flex items-center bg-transparent p-0 text-gray-800 dark:text-white" title="deletar usuário">
+                        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12h4M4 18v-1a3 3 0 0 1 3-3h4a3 3 0 0 1 3 3v1a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1Zm8-10a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
+                        </svg>
+                        </button>
                     </td>
                 </tr>
             @endforeach
@@ -107,7 +120,7 @@
                             <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
                             </svg>
-                            <span class="sr-only">Icon description</span>
+                            <span class="sr-only">save</span>
                         </button></div>
                 </form>
             </div>
@@ -131,6 +144,41 @@
                 <!-- Confirmation message -->
                 <div class="text-center">
                     <h2 class="text-lg font-semibold text-gray-900 mb-4">Dados do usuário alterados com sucesso</h2>
+                </div>
+            </div>
+        </div>
+    @endif
+
+    <!-- modal confirm delete user -->
+    @if($confirmDeleteUser)
+        <div class="fixed inset-0 flex items-center justify-center z-50">
+            <!-- Background overlay -->
+            <div class="fixed inset-0 bg-black opacity-50" wire:click="hideConfirmDeleteUser"></div>
+
+            <!-- Modal content -->
+            <div class="bg-white p-6 rounded-lg shadow-lg w-1/3 relative z-10">
+                <!-- Close button -->
+                <button wire:click="hideConfirmDeleteUser" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 focus:outline-none">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+
+                <!-- Confirmation message -->
+                <div class="text-center">
+                    <h2 class="text-lg font-semibold text-gray-900 mb-4">Deseja deletar o usuário:</h2>
+                    <b>{{ $userDelete->name }}</b>
+                </div>
+                <div class="py-1 px-1">
+                    <form wire:submit.prevent="deleteUser">
+                    <button type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300
+                            font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center me-2">
+                        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                        </svg>
+                        <span class="sr-only">deletar</span>
+                    </button>
+                    </form>
                 </div>
             </div>
         </div>

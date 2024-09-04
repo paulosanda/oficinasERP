@@ -17,6 +17,10 @@
                 </textarea>
             </div>
             <div class="py-1 px-1 w-full text-gray-800">
+                <label for="report" class="block mb- text-sm font-medium text-gray-800 py-1">Quilometragem atual</label>
+                <input type="number" id="mileage" wire:model="mileage" placeholder="quilometragem atual" class="border rounded p-1">
+            </div>
+            <div class="py-1 px-1 w-full text-gray-800">
                 <label for="observation" class="block mb- text-sm font-medium text-gray-800 py-1">Observações</label>
                 <textarea id="observation" wire:model="observation" class="w-full px-2 sm:border-r rounded">
                 </textarea>

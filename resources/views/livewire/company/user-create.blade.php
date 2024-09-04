@@ -63,6 +63,7 @@
                 <!-- Confirmation message -->
                 <div class="text-center">
                     <h2 class="text-lg font-semibold text-gray-900 mb-4">Erro ao criar usuário</h2>
+                    <b>{{ $errorMessage }}</b>
                 </div>
             </div>
         </div>

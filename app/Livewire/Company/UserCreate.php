@@ -15,6 +15,8 @@ class UserCreate extends Component
 {
     public Company $company;
 
+    public $user;
+
     public int $company_id;
 
     public string $name = '';
@@ -28,6 +30,8 @@ class UserCreate extends Component
     public bool $errorModal = false;
 
     public bool $modalSuccess = false;
+
+    public string $errorMessage = '';
 
     public $roles;
 
@@ -66,21 +70,22 @@ class UserCreate extends Component
             $this->modalSuccess = true;
         } else {
             $this->errorModal = true;
+            $this->errorMessage = $request->getContent();
         }
 
     }
 
-    public function hideModalError()
+    public function hideModalError(): void
     {
         $this->errorModal = false;
     }
 
-    public function hideModalSuccess()
+    public function hideModalSuccess(): void
     {
         $this->modalSuccess = false;
     }
 
-    public function createAnotherUser()
+    public function createAnotherUser(): void
     {
         $this->user = '';
         $this->email = '';
