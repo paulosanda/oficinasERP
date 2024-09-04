@@ -31,6 +31,7 @@ class QuoteCreateAction
             'gross_total' => 'string|required',
             'discount' => 'string|nullable',
             'net_total' => 'string|required',
+            'mileage' => 'integer|nullable',
             'quote_service.*.service_code' => 'string|nullable',
             'quote_service.*.description' => 'string|nullable',
             'quote_service.*.quantity' => 'integer|nullable',

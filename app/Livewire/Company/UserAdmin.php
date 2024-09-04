@@ -16,6 +16,8 @@ class UserAdmin extends Component
 {
     public $users = null;
 
+    public $userDelete = null;
+
     public int $user_id;
 
     public string $name = '';
@@ -33,6 +35,8 @@ class UserAdmin extends Component
     public bool $enable = false;
 
     public bool $modalEditUser = false;
+
+    public bool $confirmDeleteUser = false;
 
     public function render(): Factory|Application|View|\Illuminate\Contracts\Foundation\Application
     {
@@ -99,5 +103,25 @@ class UserAdmin extends Component
     {
         $this->modalEditUserSuccess = false;
         $this->modalEditUser = false;
+    }
+
+    public function showConfirmDeleteUser($userId): void
+    {
+        $this->userDelete = User::findOrFail($userId);
+
+        $this->confirmDeleteUser = true;
+
+    }
+
+    public function hideConfirmDeleteUser(): void
+    {
+        $this->confirmDeleteUser = false;
+    }
+
+    public function deleteUser(): void
+    {
+        $this->userDelete->delete();
+
+        $this->confirmDeleteUser = false;
     }
 }

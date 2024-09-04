@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Log;
 
 class UserCreateAction
 {
+    const USER_LIMIT = 3;
+
     protected function rules(): array
     {
         return [
@@ -30,21 +32,28 @@ class UserCreateAction
 
         $data['user']['company_id'] = $companyId;
 
-        DB::beginTransaction();
+        $hasUserLimit = $this->checkUserLimit($companyId);
 
-        try {
-            $user = User::create($data['user']);
+        if ($hasUserLimit) {
+            DB::beginTransaction();
 
-            $this->createUserRoles($data['roles'], $user->id);
+            try {
+                $user = User::create($data['user']);
 
-            DB::commit();
+                $this->createUserRoles($data['roles'], $user->id);
 
-            return response()->json(['message' => 'success']);
-        } catch (Exception $e) {
-            DB::rollBack();
+                DB::commit();
 
-            return response()->json(['error' => $e->getMessage()]);
+                return response()->json(['message' => 'success']);
+            } catch (Exception $e) {
+                DB::rollBack();
+
+                return response()->json(['error' => $e->getMessage()]);
+            }
+        } else {
+            return response()->json(['error' => 'user limit reached'], 403);
         }
+
     }
 
     public function createUserRoles($data, $userId): void
@@ -55,6 +64,16 @@ class UserCreateAction
                 'user_id' => $userId,
                 'role_id' => $role,
             ]);
+        }
+    }
+
+    public function checkUserLimit($companyId): bool
+    {
+        $hasUserLimit = User::where('company_id', $companyId)->count();
+        if ($hasUserLimit >= self::USER_LIMIT) {
+            return false;
+        } else {
+            return true;
         }
     }
 }

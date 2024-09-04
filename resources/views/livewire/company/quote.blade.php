@@ -81,13 +81,27 @@
                             </td>
                         </tr>
                         <tr>
+                            <td colspan="3" class="text-center"><h2><b>VEÍCULO</b></h2></td>
+                        </tr>
+                        <tr>
+                            <td class="px-2">
+                                {{ $quote->vehicle->brand }} {{ $quote->vehicle->model }} {{ $quote->vehicle->color }}
+                            </td>
+                            <td>
+                                Placa {{ $quote->vehicle->plate }}
+                            </td>
+                            <td>
+                                Km {{ number_format(intval($quote->mileage), 0, '', '.') }}
+                            </td>
+                        </tr>
+                        <tr>
                             <td colspan="3" class="bg-gray-500 text-white px-3 py-2">
                                 Descrição do problema
                             </td>
                         </tr>
                         <tr>
                             <td colspan="3" class="px-2">
-                                {{ $quote->problem_description }}
+                                {!! nl2br($quote->problem_description ) !!}}
                             </td>
                         </tr>
                         <tr>
@@ -97,7 +111,7 @@
                         </tr>
                         <tr>
                             <td colspan="3" class="px-2">
-                                {{ $quote->report }}
+                                {!! nl2br($quote->report) !!}
                             </td>
                         </tr>
                         <tr>
@@ -107,7 +121,7 @@
                         </tr>
                         <tr>
                             <td colspan="3" class="px-2">
-                                {{ $quote->observation }}
+                                {!! nl2br($quote->observation) !!}
                             </td>
                         </tr>
                     </table>

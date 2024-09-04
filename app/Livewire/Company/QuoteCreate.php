@@ -64,6 +64,8 @@ class QuoteCreate extends Component
 
     public string $netTotal = '';
 
+    public int $mileage;
+
     public function mount($checkupId): void
     {
         $this->user = Auth::user();
@@ -278,6 +280,7 @@ class QuoteCreate extends Component
             'gross_total' => $this->total,
             'discount' => $this->discount,
             'net_total' => $this->netTotal,
+            'mileage' => $this->mileage,
         ]);
 
         $request->merge(['quote_service' => []]);
