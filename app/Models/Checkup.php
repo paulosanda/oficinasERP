@@ -17,6 +17,8 @@ class Checkup extends Model
 
     const EVALUATION_MAINTENANCE = 'maintenance recommended';
 
+    const EVALUATION_QUOTE = 'quote';
+
     protected $fillable = [
         'company_id',
         'customer_id',

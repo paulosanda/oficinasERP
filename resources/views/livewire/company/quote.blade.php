@@ -45,8 +45,15 @@
                                 @endif
                             </td>
                             <td>
-                                Responsável: {{ $user->name }}
+                                Responsável:
+                                @if($quote->user)
+                                    {{ $quote->user->name }}
+                                @else
+                                    {{ optional($quote->user()->withTrashed()->first())->name ?? 'Usuário não encontrado' }}
+                                @endif
+
                             </td>
+
                             <td>
                                 Data de saída:
                                 @if($quote->exit_date)

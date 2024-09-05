@@ -19,9 +19,11 @@
                                 <a href="{{ route('web.company.user.create') }}" class="block px-4 py-2 hover:bg-gray-100">Cadastrar</a>
                             </li>
                         </ul>
+                        <!---
                         <div class="py-1">
-                            <a href="#" class="block px-4 py-2 hover:bg-gray-100">Para usar</a>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-100">exemplo</a>
                         </div>
+                        --->
                     </div>
                 </li>
                 <li>
@@ -75,7 +77,7 @@
                     </div>
                 </li>
                 <li>
-                    <a href="#" class="block py-2 px-3 text-gray-800 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-gray-200 md:p-0">Services</a>
+                    <a href="{{ route('web.schedule.index') }}" class="block py-2 px-3 text-gray-800 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-gray-200 md:p-0">Agendados</a>
                 </li>
                 <li>
                     <form method="post" action="{{ route('logout') }}">

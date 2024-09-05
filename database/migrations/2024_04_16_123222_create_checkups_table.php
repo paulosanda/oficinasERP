@@ -28,7 +28,7 @@ return new class extends Migration
             $table->string('roof_photo')->nullable();
             $table->enum('fuel_gauge', ['vazio', '1/4', '1/2', '3/4', 'cheio'])->nullable();
             $table->string('fuel_gauge_photo')->nullable();
-            $table->enum('evaluation', ['pending', 'approved for use', 'maintenance recommended'])->nullable();
+            $table->enum('evaluation', ['pending', 'approved for use', 'maintenance recommended', 'quote'])->nullable();
             $table->timestamps();
         });
     }

@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
-class SchedulableServiceCreate extends Component
+class SchedulableCreate extends Component
 {
     public int $customerId;
 
@@ -68,7 +68,7 @@ class SchedulableServiceCreate extends Component
 
     public function render(): Factory|Application|View|\Illuminate\Contracts\Foundation\Application
     {
-        return view('livewire.company.schedulable-service-create');
+        return view('livewire.company.schedulable-create');
     }
 
     public function addScheduleService(): void
@@ -121,7 +121,7 @@ class SchedulableServiceCreate extends Component
                 $this->successMessage = 'Serviços agendados com sucesso';
 
                 $this->successModal = true;
-                //fazer na blade view o botão para mostrar todas os agendamentos do cliente
+                //TODO fazer na blade view o botão para mostrar todas os agendamentos do cliente- AVALIAR
             } catch (\Exception $exception) {
                 $this->errorMessage = $exception->getMessage();
                 $this->errorModal = true;

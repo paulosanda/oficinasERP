@@ -55,7 +55,9 @@ Route::middleware('auth')->group(function () {
             Route::get('/create/{checkupId}', [QuoteController::class, 'create'])->name('web.quote.create');
         });
         Route::prefix('schedule')->group(function () {
-            Route::get('/{customerId}', [ScheduledServicesController::class, 'create'])->name('web.schedule.create');
+            Route::get('/', [ScheduledServicesController::class, 'index'])->name('web.schedule.index');
+            Route::get('/{scheduleId}', [ScheduledServicesController::class, 'show'])->name('web.schedule.show');
+            Route::get('/create/{customerId}', [ScheduledServicesController::class, 'create'])->name('web.schedule.create');
         });
     });
 });
