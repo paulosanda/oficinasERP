@@ -264,7 +264,7 @@ class QuoteCreate extends Component
 
     public function save(): void
     {
-        $request = new Request();
+        $request = new Request;
 
         $request->merge([
             'company_id' => $this->user->company_id,

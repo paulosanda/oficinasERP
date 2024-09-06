@@ -58,7 +58,7 @@ use Livewire\Component;
 
         $role = intval($this->role_id);
 
-        $request = new Request();
+        $request = new Request;
         $request->merge([
             'user' => [
                 'name' => $this->name,

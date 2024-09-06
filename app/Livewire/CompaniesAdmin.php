@@ -151,7 +151,7 @@ use Livewire\WithFileUploads;
 
     public function updateCompany(): void
     {
-        $request = new Request();
+        $request = new Request;
         $request->merge([
             'company_name' => $this->company_name,
             'cnpj' => $this->cnpj,
@@ -205,7 +205,7 @@ use Livewire\WithFileUploads;
             return ['id' => $id];
         }, $rolesToInteger);
 
-        $request = new Request();
+        $request = new Request;
         $request->merge([
             'id' => $this->user_id,
             'name' => $this->name,

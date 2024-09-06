@@ -113,7 +113,7 @@ class CustomerCreate extends Component
 
     public function save(): void
     {
-        $request = new Request();
+        $request = new Request;
         $request->merge([
             'type' => $this->type,
             'company_id' => $this->company_id,

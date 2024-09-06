@@ -65,7 +65,7 @@ class CreateCompany extends Component
 
     public function save()
     {
-        $request = new Request();
+        $request = new Request;
         $request->merge([
             'company_name' => $this->company_name,
             'cnpj' => $this->cnpj,

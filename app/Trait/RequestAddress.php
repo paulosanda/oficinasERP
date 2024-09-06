@@ -8,7 +8,7 @@ trait RequestAddress
 {
     public function requestAddress(): void
     {
-        $cepGet = new CepGetAction();
+        $cepGet = new CepGetAction;
         $response = $cepGet($this->postal_code);
         if ($response) {
             $this->address = $response['logradouro'];

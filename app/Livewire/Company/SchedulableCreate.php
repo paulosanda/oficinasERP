@@ -103,7 +103,7 @@ class SchedulableCreate extends Component
     {
         foreach ($this->scheduleService as $schedule) {
             try {
-                $request = new Request();
+                $request = new Request;
                 $request->merge([
                     'vehicle_id' => $this->vehicleId,
                     'company_id' => $this->companyId,
