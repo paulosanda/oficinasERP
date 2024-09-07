@@ -16,6 +16,10 @@ class DashboardCards extends Component
 
     public $checkups;
 
+    public $quotePending;
+
+    public $quoteAccepted;
+
     public function mount(): void
     {
         $this->companyId = auth()->user()->company_id;
@@ -32,6 +36,18 @@ class DashboardCards extends Component
 
         $this->checkups = \App\Models\Checkup::where('company_id', $this->companyId)
             ->where('evaluation', 'pending')
+            ->take(10)
+            ->orderBy('created_at', 'asc')
+            ->get();
+
+        $this->quotePending = \App\Models\Quote::where('company_id', $this->companyId)
+            ->where('status', 'pending')
+            ->take(10)
+            ->orderBy('created_at', 'asc')
+            ->get();
+
+        $this->quoteAccepted = \App\Models\Quote::where('company_id', $this->companyId)
+            ->where('status', 'accepted')
             ->take(10)
             ->orderBy('created_at', 'asc')
             ->get();
