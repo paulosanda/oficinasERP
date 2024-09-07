@@ -267,6 +267,7 @@ class QuoteCreate extends Component
         $request = new Request;
 
         $request->merge([
+            'checkup_id' => $this->checkupId,
             'company_id' => $this->user->company_id,
             'user_id' => $this->user->id,
             'customer_id' => $this->checkup->customer->id,

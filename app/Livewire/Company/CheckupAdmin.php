@@ -17,7 +17,7 @@ use Livewire\WithPagination;
 
     public int $dateInterval = 7;
 
-    public ?string $evaluation = null;
+    public ?string $evaluation = Checkup::EVALUATION_PENDING;
 
     public Checkup $checkup;
 
