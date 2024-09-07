@@ -130,7 +130,7 @@ class CheckupCreate extends Component
 
     public function saveVehicle()
     {
-        $request = new Request();
+        $request = new Request;
         $request->merge([
             'customer_id' => $this->customer_id,
             'brand' => $this->brand,
@@ -194,7 +194,7 @@ class CheckupCreate extends Component
 
     public function save(): void
     {
-        $request = new Request();
+        $request = new Request;
         $request->merge([
             'vehicle_id' => $this->vehicle_id,
             'customer_id' => $this->customer_id,

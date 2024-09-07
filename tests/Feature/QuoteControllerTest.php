@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Checkup;
 use App\Models\Company;
 use App\Models\Customer;
 use App\Models\Quote;
@@ -23,6 +24,8 @@ class QuoteControllerTest extends TestCase
 
     private Vehicle $vehicle;
 
+    private Checkup $checkup;
+
     public function setUp(): void
     {
         parent::setUp();
@@ -43,6 +46,13 @@ class QuoteControllerTest extends TestCase
         $this->vehicle = Vehicle::factory()->create([
             'customer_id' => $this->customer->id,
         ]);
+
+        $this->checkup = Checkup::factory()->create([
+            'company_id' => $this->company->id,
+            'customer_id' => $this->customer->id,
+            'vehicle_id' => $this->vehicle->id,
+        ]);
+
     }
 
     public function testIndex(): void
@@ -313,6 +323,7 @@ class QuoteControllerTest extends TestCase
     public function quoteData(): array
     {
         return [
+            'checkup_id' => $this->checkup->id,
             'user_id' => 1,
             'customer_id' => $this->customer->id,
             'vehicle_id' => $this->vehicle->id,

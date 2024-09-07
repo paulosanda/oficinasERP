@@ -2,6 +2,7 @@
 
 namespace App\Actions;
 
+use App\Models\Checkup;
 use App\Models\Quote;
 use App\Models\QuoteNumbering;
 use App\Models\QuotePart;
@@ -16,6 +17,7 @@ class QuoteCreateAction
     public function rules(): array
     {
         return [
+            'checkup_id' => 'required|integer|exists:checkups,id',
             'user_id' => 'required|integer|exists:users,id',
             'company_id' => 'integer|required',
             'customer_id' => 'integer|required',
@@ -50,6 +52,7 @@ class QuoteCreateAction
     public function messages(): array
     {
         return [
+            'checkup_id.required' => 'Não foi possível encontrar o id do checkup.',
             'company_id.integer|required' => 'Não foi possível encontrar o identificador de sua empresa para abrir o orçamento',
             'customer_id.integer|required' => 'Não foi possível encontrar o cliente para o orçamento',
             'vehicle_id.integer|required' => 'Não foi possível encontrar o veículo para o orçamento',
@@ -66,6 +69,8 @@ class QuoteCreateAction
     {
         $data = $request->validate($this->rules(), $this->messages());
 
+        $checkup = Checkup::findOrFail($data['checkup_id']);
+
         $numbering = $this->getCompanyNumbering($data);
         $data['company_numbering'] = $numbering;
 
@@ -77,6 +82,8 @@ class QuoteCreateAction
             $this->createServices($data, $quote->id);
 
             $this->createParts($data, $quote->id);
+
+            $checkup->update(['evaluation' => Checkup::EVALUATION_QUOTE]);
 
             DB::commit();
 

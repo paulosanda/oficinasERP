@@ -122,7 +122,7 @@ class CustomerAdmin extends Component
 
         $this->editModal = false;
 
-        $request = new Request();
+        $request = new Request;
         $request->merge([
             'id' => $this->customer_id,
             'company_id' => $this->company_id,

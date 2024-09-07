@@ -77,7 +77,7 @@ class UserAdmin extends Component
             return ['id' => $id];
         }, $rolesToInteger);
 
-        $request = new Request();
+        $request = new Request;
         $request->merge([
             'id' => $this->user_id,
             'name' => $this->name,
