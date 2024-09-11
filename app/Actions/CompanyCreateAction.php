@@ -27,6 +27,8 @@ class CompanyCreateAction
             'cellphone' => 'string|required',
             'email' => 'email|required',
             'logo' => 'image|mimes:jpeg,png,jpg,gif,svg|nullable',
+            'active' => 'boolean',
+            'max_users' => 'integer',
         ];
     }
 

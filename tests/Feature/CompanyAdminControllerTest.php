@@ -69,6 +69,8 @@ class CompanyAdminControllerTest extends TestCase
             'cellphone' => fake()->phoneNumber,
             'email' => fake()->email,
             'logo' => $file,
+            'active' => true,
+            'max_users' => 3,
         ]);
 
         $response->assertStatus(200);
@@ -172,6 +174,8 @@ class CompanyAdminControllerTest extends TestCase
             'state' => 'SP',
             'cellphone' => fake()->phoneNumber,
             'email' => fake()->email,
+            'active' => true,
+            'max_users' => 3,
         ]);
 
         $response->assertStatus(200);
