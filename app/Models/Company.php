@@ -32,6 +32,8 @@ class Company extends Model
         'state',
         'cellphone',
         'email',
+        'active',
+        'max_users',
     ];
 
     public function users(): HasMany

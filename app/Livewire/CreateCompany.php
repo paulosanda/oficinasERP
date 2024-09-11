@@ -80,6 +80,8 @@ class CreateCompany extends Component
             'email' => $this->email,
             'cellphone' => $this->cellphone,
             'logo' => $this->logo,
+            'active' => true,
+            'max_users' => 3,
         ]);
 
         $newCompany = app(CompanyCreateAction::class)->execute($request);

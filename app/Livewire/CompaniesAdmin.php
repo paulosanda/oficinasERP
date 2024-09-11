@@ -235,4 +235,11 @@ use Livewire\WithFileUploads;
         $this->selectedCompany = null;
 
     }
+
+    public function alterActiveState(): void
+    {
+        $newActiveState = $this->selectedCompany->active ? 0 : 1;
+
+        $this->selectedCompany->update(['active' => $newActiveState]);
+    }
 }

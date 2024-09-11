@@ -70,9 +70,17 @@
                     </span>
                 </th>
                 <th></th>
-                <th></th>
+                <th class="px-6 py-3">
+                    @if($selectedCompany->active)
+                        <button wire:click="alterActiveState" class="bg-red-500 text-white px-4 py-2 rounded">Bloquear</button></th>
+                    @else
+                    <button wire:click="alterActiveState" class="bg-green-500 text-white px-4 py-2 rounded">Desbloquear</button></th>
+                    @endif
+
                 <th scope="col" class="px-6 py-3 flex justify-end">
+
                     <button wire:click="showCompanyToEdit" class="bg-blue-500 text-white px-4 py-2 rounded">Editar</button>
+
                 </th>
             </tr>
         </thead>
@@ -81,8 +89,16 @@
             <th scope="row"  class="px-6 py-2 font-medium text-gray-900 whitespace-nowrap flex items-center">
                 Celular: {{ $selectedCompany->cellphone }}
             </th>
-            <td colspan="3">
+            <td colspan="2">
                 E-mail: {{ $selectedCompany->email }}
+            </td>
+            <td>
+                Situação:
+                @if($selectedCompany->active)
+                    ATIVA
+                @else
+                <span class="text-red-900">BLOQUEADA</span>
+                @endif
             </td>
         </tr>
             <tr class="bg-gray-100 border-b">

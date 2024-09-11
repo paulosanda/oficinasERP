@@ -69,7 +69,7 @@ class DatabaseSeeder extends Seeder
 
             foreach ($companies as $company) {
                 $i = 0;
-                while ($i < 10) {
+                while ($i < 3) {
                     $company_user = User::create([
                         'company_id' => $company->id,
                         'name' => fake()->name,

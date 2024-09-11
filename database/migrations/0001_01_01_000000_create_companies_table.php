@@ -26,6 +26,8 @@ return new class extends Migration
             $table->string('state');
             $table->string('cellphone');
             $table->string('email');
+            $table->boolean('active')->default(true);
+            $table->integer('max_users');
             $table->timestamps();
         });
     }
