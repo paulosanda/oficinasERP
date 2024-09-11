@@ -2,6 +2,7 @@
 
 namespace App\Actions;
 
+use App\Models\Company;
 use App\Models\User;
 use App\Models\UserRole;
 use Exception;
@@ -69,6 +70,8 @@ class UserCreateAction
 
     public function checkUserLimit($companyId): bool
     {
+        $max_users = Company::findOrFail($companyId);
+        //        dd($max_users);
         $hasUserLimit = User::where('company_id', $companyId)->count();
         if ($hasUserLimit >= self::USER_LIMIT) {
             return false;

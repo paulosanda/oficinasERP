@@ -30,6 +30,8 @@ class CompanyFactory extends Factory
             'state' => 'SP',
             'cellphone' => fake()->numerify('##-##### ###'),
             'email' => fake()->email,
+            'active' => true,
+            'max_users' => 3,
         ];
     }
 }
