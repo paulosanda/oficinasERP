@@ -8,6 +8,7 @@ use App\Http\Controllers\Web\Company\CustomerController;
 use App\Http\Controllers\Web\Company\QuoteController;
 use App\Http\Controllers\Web\Company\ScheduledServicesController;
 use App\Http\Middleware\CompanyMaster;
+use App\Http\Middleware\IsActiveCompany;
 use App\Http\Middleware\IsUserEnable;
 use App\Http\Middleware\SystemAdmin;
 use Illuminate\Support\Facades\Route;
@@ -28,7 +29,8 @@ Route::prefix('admin')->middleware(SystemAdmin::class)->group(function () {
     });
 });
 
-Route::middleware('auth')->group(function () {
+//Rotas Company
+Route::middleware(['auth', isActiveCompany::class])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
