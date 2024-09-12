@@ -71,9 +71,9 @@ class UserCreateAction
     public function checkUserLimit($companyId): bool
     {
         $max_users = Company::findOrFail($companyId);
-        //        dd($max_users);
+
         $hasUserLimit = User::where('company_id', $companyId)->count();
-        if ($hasUserLimit >= self::USER_LIMIT) {
+        if ($hasUserLimit >= $max_users->max_users) {
             return false;
         } else {
             return true;

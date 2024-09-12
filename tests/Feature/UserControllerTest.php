@@ -46,6 +46,26 @@ class UserControllerTest extends TestCase
         ]);
     }
 
+    public function testMaxUserReachedError(): void
+    {
+        $token = $this->user->createToken('teste', ['master'])->plainTextToken;
+
+        User::factory()->count(2)->create([
+            'company_id' => $this->user->company_id,
+        ]);
+
+        $newUser = $this->newUserData();
+
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer '.$token,
+        ])->postJson(route('company_user.store'), $newUser);
+
+        $response->assertStatus(403);
+
+        $response->assertJson(['error' => 'user limit reached']);
+
+    }
+
     public function testStoreErrorNoName(): void
     {
         $newUser = $this->newUserData();
