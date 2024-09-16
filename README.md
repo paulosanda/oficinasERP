@@ -2,10 +2,12 @@
 
 Este projeto utiliza Laravel, Sail e Docker. Siga os passos abaixo para configurar o ambiente de desenvolvimento.
 <br />
+<br />
 
 ## Pré-requisitos
 
 Certifique-se de ter [Docker](https://www.docker.com/products/docker-desktop) e [Docker Compose](https://docs.docker.com/compose/install/) instalados em sua máquina.
+<br />
 <br />
 
 ## Configuração do Ambiente
