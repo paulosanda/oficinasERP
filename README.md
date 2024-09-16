@@ -1,10 +1,12 @@
 # ERP EMPRESAS DO SETOR DE MANUTENÇÃO AUTOMOTIVA
 
 Este projeto utiliza Laravel, Sail e Docker. Siga os passos abaixo para configurar o ambiente de desenvolvimento.
-  
+<br />
+
 ## Pré-requisitos
 
 Certifique-se de ter [Docker](https://www.docker.com/products/docker-desktop) e [Docker Compose](https://docs.docker.com/compose/install/) instalados em sua máquina.
+<br />
 
 ## Configuração do Ambiente
 
@@ -60,7 +62,6 @@ Execute o comando abaixo para iniciar o servidor de desenvolvimento:
 ```bash
 npm run dev
 ```
-<br />  
 
 ## Testes
 
